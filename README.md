@@ -7,23 +7,23 @@
 + **Yerlan Negmetulla** (180107219) - Backend Developer (GitHub account: …)
 
 ## Project
-    This project is Web platform for HTML5 games. The platform allows to play games instantly free of charge, submit HTML5 games and monetize them.  
+This project is Web platform for HTML5 games. The platform allows to play games instantly free of charge, submit HTML5 games and monetize them.  
 
 ## Alternatives / Market research
 | Few HTML5 games distribution platforms are **Mozilla Marketplace, Facebook, Gamee, Yandex.Games, MarketJS, BoosterMedia, Kongregate, CrazyGames, Softgames, itch.io.**
 
 ## Goals
 * ### What is the purpose of this project?
-        Our goal is to create the best conditions for developers to host their games, reach an audience of gamers and users to discover new ways of instantly playing in the browser.
+    Our goal is to create the best conditions for developers to host their games, reach an audience of gamers and users to discover new ways of instantly playing in the browser.
 
 * ### What are the problems it will solve?
-      * Nowadays, the monopoly of app markets, such as google play and app stores limit game developers and require high commissions. To address this issue, we will work on an open platform for independent game developers with a focus on HTML5 games.
-      * Users with low-end devices lack enough storage on their devices and can not access games from markets, the only way is to play online, and our platform provides a list of high-quality games that could be played instantly free of charge. 
-      * We offer integration for messengers to increase customer acquisition and retention by creating conditions for competition. 
+    * Nowadays, the monopoly of app markets, such as google play and app stores limit game developers and require high commissions. To address this issue, we will work on an open platform for independent game developers with a focus on HTML5 games.
+    * Users with low-end devices lack enough storage on their devices and can not access games from markets, the only way is to play online, and our platform provides a list of high-quality games that could be played instantly free of charge. 
+    * We offer integration for messengers to increase customer acquisition and retention by creating conditions for competition. 
 
 * ### What is the product vision?
-        Entertainment in the twenty-first century should be available without the need for downloads, installations, or specific equipment. No matter what device you use, you can play anywhere, at any time! And we will provide high-quality, lightweight, fun games to users.
-        For developers, we will provide tools to create leaderboards, monetize games, reach the audience of players and get feedback on their games. 
+    Entertainment in the twenty-first century should be available without the need for downloads, installations, or specific equipment. No matter what device you use, you can play anywhere, at any time! And we will provide high-quality, lightweight, fun games to users.
+    For developers, we will provide tools to create leaderboards, monetize games, reach the audience of players and get feedback on their games. 
 
 ## Technologies
 In our project we use **HTML5**, **VueJS**, **Node Js**, **Django**
