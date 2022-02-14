@@ -10,7 +10,7 @@
 This project is Web platform for HTML5 games. The platform allows to play games instantly free of charge, submit HTML5 games and monetize them.  
 
 ## Alternatives / Market research
-| Few HTML5 games distribution platforms are **Mozilla Marketplace, Facebook, Gamee, Yandex.Games, MarketJS, BoosterMedia, Kongregate, CrazyGames, Softgames, itch.io.**
+Few HTML5 games distribution platforms are **Mozilla Marketplace, Facebook, Gamee, Yandex.Games, MarketJS, BoosterMedia, Kongregate, CrazyGames, Softgames, itch.io.**
 
 ## Goals
 * ### What is the purpose of this project?
