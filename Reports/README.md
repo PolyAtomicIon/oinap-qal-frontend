@@ -1,10 +1,16 @@
-> This folders will contain your reports
+> Week #8This folders will contain your reports
+
 ## Week by week plan
-|...|Jet Lee|Jacky Chan|
-|---|---|---|
-|Week #3|Create home web page|Design home web page|
-|Week #4|Create database models|Analyze customer expectations|
-|Week #5|Create home web page|Design home web page|
-|Week #6|Create database models|Analyze customer expectations|
-|...|...|...|
-|Week #15|...|...|
+
+| ...      | Yernat Bekzat                                                            | Abylai Altazhanov                                                                 | Aiymzhan ... | Yerlan ... | Zhanbolat ... |
+| -------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------ | ---------- | ------------- |
+| Week #5  | Designing architecture<br /> of web app,<br />state management           | Structure project,<br />base routing,<br />templating                             |              |            |               |
+| Week #6  | Implementing Entities,<br />Services for project,<br />Mocking Api Calls | decomposition to components,<br />styling components by design <br />in storybook |              |            |               |
+| Week #7  | Implementing SDK<br />for developers                                     | Create Authorization<br />and Home pages                                          |              |            |               |
+| Week #8  | Adding Ads integration                                                   | Create Category Page, Search<br /> and results Page,                              |              |            |               |
+| Week #9  | Styling SDK's view by design<br />and testing SDK                        | Create User profile, Settings                                                     |              |            |               |
+| Week #10 | Create Developer's dashboard                                             | Create Game Page with feedbacks                                                   |              |            |               |
+| Week #11 | Create Admin Panel                                                       | Connecting with real API                                                          |              |            |               |
+| Week #12 | Connecting with real API                                                 | Testing Pages and fixing bugs                                                     |              |            |               |
+| Week #13 | Connecting with real API                                                 | Testing Pages and fixing bugs                                                     |              |            |               |
+| Week #14 | Optimization and <br />Working on PWA                                    | Telegram Bot and bug fixes                                                        |              |            |               |
