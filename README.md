@@ -4,7 +4,7 @@
 + **Altazhanov Abylay** (180107239) - Frontend Developer (GitHub account : altajanovabylay)
 + **Bekmaganbetov Zhanbolat** (180107180) - Backend Developer and PM (Github 180107180)
 + **Aimzhan Sytdykova** (180107110) - UX/UI designer (GitHub account: Ayymzhan)
-+ **Yerlan Negmetulla** (180107219) - Backend Developer (GitHub account: …)
++ **Yerlan Negmetulla** (180107219) - Backend Developer (GitHub account: yerlan2)
 
 ## Project
 This project is Web platform for HTML5 games. The platform allows to play games instantly free of charge, submit HTML5 games and monetize them.  
