@@ -1,4 +1,4 @@
-> Week #8This folders will contain your reports
+> This folders will contain your reports
 
 ## Week by week plan
 
