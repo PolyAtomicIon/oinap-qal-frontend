@@ -38,3 +38,6 @@ Docker compose is a tool for defining and running multi-container Docker applica
 * After picking up a framework I started building base of the app, configured state management, storybook to view components in isolation and added typescript to typisation for a safer development. This took a while, because conflicts dependencies, but I found awesome open source solutions.
 
 * Researched about architecture of client in web apps and come up with our own structure.
+
+* Together with Abylai tried to deploy on Heroku and after many failures moved to Hoster.kz and deployed base app by the link
+* https://www.oinap-qal.abmco.kz/#/ 
