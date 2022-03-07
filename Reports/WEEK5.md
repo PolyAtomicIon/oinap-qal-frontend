@@ -6,7 +6,9 @@ People's names are their brands, so are their nicknames. Give users a chance to 
 
 * And also, I put together a mudboard. There are many interesting ones. With the help of them, I will clearly see what kind of Eton I want and be inspired by different design options.
 
+Research
 ![image](https://user-images.githubusercontent.com/49391323/157046584-54e4f743-a9b6-4bfb-a698-819428eb46e3.png)
 
+Moodboard
 ![image](https://user-images.githubusercontent.com/49391323/157046680-21fab5e9-72cf-4f62-9650-921e4e36a338.png)
 
