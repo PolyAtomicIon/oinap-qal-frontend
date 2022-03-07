@@ -33,9 +33,9 @@ Docker compose is a tool for defining and running multi-container Docker applica
 ## Frontend
 ### Yernat Bekzat
 * Researched for suitable framework over VueJs framework, compared Nuxt and Quasar frameworks and decided to choose Quasar.
-* Quasar offers a lot ready tools out of the box such as Material Icons, components, layouts and layout builder, SSR and more. 
+* Quasar offers a lot of ready tools out of the box such as Material Icons, components, layouts and layout builder, SSR and more. 
 
-* After picking up a framework I started building base of the app, configured state management, storybook to view components in isolation and added typescript to typisation for a safer development. This took a while, because conflicts dependencies, but I found awesome open source solutions.
+* After picking up a framework I started building base of the app, configured state management, storybook to view components in isolation and added typescript for a  typization for a safer development. This took a while, because conflicts in dependencies, but I found awesome open source solutions.
 
 * Researched about architecture of client in web apps and come up with our own structure.
 
