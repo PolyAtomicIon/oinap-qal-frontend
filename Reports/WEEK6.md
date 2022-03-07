@@ -29,3 +29,16 @@ https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/bac
 ![alt week5-mock](./week5/web-app-mock-data.png)
 * Branch frontend-dev
 * https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/layers
+## Frontend
+### Altazhanov Abylay
+
+* Some components have been uploaded to the storybook.
+* Logo
+![logo](./week5/logo.PNG)
+* Search input
+![search](./week5/search.PNG)
+* Game card
+![game card](./week5/gameCard.PNG)
+* Banner
+![logo](./week5/banner.PNG)
+* 

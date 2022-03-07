@@ -41,3 +41,10 @@ Docker compose is a tool for defining and running multi-container Docker applica
 
 * Together with Abylai tried to deploy on Heroku and after many failures moved to Hoster.kz and deployed base app by the link
 * https://www.oinap-qal.abmco.kz/#/ 
+## Frontend
+### Altazhanov Abylai
+* configured routing for three users
+![layouts](./week5/users.PNG)
+* made some layouts using quasar framework
+![layouts](week5/layouts.PNG)
+
