@@ -29,3 +29,12 @@ Each application on our server will be placed in a docker container. Docker soft
 
 Since we have a lot of docker containers, in order to easily manage them, we decided to use docker compose.
 Docker compose is a tool for defining and running multi-container Docker applications. In Compose, we use a YAML file to set up our application's services. Then, with one command, we create and start all the services from our configuration.
+
+## Frontend
+### Yernat Bekzat
+* Researched for suitable framework over VueJs framework, compared Nuxt and Quasar frameworks and decided to choose Quasar.
+* Quasar offers a lot ready tools out of the box such as Material Icons, components, layouts and layout builder, SSR and more. 
+
+* After picking up a framework I started building base of the app, configured state management, storybook to view components in isolation and added typescript to typisation for a safer development. This took a while, because conflicts dependencies, but I found awesome open source solutions.
+
+* Researched about architecture of client in web apps and come up with our own structure.
