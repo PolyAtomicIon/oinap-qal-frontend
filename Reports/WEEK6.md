@@ -14,4 +14,4 @@ https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/bac
 * Finally, by the end implemented base app with a clean architecture and clean code and here is result. 
 ![alt week5-mock](./week5/web-app-mock-data.png)
 * Branch frontend-dev
-* https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/frontend-dev/Project/frontend
+* https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/frontend-dev/Project/frontend 
