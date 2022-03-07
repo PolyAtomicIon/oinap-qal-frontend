@@ -12,3 +12,20 @@ Research
 Moodboard
 ![image](https://user-images.githubusercontent.com/49391323/157046680-21fab5e9-72cf-4f62-9650-921e4e36a338.png)
 
+## Backend
+![image](/Proposal/Backend/server.jpg)
+
+![image](/Proposal/Backend/service.jpg)
+
+![image](/Proposal/Backend/project-striucture.jpg)
+
+We chose to use PostgreSQL as the database because it is an open source object-relational database management system that emphasizes extensibility and SQL compatibility. It exists in implementations for many UNIX-like platforms.
+
+As the language for the backend, we chose the Django Python web framework, which promotes rapid development and clean, pragmatic design. It removes much of the hassle of web development so we can focus on writing your application without reinventing the wheel.
+
+We decided to use nginx as a web server. nginx [engine x] - HTTP server and reverse proxy, mail proxy and general purpose TCP/UDP proxy.
+
+Each application on our server will be placed in a docker container. Docker software for automating the deployment and management of applications in containerized environments, an application containerizer. Allows you to "package" an application with all its environments and dependencies into a container that can be deployed on any Linux system with cgroups support in the kernel, and also provides a set of commands for managing these containers.
+
+Since we have a lot of docker containers, in order to easily manage them, we decided to use docker compose.
+Docker compose is a tool for defining and running multi-container Docker applications. In Compose, we use a YAML file to set up our application's services. Then, with one command, we create and start all the services from our configuration.
