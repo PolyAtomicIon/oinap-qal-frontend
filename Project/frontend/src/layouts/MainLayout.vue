@@ -15,6 +15,11 @@
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <q-tabs align="left">
+        <q-route-tab to="Admin" label="Admin" />
+        <q-route-tab to="Developer" label="Developer" />
+        <q-route-tab to="Gamer" label="Gamer" />
+      </q-tabs>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
