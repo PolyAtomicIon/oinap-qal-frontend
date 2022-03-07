@@ -8,6 +8,3 @@ People's names are their brands, so are their nicknames. Give users a chance to 
 
 *screenshot
 
-# Jacky Chan
-* Learn kung-fu
-* Invented kung-fu
