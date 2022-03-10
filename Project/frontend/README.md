@@ -3,6 +3,8 @@
 Web platform for html5 games
 link https://www.oinap-qal.abmco.kz/#/
 
+MOCK APIs https://622627662dfa524018fd9dae.mockapi.io/articles
+
 ## Install the dependencies
 
 ```bash

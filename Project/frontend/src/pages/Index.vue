@@ -1,49 +1,52 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page>
+    <h3 class="text-center">{{email}}</h3>
+    <div class="row items-center justify-evenly q-gutter-sm q-pa-md">
+      <q-card
+        v-for="article in articles"
+        :key="article.id"
+      >
+        <img :src="article.picture" height="156" width="256"/>
+
+        <q-card-section>
+          <div class="text-h6">{{article.title}}</div>
+          <div class="text-subtitle2">{{article.short}}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          {{ article.content }}
+        </q-card-section>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
+import { ArticlesService } from '../services/articles'
+import { useStore, UserInterface } from '../store/'
+import {
+  IArticleData,
+} from '../entities'
+import { IArticlesService } from '../services/articles/articles.types'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: { ExampleComponent },
-  setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1',
-      },
-      {
-        id: 2,
-        content: 'ct2',
-      },
-      {
-        id: 3,
-        content: 'ct3',
-      },
-      {
-        id: 4,
-        content: 'ct4',
-      },
-      {
-        id: 5,
-        content: 'ct5',
-      },
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200,
-    });
-    return { todos, meta };
+  components: {  },
+  async setup() {
+
+    const $store = useStore()
+    const userStoreModule = (<UserInterface> $store.state.user);
+    const email = computed(() => userStoreModule.email)
+
+    const artcileService: IArticlesService = new ArticlesService();
+    const articlesResponse = await artcileService.getAll();
+    const articles: IArticleData[] = articlesResponse.data;
+
+    return {
+      email,
+      articles
+    };
   },
 });
 </script>
