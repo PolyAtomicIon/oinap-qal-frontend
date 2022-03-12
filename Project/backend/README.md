@@ -6,3 +6,5 @@
 > poetry add [package-name]
 # For running django
 > python3 manage.py runserver
+# In order exit from the environment
+> exit
