@@ -5,7 +5,7 @@ from core.models import CommonModel
 from .choices import all_roles_choices
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username, password, role=choices["GAMER"]):
+    def create_user(self, email, username, password, role="GAMER"):
         if not email:
             raise ValueError("Users must have email address")
         if not username:
