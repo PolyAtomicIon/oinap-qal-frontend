@@ -1,7 +1,9 @@
 # As the package manager we are using Poetry more info: https://python-poetry.org/
 
-# In order to create new environment witl all dependencies run command in a folder, where poetry.toml is located
+# In order to create and connect to the environment run command:
 > poetry shell
+# In order to install all dependencies:
+> poetry install
 # In order to add new package just run this command
 > poetry add [package-name]
 # For running django
