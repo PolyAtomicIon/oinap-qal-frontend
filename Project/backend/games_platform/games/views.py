@@ -1,11 +1,11 @@
 from typing import Tuple
-from django.shortcuts import render
+
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
 
+from .filters import CategoryFilter, GameFilter
 from .models import Category, Game
 from .serializers import CategorySerializer, GameSerializer
-from .filters import CategoryFilter, GameFilter
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

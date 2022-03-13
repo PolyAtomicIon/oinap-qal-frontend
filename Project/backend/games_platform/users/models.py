@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User, BaseUserManager
+from django.contrib.auth.models import BaseUserManager, User
 from django.db import models
 
 from core.models import CommonModel
+
 from .choices import all_roles_choices
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password, role="GAMER"):

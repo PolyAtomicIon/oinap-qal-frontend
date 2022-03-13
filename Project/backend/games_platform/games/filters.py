@@ -1,5 +1,6 @@
 from django_filters import rest_framework as filters
-from .models import Game, Category
+
+from .models import Category, Game
 
 
 class CategoryFilter(filters.FilterSet):

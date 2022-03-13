@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
-from .views import GameViewSet, CategoryViewSet
 
+from .views import CategoryViewSet, GameViewSet
 
 router = DefaultRouter()
 router.register(
