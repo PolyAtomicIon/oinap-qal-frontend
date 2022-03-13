@@ -1,4 +1,5 @@
-# Aimzhan Sytdykova
+## UX/UI Design
+### Aimzhan Sytdykova
 
 It was done:
 
