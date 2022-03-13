@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import User, BaseUserManager
 from django.db import models
 
 from core.models import CommonModel
@@ -24,7 +24,12 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
-class CustomUser(AbstractBaseUser, CommonModel):
+
+class UserDetail(CommonModel):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
     email = models.EmailField(
         verbose_name="email",
         max_length=100,
