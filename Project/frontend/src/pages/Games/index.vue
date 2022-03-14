@@ -5,6 +5,7 @@
       <q-card
         v-for="article in articles"
         :key="article.id"
+        @click="$router.push('/games/1')"
       >
         <img :src="article.picture" height="156" width="256"/>
 
@@ -23,16 +24,17 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { ArticlesService } from '../services/articles'
-import { useStore } from '../store/'
+import { ArticlesService } from '../../services/articles'
+import { useStore } from '../../store'
 import {
   IArticleData,
-} from '../entities'
-import { IArticlesService } from '../services/articles/articles.types'
+} from '../../entities'
+import { IArticlesService } from '../../services/articles/articles.types'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: {  },
+  components: {
+  },
   async setup() {
 
     const $store = useStore()
