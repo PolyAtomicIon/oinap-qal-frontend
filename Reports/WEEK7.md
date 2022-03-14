@@ -31,6 +31,23 @@ If the refresh_token is invalid or expired, the user will need to re-login.
 ![image](/Proposal/Backend/1.png)
 ![image](/Proposal/Backend/2.png)
 
+
+## Frontend
+### Altazhanov Abylai
+* my task was to create a home page and an authentication page
+* I made these pages and added some feature  features and changed some components.
+  but i think i will have to change and add a lot of things in the future
+  
+
+
+
+**Registration page:**\
+![layouts](week5/auth1.PNG)
+![layouts](week5/auth2.PNG)
+![layouts](week5/auth3.PNG)
+**Home page:**\
+![layouts](week5/homepage.PNG)
+![layouts](week5/homepage2.PNG)
 # Jacky Chan
 * Learn kung-fu
 * Invented kung-fu
