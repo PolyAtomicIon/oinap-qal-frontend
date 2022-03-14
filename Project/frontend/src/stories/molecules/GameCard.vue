@@ -2,16 +2,16 @@
   <div class="game-card">
     <q-card class="game-card__container">
       <q-card-section class="padding0">
-        <img :src="require('../assets/images/GameCard.png')" alt="">
+        <img :src="require('../assets/images/'+img)" alt="">
       </q-card-section>
       <q-card-section class="padding0">
         <span class="game-card__title text-white">
-          Element blocks
+          {{ title }}
         </span>
       </q-card-section>
       <q-card-section class="padding0">
         <span class="game-card__description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.
+          {{description}}
         </span>
       </q-card-section>
       <div class="game-card__footer row">
@@ -39,6 +39,24 @@
 import { ref } from 'vue'
 export default {
   name: "GameCard",
+  props:{
+    img:{
+      type:String ,
+      default:''
+    },
+    title:{
+      type:String,
+      default:'no title'
+    },
+    description:{
+      type:String,
+      default:'no description'
+    },
+    rating:{
+      type:Number,
+      default:1
+    }
+  },
   setup () {
     return {
       ratingModel: ref(1)
@@ -50,10 +68,11 @@ export default {
 <style scoped>
 .game-card{
   width: 100%;
-  max-width: 360px;
+  max-width: 357px;
 }
 .game-card__container{
-  background-color: #F4F4F4;
+  background-color: #202020;
+  color: white;
 }
 .game-card__title{
   font-size: 24px;
