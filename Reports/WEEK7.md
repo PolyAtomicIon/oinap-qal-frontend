@@ -43,10 +43,16 @@ If the refresh_token is invalid or expired, the user will need to re-login.
 
 **Registration page:**\
 ![layouts](week5/auth1.PNG)
+
 ![layouts](week5/auth2.PNG)
+
 ![layouts](week5/auth3.PNG)
+
+#
+
 **Home page:**\
 ![layouts](week5/homepage.PNG)
+
 ![layouts](week5/homepage2.PNG)
 # Jacky Chan
 * Learn kung-fu
