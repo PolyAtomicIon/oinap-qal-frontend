@@ -14,7 +14,7 @@
         class="iframe"
       >
       </iframe>
-      <q-card class="q-pa-lg iframe__inner" ref="sdk">
+      <q-card class="q-pa-lg iframe__inner" ref="sdk" square bordered>
         <q-btn @click="semdMessageToIframe" color="primary">Score: {{ score }}</q-btn>
       </q-card>
     </q-card>
@@ -83,7 +83,7 @@ $inner-container-height: 96px;
     position: absolute;
     top: 0;
     left: 0;
-    background: $primary;
+    background: $accent;
     width: 100%;
     height: $inner-container-height;
   }
