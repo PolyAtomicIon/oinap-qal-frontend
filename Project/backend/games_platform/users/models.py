@@ -1,7 +1,8 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.db import models
 
 from core.models import CommonModel
+
 from .choices import all_roles_choices
 
 
@@ -51,3 +52,10 @@ class CustomUser(AbstractBaseUser, CommonModel):
     objects = CustomUserManager()
     def __srt__(self):
         return self.username + ',' + self.email
+
+
+# class UserDetail(CommonModel):
+#     user = models.OneToOneField(
+#         User,
+#         on_delete=models.CASCADE
+#     )
