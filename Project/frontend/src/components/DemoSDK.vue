@@ -1,22 +1,24 @@
 <template>
   <q-page>
-    <q-card class="q-ma-md q-pa-lg">
-      <q-btn @click="$router.go(-1)">Go back</q-btn>
-    </q-card>
+    <q-btn @click="$router.go(-1)" class="q-ma-md">Go back</q-btn>
 
-    <iframe
-      src="https://biz-oinaimyz.herokuapp.com/index.html"
-      frameborder="0"
-      width="100%"
-      height="500px"
-      class="iframe"
-      ref="iframe"
+    <q-card
+      class="iframe__container"
     >
-    </iframe>
-
-    <q-card class="q-pa-lg iframe__inner" ref="sdk">
-      <q-btn @click="showIframe" color="primary">Hello</q-btn>
+      <iframe
+        src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
+        frameborder="0"
+        width="100%"
+        height="500px"
+        ref="iframe"
+        class="iframe"
+      >
+      </iframe>
+      <q-card class="q-pa-lg iframe__inner" ref="sdk">
+        <q-btn @click="semdMessageToIframe" color="primary">Score: {{ score }}</q-btn>
+      </q-card>
     </q-card>
+
   </q-page>
 </template>
 
@@ -29,37 +31,61 @@ export default defineComponent({
   setup() {
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
+    const score = ref(0);
 
-    const showIframe = () => {
-      console.log(iframe.value)
+    interface gameMessageInterface {
+      data: {
+        name: string
+        finalScore: number
+      }
+    }
+
+    window.onmessage = (e: gameMessageInterface) => {
+      // @ts-ignore
+      if( e.data.name === 'gameFinished' ){
+      // @ts-ignore
+        score.value = e.data.finalScore
+      }
+    };
+
+    const semdMessageToIframe = () => {
+      // console.log(iframe.value)
+      iframe.value?.contentWindow?.postMessage('pause', '*');
     }
 
     onMounted(() => {
-      console.log(iframe.value)
       // console.log(iframe.value?.getElementsByTagName('iframe'))
     });
 
     return {
       iframe,
       sdk,
-      showIframe
+      semdMessageToIframe,
+      score
     }
   }
 });
 </script>
 
 <style lang="scss" scoped>
+$inner-container-height: 96px;
 .iframe {
-  position: relative;
-  margin: 15px;
+  height: 100%;
+  width: 100%;
+  &__container {
+    position: relative;
+    background: $secondary;
+    width: 100%;
+    height: 600px;
+    padding-top: $inner-container-height;
+  }
   &__inner {
     position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
+    top: 0;
+    left: 0;
     background: $primary;
     width: 100%;
-    height: 160px;
+    height: $inner-container-height;
   }
 }
 </style>
