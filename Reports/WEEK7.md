@@ -34,6 +34,29 @@ If the refresh_token is invalid or expired, the user will need to re-login.
 ### Zhanbolat Bekmaganbetov
 This week we implemented endpoints for homepage and base structure for main models of home page such as game and category. We implemented base CRUD for each of them using viewsets, updated structure of project, we made it folder structure much more understadanble, and clear. Then we maintained filters and created filters for games and categories. Also were updated routes in core and games apps. We also started to implement rating system for games and discussing and researching implementation methods for rating system and views counting
 
+## Frontend
+### Altazhanov Abylai
+* my task was to create a home page and an authentication page
+* I made these pages and added some feature  features and changed some components.
+  but i think i will have to change and add a lot of things in the future
+  
+
+
+
+**Registration page:**\
+![layouts](week5/auth1.PNG)
+
+![layouts](week5/auth2.PNG)
+
+![layouts](week5/auth3.PNG)
+
+#
+
+**Home page:**\
+![layouts](week5/homepage.PNG)
+
+![layouts](week5/homepage2.PNG)
+
 # Jacky Chan
 * Learn kung-fu
 * Invented kung-fu
