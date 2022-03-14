@@ -4,6 +4,7 @@ from django.db import models
 from core.models import CommonModel
 from .choices import all_roles_choices
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password, role="GAMER"):
         if not email:
@@ -21,8 +22,8 @@ class CustomUserManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
-
         return user
+
 
 class CustomUser(AbstractBaseUser, CommonModel):
     email = models.EmailField(
@@ -45,8 +46,8 @@ class CustomUser(AbstractBaseUser, CommonModel):
         null=True,
         blank=True,
     )
-
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
     objects = CustomUserManager()
-
     def __srt__(self):
         return self.username + ',' + self.email
