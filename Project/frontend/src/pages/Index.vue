@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { ArticlesService } from '../services/articles'
-import { useStore, UserInterface } from '../store/'
+import { useStore } from '../store/'
 import {
   IArticleData,
 } from '../entities'
@@ -36,8 +36,7 @@ export default defineComponent({
   async setup() {
 
     const $store = useStore()
-    const userStoreModule = (<UserInterface> $store.state.user);
-    const email = computed(() => userStoreModule.email)
+    const email = computed(() => $store.state.email)
 
     const artcileService: IArticlesService = new ArticlesService();
     const articlesResponse = await artcileService.getAll();

@@ -19,6 +19,7 @@
         <q-route-tab to="Admin" label="Admin" />
         <q-route-tab to="Developer" label="Developer" />
         <q-route-tab to="Gamer" label="Gamer" />
+        <q-route-tab to="Main" label="Main" />
       </q-tabs>
     </q-header>
 

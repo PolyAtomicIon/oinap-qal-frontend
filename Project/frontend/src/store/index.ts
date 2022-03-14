@@ -37,9 +37,7 @@ export const storeKey: InjectionKey<VuexStore<UserInterface>> =
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<UserInterface>({
-    modules: {
-      user
-    },
+    ...user,
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
