@@ -2,6 +2,7 @@ from django.db import models
 
 from core.models import CommonModel
 
+from .choices import rating_choices
 
 class Category(CommonModel):
     icon = models.CharField(
@@ -46,3 +47,24 @@ class Game(CommonModel):
     class Meta:
         verbose_name = "game"
         verbose_name_plural = "games"
+
+
+class GameRating(CommonModel):
+    game = models.ForeignKey(
+        'Game',
+        related_name="rating",
+        on_delete=models.CASCADE,
+    )
+    user = models.OneToOneField(
+        'users.CustomUser',
+        related_name="game_rating",
+        on_delete=models.SET_NULL,
+    )
+    value = models.SmallIntegerField(
+        verbose_name="rating_value",
+        choices=rating_choices,
+    )
+
+    class Meta:
+        verbose_name = "game_rating"
+        verbose_name_plural = "games_ratings"

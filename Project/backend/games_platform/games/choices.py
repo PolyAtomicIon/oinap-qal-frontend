@@ -4,5 +4,5 @@ rating_choices = [
     (2, "Bad"),
     (3, "Satisfactory"),
     (4, "Good"),
-    (4, "Very well"),
+    (5, "Very well"),
 ]

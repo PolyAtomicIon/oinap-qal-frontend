@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-from .models import Category, Game
+from users.models import CustomUser
+
+from .models import Category, Game, GameRating
+from .choices import rating_choices
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -33,14 +36,14 @@ class GameSerializer(serializers.ModelSerializer):
         allow_blank=False,
     )
     description = serializers.CharField(
+        max_length=1000,
         allow_null=True,
         allow_blank=True,
-        max_length=1000,
     )
     cover = serializers.FileField(
         allow_null=True,
     )
-    views = serializers.IntegerField(
+    views = serializers.BigIntegerField(
         required=False,
         read_only=True,
     )
@@ -48,6 +51,30 @@ class GameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Game
+        exclude = (
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        )
+
+
+class GameRatingSerializer(serializers.ModelSerializer):
+    game = serializers.PrimaryKeyRelatedField(
+        required=True,
+        queryset=Game.objects.filter(deleted_at=None),
+    )
+    user = serializers.PrimaryKeyRelatedField(
+        required=True,
+        queryset=CustomUser.objects.filter(deleted_at=None),
+    )
+    value = serializers.ChoiceField(
+        required=False,
+        choices=rating_choices,
+    )
+
+
+    class Meta:
+        model = GameRating
         exclude = (
             'created_at',
             'updated_at',
