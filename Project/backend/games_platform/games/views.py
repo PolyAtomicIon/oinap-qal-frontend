@@ -2,6 +2,7 @@ from typing import Tuple
 
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 from .filters import CategoryFilter, GameFilter
 from .models import Category, Game
@@ -28,10 +29,18 @@ class GameViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         instance.views += 1
         instance.save()
-
         return Response(
             data={
                 "status": "success",
                 "data": serializer.data,
             }
         )
+
+    def list(self, request):
+        category = request.GET.get('category', "")
+        queryset = Game.objects.all()
+        if category:
+            queryset = queryset.filter(category=category)
+        serializer = GameSerializer(queryset, many=True)
+        return Response(data=serializer.data)
+

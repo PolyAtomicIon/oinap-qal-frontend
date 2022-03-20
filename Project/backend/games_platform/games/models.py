@@ -66,6 +66,8 @@ class GameRating(CommonModel):
         'users.CustomUser',
         related_name="game_rating",
         on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     value = models.SmallIntegerField(
         verbose_name="rating_value",

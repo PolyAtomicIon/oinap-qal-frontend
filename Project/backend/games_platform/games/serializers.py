@@ -40,10 +40,10 @@ class GameSerializer(serializers.ModelSerializer):
         allow_null=True,
         allow_blank=True,
     )
-    cover = serializers.FileField(
-        allow_null=True,
-    )
-    views = serializers.BigIntegerField(
+    # cover = serializers.FileField(
+    #     allow_null=True,
+    # )
+    views = serializers.IntegerField(
         required=False,
         read_only=True,
         allow_null=True,
