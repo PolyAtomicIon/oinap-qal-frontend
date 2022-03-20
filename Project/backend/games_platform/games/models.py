@@ -40,6 +40,13 @@ class Game(CommonModel):
         verbose_name="views_count",
         default=0,
     )
+    category = models.ForeignKey(
+        "Category",
+        verbose_name="category",
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="games",
+    )
 
     def __str__(self):
         return self.title

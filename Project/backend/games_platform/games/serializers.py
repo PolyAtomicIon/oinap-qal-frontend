@@ -46,8 +46,12 @@ class GameSerializer(serializers.ModelSerializer):
     views = serializers.BigIntegerField(
         required=False,
         read_only=True,
+        allow_null=True,
     )
-
+    category = serializers.PrimaryKeyRelatedField(
+        required=False,
+        queryset=Category.objects.filter(deleted_at=None),
+    )
 
     class Meta:
         model = Game

@@ -21,7 +21,6 @@ from users import urls as users_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('swagger-ui/', schema_view),
     path('users/', include(users_urls)),
     path(route="", view=include(arg="games.urls")),
 ]
