@@ -42,7 +42,7 @@ class GameSerializer(serializers.ModelSerializer):
         read_only=True,
         allow_null=True,
     )
-    _category = serializers.PrimaryKeyRelatedField(
+    category = serializers.PrimaryKeyRelatedField(
         required=False,
         queryset=Category.objects.filter(deleted_at=None),
     )

@@ -22,10 +22,3 @@ class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.filter(deleted_at=None)
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = GameFilter
-    # def list(self, request):
-    #     category = request.GET.get('category', "")
-    #     queryset = Game.objects.all()
-    #     if categories:
-    #         queryset = queryset.filter(category=category)
-    #     serializer = GameSerializer(queryset, many=True)
-    #     return Response(data=serializer.data)
