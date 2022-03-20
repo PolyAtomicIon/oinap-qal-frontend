@@ -38,13 +38,14 @@ class GameSerializer(serializers.ModelSerializer):
         max_length=1000,
     )
     cover = serializers.FileField(
-        allow_null=True,
-    )
-    views = serializers.IntegerField(
         required=False,
         read_only=True,
+        allow_null=True,
     )
-
+    _category = serializers.PrimaryKeyRelatedField(
+        required=False,
+        queryset=Category.objects.filter(deleted_at=None),
+    )
 
     class Meta:
         model = Game
@@ -53,3 +54,7 @@ class GameSerializer(serializers.ModelSerializer):
             'updated_at',
             'deleted_at'
         )
+
+    def create(self, validated_data):
+        return Game.objects.create(**validated_data)
+
