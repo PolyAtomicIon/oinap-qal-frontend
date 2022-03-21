@@ -30,7 +30,6 @@ class GameViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         instance.views += 1
         instance.save()
-
         return Response(
             data={
                 "status": "success",
@@ -38,6 +37,13 @@ class GameViewSet(viewsets.ModelViewSet):
             }
         )
 
+    def list(self, request):
+        category = request.GET.get('category', "")
+        queryset = Game.objects.all()
+        if category:
+            queryset = queryset.filter(category=category)
+        serializer = GameSerializer(queryset, many=True)
+        return Response(data=serializer.data)
 
 class GameRatingViewSet(viewsets.ModelViewSet):
     http_method_names: Tuple = ("get", "post", "patch", "delete")
