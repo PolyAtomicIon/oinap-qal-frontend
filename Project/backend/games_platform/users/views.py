@@ -1,15 +1,13 @@
 import jwt
-from django.views.decorators.csrf import ensure_csrf_cookie
 from django.conf import settings
-from django.views.decorators.csrf import csrf_protect
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from rest_framework import exceptions, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
 from .models import CustomUser
-from .serializers import CustomUserSerializer, CustomRegisterSerializer
+from .serializers import CustomRegisterSerializer, CustomUserSerializer
 from .utils import generate_access_token, generate_refresh_token
 
 

@@ -1,8 +1,10 @@
 from django.db import models
+from django.db.models import Count
 
 from core.models import CommonModel
 
 from .choices import rating_choices
+
 
 class Category(CommonModel):
     icon = models.CharField(
@@ -48,6 +50,11 @@ class Game(CommonModel):
         related_name="games",
     )
 
+    @property
+    def rating(self, instance, *args, **kwargs) -> int:
+        rate_count_dict = GameRating.objects.values('value').annotate(rate_count=Count('value'))
+        return rate_count_dict
+
     def __str__(self):
         return self.title
 
@@ -66,6 +73,8 @@ class GameRating(CommonModel):
         'users.CustomUser',
         related_name="game_rating",
         on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     value = models.SmallIntegerField(
         verbose_name="rating_value",

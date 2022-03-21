@@ -1,8 +1,9 @@
 import jwt
-from rest_framework.authentication import BaseAuthentication
+from django.conf import settings
 from django.middleware.csrf import CsrfViewMiddleware
 from rest_framework import exceptions
-from django.conf import settings
+from rest_framework.authentication import BaseAuthentication
+
 from .models import CustomUser
 
 

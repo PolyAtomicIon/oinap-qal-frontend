@@ -2,8 +2,8 @@ from rest_framework import serializers
 
 from users.models import CustomUser
 
-from .models import Category, Game, GameRating
 from .choices import rating_choices
+from .models import Category, Game, GameRating
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class GameSerializer(serializers.ModelSerializer):
     cover = serializers.FileField(
         allow_null=True,
     )
-    views = serializers.BigIntegerField(
+    views = serializers.IntegerField(
         required=False,
         read_only=True,
         allow_null=True,

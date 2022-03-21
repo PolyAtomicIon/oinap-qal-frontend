@@ -2,10 +2,12 @@ from typing import Tuple
 
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 from .filters import CategoryFilter, GameFilter
-from .models import Category, Game
-from .serializers import CategorySerializer, GameSerializer
+from .models import Category, Game, GameRating
+from .serializers import (CategorySerializer, GameRatingSerializer,
+                          GameSerializer)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -35,3 +37,9 @@ class GameViewSet(viewsets.ModelViewSet):
                 "data": serializer.data,
             }
         )
+
+
+class GameRatingViewSet(viewsets.ModelViewSet):
+    http_method_names: Tuple = ("get", "post", "patch", "delete")
+    serializer_class = GameRatingSerializer
+    queryset = GameRating.objects.filter(deleted_at=None)
