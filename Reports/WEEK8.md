@@ -1,5 +1,20 @@
 ## UX/UI Design
 ### Aimzhan Sytdykova
+In this week I worked with design of category, search and result pages and started creating mobile adaptive design versions of web pages.
+With the help of a category, a person can choose a genre he likes and find a game suitable for it, or enter the name of the games into the search engine and find the right game.
+
+* Mobile Adaptive Design\
+![alt mobile_v](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/mobile_v.png?raw=true)
+
+* Category Page Design\
+![alt category](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/category.png?raw=true)
+
+* Category Page with Search Design\
+![alt category_w_search](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/category_w_search.png?raw=true)
+
+* Result Page Design\
+![alt search_res](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/search_res.png?raw=true)
+
 ## Backend
 ### Yerlan Negmetulla
 ### Zhanbolat Bekmaganbetov
