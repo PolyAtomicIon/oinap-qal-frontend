@@ -29,6 +29,9 @@ We have also implemented an endpoint for game search. The search for games occur
 ![Search](./week8/search.png)
 
 ### Zhanbolat Bekmaganbetov
+
+On this week I worked with Yerlan on search page and category filtering. We discussed about search and filtering logic and implemented it step by step. After implementation of each feature we tested it, and in case if some issue or bug were found we kept each other informed and fixed it if someone found a solution first. I also, set up pagination, and refactored game viewsets, where total rating of game was not correctly displayed. I also made some code refactoring, improved safety and performance for views counting, by using database computations instead of computing it by python itself
+
 ## Frontend
 ### Altazhanov Abylai
 ### Yernat Bekzat
