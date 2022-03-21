@@ -1,6 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header
+      v-if="!$q.fullscreen.isActive"
+      elevated
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -23,7 +26,12 @@
       </q-tabs>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer
+      v-model="leftDrawerOpen"
+      v-if="!$q.fullscreen.isActive"
+      show-if-above
+      bordered
+    >
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 

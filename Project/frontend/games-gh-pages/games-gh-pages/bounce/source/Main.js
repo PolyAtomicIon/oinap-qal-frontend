@@ -37,6 +37,9 @@ let startTime  = 0;
  */
 function showMainScreen() {
     display.set("mainScreen").show();
+    window.top.postMessage({
+      name: 'showAd',
+    }, '*')
 }
 
 /**
@@ -358,8 +361,13 @@ window.addEventListener("load", main, false);
 window.onmessage = function(e) {
   if (e.data == 'pause') {
       // alert('It works!');
-      console.log('It works!');
+      console.log('Pause called from outside');
       startPause();
+  }
+  if (e.data == 'restart') {
+      // alert('It works!');
+      console.log('Restart called from outside');
+      newGame("speed");
   }
 };
 
