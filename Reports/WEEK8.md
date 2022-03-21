@@ -17,6 +17,17 @@ With the help of a category, a person can choose a genre he likes and find a gam
 
 ## Backend
 ### Yerlan Negmetulla
+
+This week we have implemented endpoints for category and search pages.
+
+For filtering, we first added a library for Django. Django-filter is a generic application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields, displaying the form to let them do this.
+
+We have added a category field for the game model, and due to this, we have implemented the display of games for the selected category. Application should show a list of games for the requested category.
+![Category](./week8/category.png)
+
+We have also implemented an endpoint for game search. The search for games occurs by the name and description of the games. The search takes place on each individual word using regular expressions. Application should show a list of games on the requested request.
+![Search](./week8/search.png)
+
 ### Zhanbolat Bekmaganbetov
 ## Frontend
 ### Altazhanov Abylai
@@ -28,10 +39,10 @@ With the help of a category, a person can choose a genre he likes and find a gam
 
 * After finishing with APIs that helps to show Ad from our side and from developers side, whenever he decides it will be important, I started to register in AdSense and integrate Ads, and here is the list of problems:
 1. The platform should be finished, all functions, buttons should work properly. Our backend and frontend still is in development.
-2. Subdomains are not allowed, currently we have **oinap-qal.abmco.kz**, and our team is not ready to buy another host and set it up. 
+2. Subdomains are not allowed, currently we have **oinap-qal.abmco.kz**, and our team is not ready to buy another host and set it up.
 3. Even if we will integrate Ads to our platform, Google do not easily allows to share revenue to third parties, in our case game developers. It requires some paperworks with lawyers and financial organizations. It will take our time and focus, that's why we discussed with our supervisor and decided to add only placeholder Ad for a while.
 ![alt demo-ad](./week8/Ad%20example.png)
-  
+
 * Overall, this week's task is finished by plan, but because of AdSense rules I will postpone real Ad Integration for the future.
 
 * Link to API List for SDK
