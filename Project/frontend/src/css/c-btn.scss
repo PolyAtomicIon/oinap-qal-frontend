@@ -1,0 +1,36 @@
+@import './quasar.variables.scss';
+
+.c-btn {
+  padding: 8px 24px;
+  border-radius: $button-border-radius;
+
+  &--flat {
+    background: none;
+    border: none;
+    color: $white;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &--list-item {
+    display: grid;
+    grid-template-columns: 16px auto;
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 0px;
+    align-items: center;
+
+    background: none;
+    border: none;
+    color: $white;
+    text-align: left;
+    padding: 8px 16px;
+    font-weight: 300;
+
+    &:hover {
+      background: $primary;
+    }
+  }
+}

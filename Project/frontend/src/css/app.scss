@@ -1,2 +1,7 @@
 // app global css in SCSS form
-$button-border-radius: 16px;
+// @import '_fonts.scss';
+@import 'c-btn.scss';
+
+.bg-dark-light {
+  background: $dark-light;
+}
