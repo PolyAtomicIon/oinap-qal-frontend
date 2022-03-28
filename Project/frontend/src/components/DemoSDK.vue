@@ -1,29 +1,25 @@
 <template>
-  <q-page>
-    <q-btn @click="$router.go(-1)" class="q-ma-md">Go back</q-btn>
-
-    <q-card
-      class="iframe__container"
-      :class="{'iframe__container--fullscreen': $q.fullscreen.isActive}"
+  <q-card
+    class="iframe__container"
+  >
+    <iframe
+      src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+      ref="iframe"
+      class="iframe"
+      @load="showAd"
     >
-      <iframe
-        src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
-        frameborder="0"
-        width="100%"
-        height="100%"
-        ref="iframe"
-        class="iframe"
-        @load="showAd"
-      >
-      </iframe>
-      <!-- controller -->
-      <q-card
-        class="q-pa-lg iframe__inner row justify-between"
-        ref="sdk"
-        square
-        bordered
-      >
-        <q-btn @click="pauseGame" color="primary">Score: {{ score }}</q-btn>
+    </iframe>
+    <!-- controller -->
+    <!-- <q-card
+      class="q-pa-lg iframe__inner row justify-between"
+      ref="sdk"
+      square
+      bordered
+    >
+      <q-toolbar>
         <q-btn-group>
           <q-btn color="accent" icon="pause" @click="pauseGame" />
           <q-btn color="accent" icon="refresh" @click="restartGame" />
@@ -34,15 +30,16 @@
           :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
           :label="$q.fullscreen.isActive ? 'Exit Fullscreen' : 'Go Fullscreen'"
         />
-      </q-card>
-      <!-- ad window -->
-      <q-card v-show="adActive" class="q-pa-lg ad-container" ref="ad-container" square bordered>
-        <h3>There will be Ad</h3>
-        <q-btn @click="closeAd" color="primary">Close</q-btn>
-      </q-card>
-    </q-card>
+      </q-toolbar>
+      <div class=""></div>
 
-  </q-page>
+    </q-card> -->
+    <!-- ad window -->
+    <q-card v-show="adActive" class="q-pa-lg ad-container" ref="ad-container" square bordered>
+      <span>There will be Ad</span>
+      <q-btn @click="closeAd" color="black" round icon="close" class="q-ml-lg"></q-btn>
+    </q-card>
+  </q-card>
 </template>
 
 <script lang="ts">
@@ -122,22 +119,14 @@ $inner-container-height: 96px;
     position: relative;
     background: $secondary;
     width: 100%;
-    height: 600px;
-    padding-top: $inner-container-height;
-    &--fullscreen {
-      position: absolute;
-      z-index: 2999;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      padding-top: 0;
-    }
+    height: 100%;
+    // padding-top: $inner-container-height;
   }
   &__inner {
     position: absolute;
     top: 0;
     left: 0;
-    background: $accent;
+    background: $dark-grey;
     width: 100%;
     height: $inner-container-height;
   }
@@ -149,6 +138,9 @@ $inner-container-height: 96px;
   position: absolute;
   top: 0;
   left: 0;
-  background: $accent;
+  background: $dark-grey;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
 }
 </style>

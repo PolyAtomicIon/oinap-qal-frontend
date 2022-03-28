@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import DemoSDK from '../../components/DemoSDK.vue'
+import DemoSDK from '../../components/DemoSdk.vue'
 
 export default defineComponent({
   name: 'GamePage',
