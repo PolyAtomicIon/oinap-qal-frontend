@@ -59,3 +59,12 @@ This week my goal was to make 2 pages (settings, profile pages)
 I analyzed the design and created some components and made the page structure and created some functions for settings page
 I found errors that I missed in the code and tried to fix them, then I made changes and added new features.
 
+### Yernat Bekzat
+
+* This week I spent time to add features implemented by Abyali to main branch and faced some problems, fixed conflicts and made code review for Abylai.
+* And mainly added style for SDK that was implemented weeks ago. Currently it is a full game's page with all neccessary components and functionality. 
+
+* Demo video of the working prototype
+    https://youtu.be/g-3bnC7KQGE
+* here is the link to source code for SDK in **front-grd-33** branch
+    https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/tree/front-grd-33
