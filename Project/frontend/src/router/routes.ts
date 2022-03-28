@@ -10,10 +10,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../pages/Games/index.vue'),
       },
       {
-        path: '/games/:id',
-        component: () => import('../pages/Games/_slug.vue'),
-      },
-      {
         path: '/Admin',
         component: () => import('../pages/Admin/AdminRegistration.vue')
       },
@@ -35,6 +31,10 @@ const routes: RouteRecordRaw[] = [
       }
 
     ]
+  },
+  {
+    path: '/games/:id',
+    component: () => import('layouts/LayoutSDK.vue'),
   },
   {
     path: '/ResetPassword',
