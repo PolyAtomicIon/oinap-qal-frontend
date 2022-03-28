@@ -154,8 +154,9 @@ export default defineComponent({
 
     .bg-overlay {
       position: absolute;
+      top: 74px;
       width: 100%;
-      height: 100%;
+      height: calc(100% - 74px);
       background: rgba($color: #000000, $alpha: 0.45);
       z-index: 2999;
     }
