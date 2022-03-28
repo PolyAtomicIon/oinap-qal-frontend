@@ -52,3 +52,10 @@ Part of user profile information:
 ### Zhanbolat Bekmaganbetov
 
 This week I refactored code and wrote the configuration for the project, i was working on wrapping an application in docker and prepared django configuration for these purposes. I made a research on using transactions and atomic transactions in Django, async operations in python and discuss with Yerlan about business logic and it's improvement points. I also researched existed business logic in a project in order to find vulnerabilities and parts where some logic could be broken or was't took into account, such as acceptipting rules by user and discussed about it with Yerlan on the need of validation for that on out part. We also discussed about UserProfile and structure of interfaces of rest apis, as the result we decided to standartize our exception requests by creating a custom universal exception handler, which i'm working on. I with Yerlan were been spoken on the role validations for user  entities, how to handle it, what should and must be there, and what should not
+### Front end 
+### Altazhanov Abylai
+
+This week my goal was to make 2 pages (settings, profile pages)
+I analyzed the design and created some components and made the page structure and created some functions for settings page
+I found errors that I missed in the code and tried to fix them, then I made changes and added new features.
+
