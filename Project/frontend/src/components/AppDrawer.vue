@@ -1,14 +1,11 @@
 <template>
-  <q-drawer
+  <div
     v-if="!$q.fullscreen.isActive"
-    v-model="leftDrawerOpen"
-    class="bg-dark"
+    class="drawer"
+    :width="drawerWidth"
   >
-    <q-list class="q-mt-sm q-pl-md">
-      <q-item-label
-        class="category__header"
-        header
-      > Categories </q-item-label>
+    <q-list class="q-mt-sm category">
+      <q-item-label class="category__header" header> Categories </q-item-label>
       <q-item
         v-for="(link, index) in essentialLinks"
         :key="index"
@@ -34,11 +31,12 @@
         </q-item-section>
       </q-item>
     </q-list>
-  </q-drawer>
+  </div>
 </template>
 
 <script lang="ts">
-const linksList = [{
+const linksList = [
+  {
     title: 'Arcades',
     icon: 'Arcades',
   },
@@ -65,18 +63,37 @@ const linksList = [{
   {
     title: 'For Girls',
     icon: 'For Girls',
-  },];
+  },
+];
 
-import { defineComponent, ref,  } from 'vue';
+import { defineComponent, ref, } from 'vue';
+
 export default defineComponent({
   name: 'AppDrawer',
-  components: {
-  },
+  components: {},
   setup() {
     const leftDrawerOpen = ref(true);
     const iconLocation = (iconName: string) => {
-      return `~assets/icons/genres/${iconName}.svg`
+      return `~assets/icons/genres/${iconName}.svg`;
+    };
+
+    const drawerWidth = ref(350);
+    const changeDrawerWidth = () => {
+      let width = window.innerWidth | window.screen.width
+      let breakpointLg = 1280;
+      if( width <= breakpointLg  ){
+        drawerWidth.value = 250;
+      }
+      else{
+        drawerWidth.value = 350;
+      }
     }
+
+    window.addEventListener(
+      'resize',
+      changeDrawerWidth,
+      false
+    );
 
     return {
       essentialLinks: linksList,
@@ -85,19 +102,29 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       iconLocation,
+      drawerWidth,
     };
   },
-
-
 });
 </script>
+
 <style lang="scss">
-.category{
+.drawer {
+  background: $dark;
+
+  @media screen and (max-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+.category {
+  width: 200px;
+  margin-left: auto;
+
   &__header {
     color: $white;
     font-size: 24px;
     text-align: left;
-    margin-left: 18px;
+    margin-left: 5px;
   }
   &__item {
     &:hover {

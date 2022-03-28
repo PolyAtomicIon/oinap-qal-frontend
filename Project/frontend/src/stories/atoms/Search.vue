@@ -1,5 +1,6 @@
 <template>
   <input class="search" type="search" Placeholder="search">
+
 </template>
 
 <script>

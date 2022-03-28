@@ -1,12 +1,12 @@
 <template>
   <q-layout
     class="main-layout bg-dark"
-    view="hHh Lpr lFf"
+    view="hHh lpR lFf"
   >
     <app-header></app-header>
-    <app-drawer></app-drawer>
 
-    <q-page-container>
+    <q-page-container class="page-container">
+      <app-drawer/>
       <q-page
         class="bg-dark-light q-pa-md"
       >
@@ -43,22 +43,7 @@ import AppDrawer from '../components/AppDrawer.vue';
 import MyBanner from '../components/Banner.vue';
 import MyAuth from '../pages/Auth.vue';
 import MyGameCard from '../components/GameCard.vue'
-const linksList = [
-  {
-    title: 'Arcades',},
-  {
-    title: 'Fighters',},
-  {
-    title: 'Quizzes',  },
-  {
-    title: 'Puzzles',  },
-  {
-    title: 'Races',},
-  {
-    title: 'Childish',},
-  {
-    title: 'ForGirls',},
-];
+
 const GameList = [
       {
         img:'GameCard.png',
@@ -149,7 +134,6 @@ export default defineComponent({
     const leftDrawerOpen = ref(true);
     return {
       GameList:GameList,
-      essentialLinks: linksList,
       leftDrawerOpen,
       basic: ref(false),
       toggleLeftDrawer() {
@@ -161,6 +145,7 @@ export default defineComponent({
 
 });
 </script>
+
 <style lang="scss">
 .main-layout{
   // max-width: ;
@@ -172,9 +157,19 @@ export default defineComponent({
     margin: 16px;
   }
 }
-.category{
-  font-size: 36px;
-  color: white;
-  padding:10px;
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  @media screen and (max-width: 1280px) {
+    margin: 0;
+  }
+  @media screen and (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
