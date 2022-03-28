@@ -1,23 +1,24 @@
 <template>
   <q-page>
-    <h3 class="text-center">{{email}}</h3>
-    <div class="row items-center justify-evenly q-gutter-sm q-pa-md">
-      <q-card
-        v-for="article in articles"
-        :key="article.id"
-        @click="$router.push('/games/1')"
+    <my-banner></my-banner>
+    <h1>All games</h1>
+    <div
+      class="
+        row
+        items-center
+        justify-evenly
+        q-gutter-lg
+        q-pa-sm
+      "
       >
-        <img :src="article.picture" height="156" width="256"/>
-
-        <q-card-section>
-          <div class="text-h6">{{article.title}}</div>
-          <div class="text-subtitle2">{{article.short}}</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          {{ article.content }}
-        </q-card-section>
-      </q-card>
+      <my-game-card
+        class="main-layout__game-card"
+        v-for="game in articles"
+        :key="game.id"
+        :img="game.picture"
+        :title="game.title"
+        :description="game.content"
+      ></my-game-card>
     </div>
   </q-page>
 </template>
@@ -31,9 +32,14 @@ import {
 } from '../../entities'
 import { IArticlesService } from '../../services/articles/articles.types'
 
+import MyBanner from '../../components/Banner.vue';
+import MyGameCard from '../../components/GameCard.vue'
+
 export default defineComponent({
   name: 'PageIndex',
   components: {
+    MyBanner,
+    MyGameCard
   },
   async setup() {
 
@@ -51,3 +57,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  font-size: 36px;
+  color: $white;
+  margin-left: 36px;
+}
+</style>

@@ -7,7 +7,7 @@
     control-color="white"
     arrows
     height="300px"
-    class="carousels"
+    class="carousels q-mx-lg"
   >
 
 
