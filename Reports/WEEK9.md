@@ -24,6 +24,8 @@ In the mobile version, as well as in the web version, I decided to make an upper
         ![alt friends_menu_mobile](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/friends_menu_mobile.png?raw=true)
         * Ratings page\
         ![alt ratings_menu_mobile](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/ratings_menu_mobile.png?raw=true)
-# Jacky Chan
-* Learn kung-fu
-* Invented kung-fu
+
+## Backend
+### Zhanbolat Bekmaganbetov
+
+This week I refactored code and wrote the configuration for the project, i was working on wrapping an application in docker and prepared django configuration for these purposes. I made a research on using transactions and atomic transactions in Django, async operations in python and discuss with Yerlan about business logic and it's improvement points. I also researched existed business logic in a project in order to find vulnerabilities and parts where some logic could be broken or was't took into account, such as acceptipting rules by user and discussed about it with Yerlan on the need of validation for that on out part. We also discussed about UserProfile and structure of interfaces of rest apis, as the result we decided to standartize our exception requests by creating a custom universal exception handler, which i'm working on. I with Yerlan were been spoken on the role validations for user  entities, how to handle it, what should and must be there, and what should not
