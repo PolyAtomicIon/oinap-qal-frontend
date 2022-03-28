@@ -1,3 +1,7 @@
+## Team Meetings
+* https://youtu.be/SD1DZo0iXZ8
+* https://youtu.be/Nuf33jCsyVk
+
 ## UX/UI Design
 ### Aimzhan Sytdykova
 
