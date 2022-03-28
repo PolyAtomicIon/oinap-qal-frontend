@@ -20,20 +20,26 @@
         >
       </div>
       <q-input
-        dense
-        standout
-        rounded
-        dark
-        v-model="text"
-        class="fit header__search-field mobile-hide"
-        bg-color="grey-14"
-        color="primary"
-        label-color="primary"
+        v-model="searchFragment"
         placeholder="Search"
+        dense
+        rounded
+        standout
+        dark
+        class="fit header__search-field mobile-hide"
+        bg-color="grey-9"
+        color="white"
+        input-class="header__search-field__input"
       >
         <template v-slot:append>
-          <q-icon v-if="text === ''" name="search" />
-          <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
+          <q-icon v-if="!searchFragment" name="search" />
+          <q-icon
+            v-else
+            name="clear"
+            color="white"
+            class="cursor-pointer"
+            @click="searchFragment = ''"
+          />
         </template>
       </q-input>
       <div
@@ -73,8 +79,8 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'AppHeader',
   components: {
@@ -88,6 +94,13 @@ export default defineComponent({
       type: Function,
       default: () => ({})
     },
+  },
+  setup() {
+    const searchFragment = ref('');
+
+    return {
+      searchFragment
+    }
   }
 });
 </script>
@@ -121,6 +134,7 @@ export default defineComponent({
       display: flex;
       align-items: center;
       width: 150px;
+      cursor: pointer;
 
       @media screen and (max-width: $breakpoint-sm) {
         width: 124px;
@@ -144,6 +158,12 @@ export default defineComponent({
 
         @media screen and (max-width: $breakpoint-sm) {
           max-width: 160px;
+        }
+
+        &__input {
+          &:active, &:focus {
+            color: $white !important;
+          }
         }
       }
       &-btn {
