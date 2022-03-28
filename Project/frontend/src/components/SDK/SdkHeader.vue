@@ -8,7 +8,7 @@
         </q-toolbar-title>
       </div>
       <div class="sdk-header__title">
-        <q-btn @click="$router.go(-1)" round text-color="grey" icon="chevron_left" />
+        <q-btn @click="$router.go(-1)" round dense flat text-color="grey" icon="chevron_left" />
         Forest Match
         <span>
           <q-icon name="star" color="orange-5"></q-icon>
