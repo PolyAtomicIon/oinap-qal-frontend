@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="banner__img">
-        <img :src="require('../assets/images/BannerImage.png')" alt="">
+        <img :src="require('../../assets/images/BannerImage.png')" alt="">
       </div>
     </q-carousel-slide>
   </q-carousel>

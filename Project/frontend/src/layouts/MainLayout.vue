@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import AppHeader from '../components/AppHeader.vue';
-import AppDrawer from '../components/AppDrawer.vue';
+import AppHeader from '../components/molecules/AppHeader.vue';
+import AppDrawer from '../components/molecules/AppDrawer.vue';
 
 // const GameList = [
 //       {

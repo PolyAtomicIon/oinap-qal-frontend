@@ -44,7 +44,7 @@
             @click="$router.push('/games/1')"
           >
             <img
-              src="../assets/icons/chevron-right-white.svg"
+              src="../../assets/icons/chevron-right-white.svg"
               alt="chevron-right"
               class="game-card__btn__icon"
             />
@@ -105,6 +105,7 @@ export default {
   &__img {
     border-radius: 20px;
     width: 100%;
+    aspect-ratio: 16 / 9;
   }
   &__title {
     font-size: 24px;

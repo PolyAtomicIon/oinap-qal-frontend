@@ -10,12 +10,12 @@
       >
         <img
           class="header__logo__figure"
-          :src="require('../assets/logo/logo.svg')"
+          :src="require('../../assets/logo/logo.svg')"
           alt="logo"
         >
         <img
           class="header__logo__title"
-          :src="require('../assets/logo/logo-title.svg')"
+          :src="require('../../assets/logo/logo-title.svg')"
           alt="logo-title"
         >
       </div>

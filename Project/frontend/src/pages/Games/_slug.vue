@@ -30,9 +30,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import SdkHeader from '../../components/SDK/SdkHeader.vue'
-import SdkDrawer from '../../components/SDK/SdkDrawer.vue'
-import GameContainer from '../../components/SDK/index.vue';
+import SdkHeader from '../../components/organisms/SdkHeader.vue'
+import SdkDrawer from '../../components/organisms/SdkDrawer.vue'
+import GameContainer from '../../components/organisms/SdkGameContainer.vue';
 
 export default defineComponent({
   name: 'GamePage',

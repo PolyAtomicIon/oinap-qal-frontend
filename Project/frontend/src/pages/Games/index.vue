@@ -32,8 +32,8 @@ import {
 } from '../../entities'
 import { IArticlesService } from '../../services/articles/articles.types'
 
-import MyBanner from '../../components/Banner.vue';
-import MyGameCard from '../../components/GameCard.vue'
+import MyBanner from '../../components/atoms/Banner.vue';
+import MyGameCard from '../../components/atoms/GameCard.vue'
 
 export default defineComponent({
   name: 'PageIndex',
