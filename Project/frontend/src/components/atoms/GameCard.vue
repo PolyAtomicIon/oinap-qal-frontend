@@ -2,7 +2,6 @@
   <div class="game-card">
     <q-card class="game-card__container" flat dark>
       <q-card-section class="q-pa-none">
-        <!-- <img :src="require('../assets/images/' + img)" alt="" /> -->
         <img
           :src="img"
           alt="preview image"

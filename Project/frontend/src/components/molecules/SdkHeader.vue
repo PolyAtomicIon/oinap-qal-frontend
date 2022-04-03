@@ -3,7 +3,9 @@
     <q-toolbar class="sdk-header">
       <div class="sdk-header__logo">
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title class="text-bold">
+        <q-toolbar-title
+          class="text-bold mobile-hide"
+        >
           Easy Play
         </q-toolbar-title>
       </div>
@@ -22,7 +24,7 @@
           4.5
         </span>
       </div>
-      <div class="sdk-header__auth">
+      <div class="sdk-header__auth mobile-hide">
         <q-btn
           flat
           round
@@ -83,6 +85,7 @@ export default defineComponent({
     max-width: 1280px;
     margin: 0 auto;
     padding: 16px 24px;
+    height: 74px;
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -101,6 +104,7 @@ export default defineComponent({
 
     @media screen and (max-width: $breakpoint-sm) {
       padding: 8px 24px;
+      height: 50px;
     }
 
     &__logo {
@@ -120,6 +124,9 @@ export default defineComponent({
         align-items: center;
         gap: 7px;
         color: $grey;
+      }
+      @media screen and (max-width: $breakpoint-sm) {
+        font-size: 16px;
       }
     }
     &__auth {

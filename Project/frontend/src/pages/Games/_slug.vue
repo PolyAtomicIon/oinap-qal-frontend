@@ -6,7 +6,7 @@
     ></sdk-header>
 
     <div
-      class="bg-overlay"
+      class="bg-overlay mobile-hide"
       v-show="leftDrawerOpen"
       @click="toggleLeftDrawer"
     ></div>
@@ -16,23 +16,27 @@
     ></sdk-drawer>
 
     <q-page-container class="sdk__page-container">
-      <div class="sdk__highscore-container">
-        <p class="sdk__highscore-container__text">
-          HighScore: 2455
-        </p>
-      </div>
+      <q-page
+        :style-fn="myTweak"
+      >
+        <div class="sdk__highscore-container">
+          <p class="sdk__highscore-container__text">
+            HighScore: 2455
+          </p>
+        </div>
 
-      <game-container></game-container>
+        <game-container></game-container>
+      </q-page>
     </q-page-container>
 
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import SdkHeader from '../../components/organisms/SdkHeader.vue'
-import SdkDrawer from '../../components/organisms/SdkDrawer.vue'
-import GameContainer from '../../components/organisms/SdkGameContainer.vue';
+import { defineComponent, ref, onMounted } from 'vue'
+import SdkHeader from '../../components/molecules/SdkHeader.vue'
+import SdkDrawer from '../../components/molecules/SdkDrawer.vue'
+import GameContainer from '../../components/molecules/SdkGameContainer.vue';
 
 export default defineComponent({
   name: 'GamePage',
@@ -43,12 +47,35 @@ export default defineComponent({
   },
   setup () {
     const leftDrawerOpen = ref(false);
+    const myTweak = (offset: number) => {
+      // "offset" is a Number (pixels) that refers to the total
+      // height of header + footer that occupies on screen,
+      // based on the QLayout "view" prop configuration
+
+      // this is actually what the default style-fn does in Quasar
+      return { minHeight: offset ? `calc(var(--vh, 1vh) - ${offset}px)` : 'calc(var(--vh, 1vh))' }
+    }
+
+    const fixProblemWithViewHeight = () => {
+          // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+          let vh = window.innerHeight * 0.01;
+          // Then we set the value in the --vh custom property to the root of the document
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+          // We listen to the resize event
+          window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+          });
+        };
+    onMounted(fixProblemWithViewHeight);
 
     return {
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
+      myTweak,
     }
   }
 });
@@ -61,6 +88,9 @@ export default defineComponent({
       padding: 20px 0;
       background: $secondary;
       text-align: center;
+      @media screen and (max-width: $breakpoint-sm) {
+        padding: 10px 0;
+      }
       &__text {
         margin: 0;
         font-style: normal;
@@ -71,18 +101,12 @@ export default defineComponent({
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        text-fill-color: transparent;
       }
-    }
-
-    &__navbar {
-      background: $dark;
-      width: 64px;
     }
 
     &__page-container {
       background: $dark;
-      height: calc(100vh - 64px);
+      overflow: hidden;
     }
 
     .bg-overlay {
@@ -92,6 +116,10 @@ export default defineComponent({
       height: calc(100% - 74px);
       background: rgba($color: #000000, $alpha: 0.45);
       z-index: 2999;
+      @media screen and (max-width: $breakpoint-sm) {
+        top: 50px;
+        height: calc(100% - 50px);
+      }
     }
 
   }

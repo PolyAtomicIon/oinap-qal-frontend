@@ -3,7 +3,7 @@
     class="iframe__container"
   >
     <iframe
-      src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
+      src="http://192.168.1.10:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
       frameborder="0"
       width="100%"
       height="100%"
@@ -92,9 +92,19 @@ export default defineComponent({
       iframe.value?.contentWindow?.postMessage('restart', '*');
     }
 
-    onMounted(() => {
-      // console.log(iframe.value?.getElementsByTagName('iframe'))
-    });
+    const fixProblemWithViewHeight = () => {
+          // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+          let vh = window.innerHeight * 0.01;
+          // Then we set the value in the --vh custom property to the root of the document
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+          // We listen to the resize event
+          window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+          });
+        };
+    onMounted(fixProblemWithViewHeight);
 
     return {
       iframe,
@@ -119,8 +129,10 @@ $inner-container-height: 96px;
     position: relative;
     background: $secondary;
     width: 100%;
-    height: 100%;
-    // padding-top: $inner-container-height;
+    height: calc(var(--vh, 1vh) * 100 - 138px);
+    @media screen and (max-width: $breakpoint-sm) {
+      height: calc(var(--vh, 1vh) * 100 - 94px);
+    }
   }
   &__inner {
     position: absolute;
