@@ -6,6 +6,7 @@
     font-style: normal;
     font-weight: normal;
     src: local("Gill Sans MT Ext Condensed Bold"), url("../fonts/glsnecb.ttf") format("truetype");
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -22,11 +23,15 @@ html, body {
     overflow: hidden;
     background-color: transparent;
     font-size: 15px;
+    -webkit-tap-highlight-color: transparent;
+
 }
 html, body, input {
     color: black;
     font-family: "Gill Sans MT Ext Condensed Bold";
     text-shadow: #333 0.1em 0.1em 0.1em;
+    -webkit-tap-highlight-color: transparent;
+
 }
 
 a {
@@ -34,7 +39,9 @@ a {
     text-shadow: #666 0.05em 0.05em 0.05em;
     text-decoration: none;
     outline: none;
-    font-size: 3em
+    font-size: 3em;
+    -webkit-tap-highlight-color: transparent;
+
 }
 a:hover {
     color: black;
@@ -44,6 +51,7 @@ a:hover {
 input {
     color: #333;
     text-shadow: #666 0.05em 0.05em 0.05em;
+
 }
 
 

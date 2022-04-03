@@ -9,6 +9,7 @@ html {
     background-color: #282828;
     background-size: 16px 16px;
     height: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
     margin: 0px;
     font: 12px/18px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-image: radial-gradient(50% 50%, transparent, black);
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -47,6 +49,7 @@ iframe {
     height: 100%;
     border: none;
     margin-bottom: -5px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -110,7 +113,7 @@ header:hover #select {
     line-height: 18px;
     color: #BBB;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.5s;-webkit-tap-highlight-color: transparent;
 }
 header:hover #nav a {
     opacity: 1;

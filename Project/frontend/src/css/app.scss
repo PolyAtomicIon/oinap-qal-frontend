@@ -9,3 +9,13 @@
 .bg-dark-grey {
   background: $dark-grey;
 }
+button,
+textarea,
+input,
+select,
+a,
+iframe,
+body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
