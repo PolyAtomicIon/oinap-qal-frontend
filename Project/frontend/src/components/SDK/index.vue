@@ -47,7 +47,7 @@ import { defineComponent, onMounted, ref} from 'vue';
 // import QCard from 'quasar'
 
 export default defineComponent({
-  name: 'DemoSDK',
+  name: 'DemoSdk',
   setup() {
 
     const iframe = ref<HTMLIFrameElement | null>(null);

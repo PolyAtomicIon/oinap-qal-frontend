@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/games/:id',
-    component: () => import('layouts/LayoutSDK.vue'),
+    component: () => import('pages/Games/_slug.vue'),
   },
   {
     path: '/ResetPassword',

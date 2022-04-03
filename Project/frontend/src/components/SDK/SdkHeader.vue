@@ -52,6 +52,14 @@ export default defineComponent({
     toggleLeftDrawer: {
       type: Function,
       default: () => ({})
+    },
+    signIn: {
+      type: Function,
+      default: () => ({})
+    },
+    signUp: {
+      type: Function,
+      default: () => ({})
     }
   },
   setup() {
