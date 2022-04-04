@@ -23,7 +23,7 @@
           class="q-pa-none"
         >
           <q-rating
-            v-model="ratingModel"
+            :model-value="ratingModel"
             size="1.3em"
             color="yellow-5"
             icon="star_border"
@@ -89,11 +89,7 @@ export default {
   width: 100%;
   max-width: 300px;
 
-  @media screen and (max-width: $breakpoint-md) {
-    max-width: 450px;
-  }
-
-  @media screen and (max-width: $breakpoint-sm) {
+  @media screen and (max-width: $breakpoint-xs) {
     max-width: 100%;
   }
 

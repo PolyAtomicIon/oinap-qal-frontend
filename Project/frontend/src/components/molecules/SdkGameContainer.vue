@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref} from 'vue';
+import fixProblemWithViewHeight from '../../services/utils'
 // import QCard from 'quasar'
 
 export default defineComponent({
@@ -92,18 +93,6 @@ export default defineComponent({
       iframe.value?.contentWindow?.postMessage('restart', '*');
     }
 
-    const fixProblemWithViewHeight = () => {
-          // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-          let vh = window.innerHeight * 0.01;
-          // Then we set the value in the --vh custom property to the root of the document
-          document.documentElement.style.setProperty('--vh', `${vh}px`);
-          // We listen to the resize event
-          window.addEventListener('resize', () => {
-            // We execute the same script as before
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-          });
-        };
     onMounted(fixProblemWithViewHeight);
 
     return {
@@ -131,7 +120,7 @@ $inner-container-height: 96px;
     width: 100%;
     height: calc(var(--vh, 1vh) * 100 - 138px);
     @media screen and (max-width: $breakpoint-sm) {
-      height: calc(var(--vh, 1vh) * 100 - 94px);
+      height: calc(var(--vh, 1vh) * 100 - 50px);
     }
   }
   &__inner {

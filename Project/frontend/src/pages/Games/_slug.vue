@@ -37,6 +37,7 @@ import { defineComponent, ref, onMounted } from 'vue'
 import SdkHeader from '../../components/molecules/SdkHeader.vue'
 import SdkDrawer from '../../components/molecules/SdkDrawer.vue'
 import GameContainer from '../../components/molecules/SdkGameContainer.vue';
+import fixProblemWithViewHeight from '../../services/utils'
 
 export default defineComponent({
   name: 'GamePage',
@@ -48,26 +49,9 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false);
     const myTweak = (offset: number) => {
-      // "offset" is a Number (pixels) that refers to the total
-      // height of header + footer that occupies on screen,
-      // based on the QLayout "view" prop configuration
-
-      // this is actually what the default style-fn does in Quasar
       return { minHeight: offset ? `calc(var(--vh, 1vh) - ${offset}px)` : 'calc(var(--vh, 1vh))' }
     }
 
-    const fixProblemWithViewHeight = () => {
-          // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-          let vh = window.innerHeight * 0.01;
-          // Then we set the value in the --vh custom property to the root of the document
-          document.documentElement.style.setProperty('--vh', `${vh}px`);
-          // We listen to the resize event
-          window.addEventListener('resize', () => {
-            // We execute the same script as before
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-          });
-        };
     onMounted(fixProblemWithViewHeight);
 
     return {
@@ -90,6 +74,7 @@ export default defineComponent({
       text-align: center;
       @media screen and (max-width: $breakpoint-sm) {
         padding: 10px 0;
+        display: none;
       }
       &__text {
         margin: 0;
