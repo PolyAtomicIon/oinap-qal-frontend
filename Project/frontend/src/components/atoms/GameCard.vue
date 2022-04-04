@@ -104,7 +104,8 @@ export default {
   &__img {
     border-radius: 20px;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
   &__title {
     font-size: 24px;
