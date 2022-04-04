@@ -11,6 +11,12 @@ Fixed errors that occurred after the transfer of the project; Moved changes to t
 
 This week I created some components and pages "settings", "profile", then reworked the code, fixed some bugs
 
+Profile page:
+![Profile page](./week10/Profile.jpg)
+
+Settings page:
+![Settings page](./week10/settingpage.jpg)
+
 
 # Jet Lee
 * Made kung-fu
