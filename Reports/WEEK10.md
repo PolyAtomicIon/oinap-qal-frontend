@@ -6,6 +6,11 @@ This week I implemented the endpoints for the Developer's dashboard. In the Deve
 
 Fixed errors that occurred after the transfer of the project; Moved changes to the new repository; Changed the Game entity by bringing a user with the developer role to it; Added property for counting the number of reviews; Changed property for calculating total_rate from sum to average; For GameSerializer added options and fields for users and feedbacks; Register new router for Developer's studio (dashboard); Added DevGamesViewSet for developer studio (dashboard) and rewritten all methods for CRUD; Added sorting by different options for developers on the developer's studio page; And fixed minor errors found when viewing the project;
 
+## Frontend
+### Abylay Altazhanov
+
+This week I created some components and pages "settings", "profile", then reworked the code, fixed some bugs
+
 
 # Jet Lee
 * Made kung-fu
