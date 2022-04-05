@@ -54,8 +54,6 @@ This week, pages such as: sdk and its status with description, comments, leaderb
 
 ![alt image12](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image12.png?raw=true)
 
-![alt image13](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image13.png?raw=true)
-
 # Jacky Chan
 * Learn kung-fu
 * Invented kung-fu
