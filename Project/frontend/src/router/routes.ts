@@ -2,39 +2,28 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/home',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '/',
-        component: () => import('../pages/Games/index.vue'),
+        path: '',
+        component: () => import('pages/Games/index.vue'),
       },
-      {
-        path: '/Admin',
-        component: () => import('../pages/Admin/AdminRegistration.vue')
-      },
-      {
-        path: '/Developer',
-        component: () => import('../pages/Developer/DeveloperLogin.vue')
-      },
-      {
-        path: '/Developer/Registration',
-        component: () => import('../pages/Developer/DeveloperRegistration.vue')
-      },
-      {
-        path: 'Developer/ResetPassword',
-        component: () => import('../pages/ResetPassword.vue')
-      },
-      {
-        path: '/Gamer',
-        component: () => import('../pages/Gamer/GamerRegistration.vue')
-      }
-
     ]
   },
   {
     path: '/games/:id',
     component: () => import('pages/Games/_slug.vue'),
+  },
+  {
+    path: '/studio',
+    component: () => import('layouts/StudioLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Studio/index.vue'),
+      },
+    ]
   },
   {
     path: '/ResetPassword',
