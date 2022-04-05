@@ -23,9 +23,39 @@ Settings page:
 ![Settings page](./week10/settingpage.jpg)
 
 
-# Jet Lee
-* Made kung-fu
-* Learned kung-fu
+## UX/UI Design
+### Aimzhan Sytdykova
+
+This week, pages such as: sdk and its status with description, comments, leaderboard and share were made. There is also their mobile adaptation. From the rest of the pages, this is for game developers with their profile, game list and game statistics.
+
+![alt image0](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image0.png?raw=true)
+
+![alt image1](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image1.png?raw=true)
+
+![alt image2](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image2.png?raw=true)
+
+![alt image3](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image3.png?raw=true)
+
+![alt image4](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image4.png?raw=true)
+
+![alt image5](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image5.png?raw=true)
+
+![alt image6](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image6.png?raw=true)
+
+![alt image7](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image7.png?raw=true)
+
+![alt image8](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image8.png?raw=true)
+
+![alt image9](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image9.png?raw=true)
+
+![alt image10](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image10.png?raw=true)
+
+![alt image11](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image11.png?raw=true)
+
+![alt image12](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image12.png?raw=true)
+
+![alt image13](https://github.com/SuleymanDemirelKazakhstan/diploma-project-graduaders/blob/main/Design/w10image13.png?raw=true)
+
 # Jacky Chan
 * Learn kung-fu
 * Invented kung-fu
