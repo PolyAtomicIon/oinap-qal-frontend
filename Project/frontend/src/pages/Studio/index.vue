@@ -83,7 +83,9 @@
               dense
               @click="props.expand = !props.expand"
               icon="delete"
-            />
+            >
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Delete</q-tooltip>
+            </q-btn>
           </q-td>
           <q-td auto-width>
             <q-btn
@@ -94,7 +96,9 @@
               dense
               @click="props.expand = !props.expand"
               icon="edit"
-            />
+            >
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Edit</q-tooltip>
+            </q-btn>
           </q-td>
           <q-td auto-width>
             <q-btn
@@ -105,7 +109,9 @@
               dense
               @click="props.expand = !props.expand"
               icon="chevron_right"
-            />
+            >
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Statistics</q-tooltip>
+            </q-btn>
           </q-td>
         </q-tr>
       </template>
