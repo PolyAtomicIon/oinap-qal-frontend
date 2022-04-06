@@ -30,6 +30,7 @@
           dark
           color="dark"
           class="bg-dark-light"
+          @added="closeDialog"
         >
           <template v-slot:header>
           </template>
@@ -37,7 +38,7 @@
             <p v-if="scope.files.length > 0">Files is here</p>
             <div v-else class="column justify-center items-center q-pa-sm q-gutter-y-md bg-dark-light">
               <img src="../../assets/images/upload-img.svg" alt="upload" >
-              <p class="text-center">Drag and drop the files here or click the button below to select them on your computer.</p>
+              <p class="text-center ">Drag and drop the files here or click the button below to select them on your computer.</p>
               <q-btn
                 v-if="scope.canAddFiles"
                 @click="scope.pickFiles"

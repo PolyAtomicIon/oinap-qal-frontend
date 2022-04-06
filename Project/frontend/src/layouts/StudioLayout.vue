@@ -4,7 +4,7 @@
     view="hHh lpR lFf"
   >
     <studio-header
-      :add-game="toggleAddGameDialog"
+      :add-game="toggleUploadGameDialog"
     ></studio-header>
 
     <q-page-container class="page-container">
@@ -16,10 +16,14 @@
           <router-view />
         </Suspense>
         <studio-upload-dialog
-          :is-dialog-active="isAddGameDialogActive"
-          :close-dialog="toggleAddGameDialog"
+          :is-dialog-active="isUploadGameDialogActive"
+          :close-dialog="toggleUploadGameDialog"
+        />
+        <studio-add-game-form
+          :is-dialog-active="isAddGameFormActive"
+          :close-dialog="toggleAddGameForm"
         >
-        </studio-upload-dialog>
+        </studio-add-game-form>
       </q-page>
     </q-page-container>
   </q-layout>
@@ -29,6 +33,7 @@
 import StudioHeader from '../components/molecules/StudioHeader.vue';
 import StudioDrawer from '../components/molecules/StudioDrawer.vue';
 import StudioUploadDialog from '../components/molecules/StudioUploadDialog.vue';
+import StudioAddGameForm from '../components/molecules/StudioAddGameForm.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
@@ -37,12 +42,23 @@ export default defineComponent({
     StudioHeader,
     StudioDrawer,
     StudioUploadDialog,
+    StudioAddGameForm,
   },
   setup() {
-    const leftDrawerOpen = ref(true);
-    const isAddGameDialogActive = ref(false);
-    const toggleAddGameDialog = () => {
-      isAddGameDialogActive.value = !isAddGameDialogActive.value
+    const leftDrawerOpen = ref(true)
+    const step = ref(1)
+
+    const isAddGameFormActive = ref(false)
+    const toggleAddGameForm = () => {
+      isAddGameFormActive.value = !isAddGameFormActive.value
+    }
+
+    const isUploadGameDialogActive = ref(false)
+    const toggleUploadGameDialog = () => {
+      if(step.value > 2)
+        toggleAddGameForm()
+      isUploadGameDialogActive.value = !isUploadGameDialogActive.value
+      step.value += 1;
     }
 
     return {
@@ -51,8 +67,11 @@ export default defineComponent({
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
-      toggleAddGameDialog,
-      isAddGameDialogActive,
+      isUploadGameDialogActive,
+      toggleUploadGameDialog,
+      isAddGameFormActive,
+      toggleAddGameForm,
+      step
     };
   },
 
