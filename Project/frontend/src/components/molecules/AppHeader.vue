@@ -139,15 +139,15 @@ export default defineComponent({
       cursor: pointer;
 
       @media screen and (max-width: $breakpoint-sm) {
-        width: 124px;
+        width: 32px;
       }
 
       &__figure {
         width: 32px;
       }
       &__title {
-        width: 80px;
-        margin-left: 24px;
+        width: 96px;
+        margin-left: 16px;
 
         @media screen and (max-width: $breakpoint-sm) {
           display: none;
@@ -179,6 +179,9 @@ export default defineComponent({
       &__btn {
         padding: 0 15px !important;
         height: 26px;
+        @media screen and (max-screen: $breakpoint-sm) {
+          font-size: 10px !important;
+        }
       }
     }
   }

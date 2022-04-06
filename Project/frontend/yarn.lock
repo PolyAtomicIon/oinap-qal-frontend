@@ -9891,10 +9891,10 @@ qs@^6.10.0:
   dependencies:
     side-channel "^1.0.4"
 
-quasar@^2.0.0:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.5.5.tgz#942996e10a548c5f8a368b51d3432da21043d25a"
-  integrity sha512-7UntzqIBih+xZLCB/f9pxuvNP3EBgexfQDbf8r9p58DHWAiSQwamLjcRHKqmujjp0uX1QChtp6oUxEkK+sFKtA==
+quasar@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.6.5.tgz#f744e2f12c53430da58da413d31e0720cbd6a6fa"
+  integrity sha512-ABaFt6eXDtXwV6RUt8VW5xxvqb8gpflIdYc8+ucGFnZ5zKH20YzqHOlIg/jJOw3T/C1s8T/c6T4yxvhxxj/uxA==
 
 querystring-es3@^0.2.0:
   version "0.2.1"
