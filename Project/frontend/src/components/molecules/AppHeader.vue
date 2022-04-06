@@ -72,6 +72,8 @@
         >
           Sign up
         </button>
+        <slot name="add-button">
+        </slot>
       </div>
 
     </q-toolbar>

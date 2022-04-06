@@ -3,7 +3,7 @@
     class="bg-dark"
     view="hHh lpR lFf"
   >
-    <app-header></app-header>
+    <studio-header></studio-header>
 
     <q-page-container class="page-container">
       <studio-drawer/>
@@ -19,14 +19,14 @@
 </template>
 
 <script lang="ts">
-import AppHeader from '../components/molecules/AppHeader.vue';
+import StudioHeader from '../components/molecules/StudioHeader.vue';
 import StudioDrawer from '../components/molecules/StudioDrawer.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'StudioLayout',
   components: {
-    AppHeader,
+    StudioHeader,
     StudioDrawer,
   },
   setup() {
