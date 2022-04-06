@@ -3,7 +3,9 @@
     class="bg-dark"
     view="hHh lpR lFf"
   >
-    <studio-header></studio-header>
+    <studio-header
+      :add-game="toggleAddGameDialog"
+    ></studio-header>
 
     <q-page-container class="page-container">
       <studio-drawer/>
@@ -13,6 +15,11 @@
         <Suspense>
           <router-view />
         </Suspense>
+        <studio-upload-dialog
+          :is-dialog-active="isAddGameDialogActive"
+          :close-dialog="toggleAddGameDialog"
+        >
+        </studio-upload-dialog>
       </q-page>
     </q-page-container>
   </q-layout>
@@ -21,6 +28,7 @@
 <script lang="ts">
 import StudioHeader from '../components/molecules/StudioHeader.vue';
 import StudioDrawer from '../components/molecules/StudioDrawer.vue';
+import StudioUploadDialog from '../components/molecules/StudioUploadDialog.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
@@ -28,15 +36,23 @@ export default defineComponent({
   components: {
     StudioHeader,
     StudioDrawer,
+    StudioUploadDialog,
   },
   setup() {
     const leftDrawerOpen = ref(true);
+    const isAddGameDialogActive = ref(false);
+    const toggleAddGameDialog = () => {
+      isAddGameDialogActive.value = !isAddGameDialogActive.value
+    }
+
     return {
       leftDrawerOpen,
       basic: ref(false),
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
+      toggleAddGameDialog,
+      isAddGameDialogActive,
     };
   },
 
