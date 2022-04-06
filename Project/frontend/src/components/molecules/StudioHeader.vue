@@ -2,9 +2,8 @@
   <app-header>
     <template v-slot:add-button>
       <q-btn
-        v-if="$q.platform.mobile"
         size="md"
-        class="text-white"
+        class="text-white desktop-only"
         color="primary"
         icon="add"
         label="Add game"
@@ -12,9 +11,8 @@
         @click="addGame"
       />
       <q-btn
-        v-else
         size="sm"
-        class="text-white"
+        class="text-white mobile-only"
         color="primary"
         icon="add"
         round
