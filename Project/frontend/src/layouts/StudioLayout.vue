@@ -24,6 +24,7 @@
           :close-dialog="toggleAddGameForm"
         >
         </studio-add-game-form>
+
       </q-page>
     </q-page-container>
   </q-layout>
@@ -71,7 +72,7 @@ export default defineComponent({
       toggleUploadGameDialog,
       isAddGameFormActive,
       toggleAddGameForm,
-      step
+      step,
     };
   },
 

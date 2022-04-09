@@ -51,7 +51,7 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-for="col in props.cols"
+              v-for="(col) in props.cols"
               :key="col.name"
               :props="props"
             >
@@ -74,6 +74,7 @@
                 {{ col.value }}
               </span>
             </q-td>
+            <!-- delete -->
             <q-td auto-width>
               <q-btn
                 size="sm"
@@ -81,12 +82,13 @@
                 flat
                 round
                 dense
-                @click="props.expand = !props.expand"
+                @click="deleteGame(props.row.index, props.row.name)"
                 icon="delete"
               >
                 <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Delete</q-tooltip>
               </q-btn>
             </q-td>
+            <!-- edit -->
             <q-td auto-width>
               <q-btn
                 size="sm"
@@ -100,6 +102,7 @@
                 <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Edit</q-tooltip>
               </q-btn>
             </q-td>
+            <!-- go to statistics -->
             <q-td auto-width>
               <q-btn
                 size="sm"
@@ -117,6 +120,14 @@
         </template>
       </q-table>
     </q-scroll-area>
+
+    <studio-delete-dialog
+      :is-dialog-active="isDeleteDialogActive"
+      :close-dialog="toggleDeleteDialogActive"
+      :delete-game="deleteGame"
+      :game-title="activeGameTitle"
+    >
+    </studio-delete-dialog>
   </div>
 </template>
 
@@ -128,6 +139,7 @@ import {
   IArticleData,
 } from '../../entities'
 import { IArticlesService } from '../../services/articles/articles.types'
+import StudioDeleteDialog from '../../components/molecules/StudioDeleteDialog.vue';
 
 const columns = [
   {
@@ -194,6 +206,7 @@ const rows = [
 export default defineComponent({
   name: 'StudioIndex',
   components: {
+    StudioDeleteDialog,
   },
   async setup() {
 
@@ -211,13 +224,28 @@ export default defineComponent({
     ])
     const filterBy = ref('Newest')
 
+    const isDeleteDialogActive = ref(false)
+    const activeGameTitle = ref('')
+    const toggleDeleteDialogActive = () => {
+      isDeleteDialogActive.value = !isDeleteDialogActive.value
+    }
+    const deleteGame = (id: number, title: string) => {
+      console.log(id, title)
+      activeGameTitle.value = title
+      toggleDeleteDialogActive()
+    }
+
     return {
       email,
       articles,
       columns,
       rows,
       filterProperties,
-      filterBy
+      filterBy,
+      isDeleteDialogActive,
+      toggleDeleteDialogActive,
+      deleteGame,
+      activeGameTitle
     };
   },
 });
