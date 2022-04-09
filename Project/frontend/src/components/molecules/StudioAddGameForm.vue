@@ -25,13 +25,25 @@
           @submit="onSubmit"
           class="q-gutter-md"
         >
+          <!-- file -->
           <div class="add-game__form__field">
             <label for="file">File</label>
             <p class="text-primary q-py-sm">tetris_game.html5</p>
           </div>
 
+          <!-- cover -->
           <div class="add-game__form__field">
             <label for="cover">Cover</label>
+            <q-img
+              v-if="coverPreviewLink != ''"
+              :src="coverPreviewLink"
+              spinner-color="primary"
+              fit="cover"
+              class="rounded-borders q-my-sm"
+              style="display: block;"
+              width="120px"
+              height="80px"
+            />
             <q-file
               dense
               dark
@@ -39,6 +51,8 @@
               label-color="primary"
               label="Upload image"
               accept=".jpg, .png, "
+              v-model="form.cover"
+              @update:model-value="updateCover()"
             >
               <template v-slot:prepend>
                 <q-icon name="upload" color="primary" @click.stop />
@@ -46,6 +60,7 @@
             </q-file>
           </div>
 
+          <!-- name -->
           <div class="add-game__form__field">
             <label for="name">Name</label>
             <q-input
@@ -54,10 +69,12 @@
               standout
               bg-color="grey-9"
               class="q-mt-sm"
+              v-model="form.name"
             >
             </q-input>
           </div>
 
+          <!-- description -->
           <div class="add-game__form__field">
             <label for="description">Description</label>
             <q-input
@@ -67,15 +84,17 @@
               type="textarea"
               bg-color="grey-9"
               class="q-mt-sm"
+              v-model="form.description"
             />
           </div>
 
+          <!-- tags -->
           <div class="add-game__form__field">
             <label for="description">Tags</label>
 
             <div class="q-gutter-xs q-mt-md">
               <q-chip
-                v-for="(value, name) in desert"
+                v-for="(value, name) in form.tags"
                 :key="name"
                 :color="value ? 'primary' : 'grey'"
                 :outline="!value"
@@ -83,13 +102,14 @@
                 size="md"
                 class="q-pa-lg"
                 clickable
-                @click="() => {desert[name] = !desert[name]}"
+                @click="() => {form.tags[name] = !form.tags[name]}"
               >
                 {{name}}
               </q-chip>
             </div>
           </div>
 
+          <!-- save button -->
           <div>
             <q-btn
               label="Save changes"
@@ -107,7 +127,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
+
+interface IGameTag {
+  [key: string]: boolean
+}
+
+interface IGameForm {
+  fileName: string,
+  cover: File | null,
+  name: string,
+  description: string,
+  tags: IGameTag
+}
 
 export default defineComponent({
 
@@ -123,23 +155,37 @@ export default defineComponent({
   },
   setup() {
     const onSubmit = () => {
-      console.log('submit')
+      console.log('submit ', form)
     }
-    const desert = reactive({
-      Icecream: false,
-      Eclair: true,
-      Cupcake: false,
-      Gingerbread: false
+    const tags: IGameTag = reactive({
+      'game': true,
+      'space': false,
+      'multiplayer': false,
+      'shooter': false,
+      'guns': false
     })
+
+    const form: IGameForm = reactive({
+      fileName: 'string',
+      cover: null,
+      name: '',
+      description: '',
+      tags: tags
+    })
+
+    let coverPreviewLink = ref('')
+    const updateCover = () => {
+      console.log(form.cover)
+      if(form.cover)
+        coverPreviewLink.value = URL.createObjectURL(form.cover);
+    }
 
     return {
       onSubmit,
-      desert,
-      selection: computed(() => {
-        return Object.keys(desert)
-          .filter(type => desert[ type ] === true)
-          .join(', ')
-      })
+      tags,
+      form,
+      updateCover,
+      coverPreviewLink
     }
   },
 })
@@ -167,7 +213,7 @@ export default defineComponent({
 
 <style lang="scss" scoped >
   .add-game__form {
-    width: 450px;
+    width: 500px;
     border-radius: 14px;
     &__field{
       color: $grey !important;

@@ -1,123 +1,123 @@
 <template>
-<div class="table">
-  <div
-    class="table__header"
-  >
-    Filter:
-    <q-select
-      v-model="filterBy"
-      dense
-      standout
-      emit-value
-      :options="filterProperties"
-      options-dense
-      dark
-      color="white"
-      class="q-ml-md"
-      style="width: 150px;"
-    />
-  </div>
-  <q-scroll-area style="height: 100%; max-width: 100%;">
-    <q-table
-      :rows="rows"
-      :columns="columns"
-      dark
-      flat
-      card-class="bg-dark-light"
-      table-class="text-white"
-      table-header-class="text-grey"
-      hide-bottom
-      hide-top
-      row-key="index"
-      class="table"
+  <div class="table">
+    <div
+      class="table__header"
     >
-      <template v-slot:header="props">
-        <q-tr
-          :props="props"
-          class="text-grey"
-        >
-          <q-th
-            v-for="col in props.cols"
-            :key="col.name"
+      Filter:
+      <q-select
+        v-model="filterBy"
+        dense
+        standout
+        emit-value
+        :options="filterProperties"
+        options-dense
+        dark
+        color="white"
+        class="q-ml-md"
+        style="width: 150px;"
+      />
+    </div>
+    <q-scroll-area style="height: 100%; max-width: 100%;">
+      <q-table
+        :rows="rows"
+        :columns="columns"
+        dark
+        flat
+        card-class="bg-dark-light"
+        table-class="text-white"
+        table-header-class="text-grey"
+        hide-bottom
+        hide-top
+        row-key="index"
+        class="table"
+      >
+        <template v-slot:header="props">
+          <q-tr
             :props="props"
+            class="text-grey"
           >
-            {{ col.label }}
-          </q-th>
-          <q-th auto-width />
-          <q-th auto-width />
-          <q-th auto-width />
-        </q-tr>
-      </template>
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-          >
-            <q-img
-              v-if="col.name == 'cover'"
-              :src="col.value"
-              :ratio="16/9"
-              fit="cover"
-              class="rounded-borders"
-              width="96px"
-            />
-            <q-rating
-              v-else-if="col.name == 'rating'"
-              :model-value="col.value"
-              color="yellow-5"
-              icon="star_border"
-              icon-selected="star"
-            ></q-rating>
-            <span v-else >
-              {{ col.value }}
-            </span>
-          </q-td>
-          <q-td auto-width>
-            <q-btn
-              size="sm"
-              color="white"
-              flat
-              round
-              dense
-              @click="props.expand = !props.expand"
-              icon="delete"
+            <q-th
+              v-for="col in props.cols"
+              :key="col.name"
+              :props="props"
             >
-              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Delete</q-tooltip>
-            </q-btn>
-          </q-td>
-          <q-td auto-width>
-            <q-btn
-              size="sm"
-              color="white"
-              flat
-              round
-              dense
-              @click="props.expand = !props.expand"
-              icon="edit"
+              {{ col.label }}
+            </q-th>
+            <q-th auto-width />
+            <q-th auto-width />
+            <q-th auto-width />
+          </q-tr>
+        </template>
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td
+              v-for="col in props.cols"
+              :key="col.name"
+              :props="props"
             >
-              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Edit</q-tooltip>
-            </q-btn>
-          </q-td>
-          <q-td auto-width>
-            <q-btn
-              size="sm"
-              color="white"
-              flat
-              round
-              dense
-              @click="props.expand = !props.expand"
-              icon="chevron_right"
-            >
-              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Statistics</q-tooltip>
-            </q-btn>
-          </q-td>
-        </q-tr>
-      </template>
-    </q-table>
-  </q-scroll-area>
-</div>
+              <q-img
+                v-if="col.name == 'cover'"
+                :src="col.value"
+                :ratio="16/9"
+                fit="cover"
+                class="rounded-borders"
+                width="96px"
+              />
+              <q-rating
+                v-else-if="col.name == 'rating'"
+                :model-value="col.value"
+                color="yellow-5"
+                icon="star_border"
+                icon-selected="star"
+              ></q-rating>
+              <span v-else >
+                {{ col.value }}
+              </span>
+            </q-td>
+            <q-td auto-width>
+              <q-btn
+                size="sm"
+                color="white"
+                flat
+                round
+                dense
+                @click="props.expand = !props.expand"
+                icon="delete"
+              >
+                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Delete</q-tooltip>
+              </q-btn>
+            </q-td>
+            <q-td auto-width>
+              <q-btn
+                size="sm"
+                color="white"
+                flat
+                round
+                dense
+                @click="props.expand = !props.expand"
+                icon="edit"
+              >
+                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Edit</q-tooltip>
+              </q-btn>
+            </q-td>
+            <q-td auto-width>
+              <q-btn
+                size="sm"
+                color="white"
+                flat
+                round
+                dense
+                @click="props.expand = !props.expand"
+                icon="chevron_right"
+              >
+                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Statistics</q-tooltip>
+              </q-btn>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </q-scroll-area>
+  </div>
 </template>
 
 <script lang="ts">
