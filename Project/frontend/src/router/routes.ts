@@ -26,6 +26,16 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/admin',
+    component: () => import('layouts/AdminLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Admin/index.vue'),
+      },
+    ]
+  },
+  {
     path: '/ResetPassword',
     component: () => import('../pages/ResetPassword.vue')
   },
