@@ -1,7 +1,24 @@
 
 ## Backend
 ### Yerlan Negmetulla
-## Backend
+
+This week we have implemented password reset and recovery endpoints. implemented endpoints for the admin panel. And code refactoring.
+
+When you are logged in, you can enter your old password for confirmation and change your password to a new one:
+
+![Reset password](./week11/reset_pass.png)
+If you are not logged in and have forgotten your current password, you can recover your password using the email address you provided during registration:
+
+![Forgot password](./week11/forgot_pass.png)
+
+![Forgot password error](./week11/forgot_pass_err.png)
+
+Through the letter that came to your mail, you can follow the link and send a request to restore your password:
+
+![Restore password message](./week11/msg_restore_pass.png)
+
+![Restore password](./week11/restore_pass.png)
+
 ### Zhanbolat Bekmaganbetov
 
 ## Frontend
@@ -13,7 +30,7 @@ This week I developed Admin's Page, where admin can accept, reject new games, an
 Developer's page:
 ![Admin page](./week11/admin.png)
 
-Also refactored and fixed bugs in other components. 
+Also refactored and fixed bugs in other components.
 
 
 ## UX/UI Design
