@@ -6,7 +6,6 @@
 
 ## Frontend
 ### Abylay Altazhanov
-![Settings page](./week10/settingpage.jpg)
 ### Yernat Bekzat
 
 This week I developed Admin's Page, where admin can accept, reject new games, and also can view game itself.
