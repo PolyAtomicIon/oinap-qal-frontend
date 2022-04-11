@@ -21,17 +21,17 @@ Profile page:
 
 Settings page:
 ![Settings page](./week10/settingpage.jpg)
-### yernat Bezkat
+### Yernat Bekzat
 
 This week I developed Developer's Page, where developer can upload games, edit, see statistics of his game.
 
 It has inconvinient to style some components and I had override quasar's style and in the it looks not satisfactory, but on the otherhand it saves a lot of time. 
 
 Developer's page:
-![Profile page](./week10/dev.jpg)
+![Developers page](./week10/dev.png)
 
-![Settings page](./week10/dev1.jpg)
-![Settings page](./week10/dev2.jpg)
+![Developers page](./week10/dev1.png)
+![Developers page](./week10/dev2.png)
 
 
 ## UX/UI Design
