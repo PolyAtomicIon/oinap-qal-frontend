@@ -21,6 +21,12 @@ Through the letter that came to your mail, you can follow the link and send a re
 
 ### Zhanbolat Bekmaganbetov
 
+For this week I was working on code refactoring and finishing the rest endpoints. I optimized code related to games filters, removed all filter logic from viewsets to special filter classes, added filtering base on game rating, views count, creation date. Then I added additional endpoints for admin and developer pages, where it's possible to get full information with such data as game feedbacks_count, total_rate. I worked on integration of S3 with Django, and researched for ways to safely pass confidential data to Docker environment in production environment, but stuck a little bit, due to problems with Github Actions and AWS, also I researched for ways of query optimizations in Django, learned about such methods like select_prefetch, prefetch_related, only and keyset pagination. I also discussed with Bekzat about game uploading and the ways its implementation. 
+
+See branches:
+https://github.com/180107180/diplom-backend/tree/feat/statistics
+https://github.com/180107180/diplom-backend/tree/refactor/games-filters
+
 ## Frontend
 ### Abylay Altazhanov
 ### Yernat Bekzat
