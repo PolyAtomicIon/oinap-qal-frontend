@@ -2,7 +2,7 @@
   <base-layout>
     <template #header>
       <studio-header
-        :add-game="toggleUploadGameDialog"
+        :add-game="toggleAddGameDialog"
       ></studio-header>
     </template>
 
@@ -17,15 +17,10 @@
     </template>
 
     <template #modals>
-      <studio-upload-dialog
-        :is-dialog-active="isUploadGameDialogActive"
-        :close-dialog="toggleUploadGameDialog"
+      <studio-add-game-dialog
+        :is-dialog-active="isAddGameDialogActive"
+        :close-dialog="toggleAddGameDialog"
       />
-      <studio-add-game-form
-        :is-dialog-active="isAddGameFormActive"
-        :close-dialog="toggleAddGameForm"
-      >
-      </studio-add-game-form>
     </template>
   </base-layout>
 </template>
@@ -34,8 +29,7 @@
 import BaseLayout from './BaseLayout.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
 import StudioHeader from '../components/molecules/StudioHeader.vue';
-import StudioUploadDialog from '../components/molecules/StudioUploadDialog.vue';
-import StudioAddGameForm from '../components/molecules/StudioAddGameForm.vue';
+import StudioAddGameDialog from '../components/molecules/StudioAddGameDialog.vue';
 
 import { defineComponent, ref } from 'vue';
 
@@ -59,30 +53,19 @@ export default defineComponent({
     BaseLayout,
     AppDrawer,
     StudioHeader,
-    StudioUploadDialog,
-    StudioAddGameForm,
+    StudioAddGameDialog,
   },
   setup() {
     const step = ref(1)
 
-    const isAddGameFormActive = ref(false)
-    const toggleAddGameForm = () => {
-      isAddGameFormActive.value = !isAddGameFormActive.value
-    }
-
-    const isUploadGameDialogActive = ref(false)
-    const toggleUploadGameDialog = () => {
-      if(step.value > 2)
-        toggleAddGameForm()
-      isUploadGameDialogActive.value = !isUploadGameDialogActive.value
-      step.value += 1;
+    const isAddGameDialogActive = ref(false)
+    const toggleAddGameDialog = () => {
+      isAddGameDialogActive.value = !isAddGameDialogActive.value
     }
 
     return {
-      isUploadGameDialogActive,
-      toggleUploadGameDialog,
-      isAddGameFormActive,
-      toggleAddGameForm,
+      isAddGameDialogActive,
+      toggleAddGameDialog,
       step,
       linksList
     };
