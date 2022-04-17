@@ -77,6 +77,7 @@ export default defineComponent({
       form.cover = cover
       form.tags = tags
 
+      step.value = 1
       props.closeDialog()
     }
 
