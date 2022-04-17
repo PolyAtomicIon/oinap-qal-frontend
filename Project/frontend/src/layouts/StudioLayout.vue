@@ -13,6 +13,9 @@
     </template>
 
     <template #router-view>
+      <app-horizontal-drawer
+        :links-list="linksList"
+      />
       <router-view />
     </template>
 
@@ -28,6 +31,7 @@
 <script lang="ts">
 import BaseLayout from './BaseLayout.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
+import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
 import StudioHeader from '../components/molecules/StudioHeader.vue';
 import StudioAddGameDialog from '../components/templates/StudioAddGameDialog.vue';
 
@@ -52,6 +56,7 @@ export default defineComponent({
   components: {
     BaseLayout,
     AppDrawer,
+    AppHorizontalDrawer,
     StudioHeader,
     StudioAddGameDialog,
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="table-container">
+  <q-page class="table-container q-pa-md">
     <div
       class="table__header"
     >
@@ -125,7 +125,7 @@
       :game-title="activeGameTitle"
     >
     </studio-delete-dialog>
-  </div>
+  </q-page>
 </template>
 
 <script lang="ts">
@@ -233,7 +233,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 .table {
   &-container {
   }

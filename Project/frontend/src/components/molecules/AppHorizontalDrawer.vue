@@ -66,7 +66,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .category {
   min-width: 100%;
-  height: 96px;
+  height: 72px;
   display: flex;
   align-items: center;
   gap: 10px;
