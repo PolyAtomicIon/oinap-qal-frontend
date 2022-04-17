@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { ArticlesService } from '../../services/articles'
+import { ArticlesService } from '../../services/articles/'
 import {
   IArticleData,
 } from '../../entities'

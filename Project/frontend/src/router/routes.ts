@@ -1,9 +1,11 @@
 import { RouteRecordRaw } from 'vue-router';
 
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/home',
     component: () => import('layouts/MainLayout.vue'),
+    props:true,
     children: [
       {
         path: '',
@@ -46,29 +48,22 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/ResetPassword',
-    component: () => import('../pages/ResetPassword.vue')
+    path: '/user',
+    component: () => import('layouts/UserLayout.vue'),
+    children: [
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('../pages/User/Profile.vue')
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('../pages/User/Settings.vue')
+      },
+    ]
   },
-  {
-    path: '/Admin/Homepage',
-    component: () => import('../pages/Homepage.vue')
-  },
-  {
-    path: '/Developer/Homepage',
-    component: () => import('../pages/Homepage.vue')
-  },
-  {
-    path: '/Gamer/Homepage',
-    component: () => import('../pages/Homepage.vue')
-  },
-  {
-    path: '/Gamer/Homepage',
-    component: () => import('../pages/Homepage.vue')
-  },
-  {
-    path: '/Admin/Profile',
-    component: () => import('../pages/Profile.vue')
-  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

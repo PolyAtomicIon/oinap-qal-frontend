@@ -74,7 +74,8 @@ export default {
   padding: 40px 80px;
 }
 .banner__about{
-  width: 480px;
+  max-width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

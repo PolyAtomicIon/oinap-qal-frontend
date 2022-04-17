@@ -20,8 +20,8 @@ export const Components = (args) => ({
   data() {
     return {
       name: null,
-      role: 'User',
-      options: ['Admin', 'Supervisor', 'User']
+      role: 'user',
+      options: ['Admin', 'Supervisor', 'user']
     }
   },
   setup(){

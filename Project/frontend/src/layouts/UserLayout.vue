@@ -1,7 +1,9 @@
 <template>
   <base-layout>
     <template #header>
-      <app-header></app-header>
+      <app-header
+        :add-game="toggleAddGameDialog"
+      ></app-header>
     </template>
 
     <template #drawer>
@@ -18,69 +20,62 @@
     </template>
 
     <template #modals>
+      <studio-add-game-dialog
+        :is-dialog-active="isAddGameDialogActive"
+        :close-dialog="toggleAddGameDialog"
+      />
     </template>
   </base-layout>
 </template>
 
 <script lang="ts">
 import BaseLayout from './BaseLayout.vue';
-import AppHeader from '../components/molecules/AppHeader.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
 import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
+import AppHeader from '../components/molecules/AppHeader.vue';
+
+import { defineComponent, ref } from 'vue';
+
 
 const linksList = [
   {
-    title: 'Arcades',
-    icon: 'genres/Arcades',
-    path: '/home/arcades'
+    title: 'Profile',
+    icon: 'generics/games',
+    path: '/user/profile'
   },
   {
-    title: 'Fighters',
-    icon: 'genres/Fighters',
-    path: '/home/fighters'
-  },
-  {
-    title: 'Quizzes',
-    icon: 'genres/Quizzes',
-    path: '/home/quizzes'
-  },
-  {
-    title: 'Puzzles',
-    icon: 'genres/Puzzles',
-    path: '/home/puzzles'
-  },
-  {
-    title: 'Races',
-    icon: 'genres/Races',
-    path: '/home/races'
-  },
-  {
-    title: 'Childish',
-    icon: 'genres/Childish',
-    path: '/home/childish'
-  },
-  {
-    title: 'For Girls',
-    icon: 'genres/For Girls',
-    path: '/home/for-girls'
+    title: 'Settings',
+    icon: 'generics/statistics',
+    path: '/user/settings'
   },
 ];
 
-import { defineComponent,  } from 'vue';
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'UserLayout',
   components: {
     BaseLayout,
-    AppHeader,
     AppDrawer,
     AppHorizontalDrawer,
+    AppHeader,
   },
-
   setup() {
+    const step = ref(1)
+
+    const isAddGameDialogActive = ref(false)
+    const toggleAddGameDialog = () => {
+      isAddGameDialogActive.value = !isAddGameDialogActive.value
+    }
+
     return {
+      isAddGameDialogActive,
+      toggleAddGameDialog,
+      step,
       linksList
     };
   },
+
 });
 </script>
 
+<style lang="scss">
+</style>

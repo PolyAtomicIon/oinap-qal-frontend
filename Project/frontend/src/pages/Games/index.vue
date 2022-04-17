@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import MyBanner from '../../components/atoms/Banner.vue';
+import MyBanner from '../../components/molecules/Banner.vue';
 
 export default defineComponent({
   name: 'PageIndex',
