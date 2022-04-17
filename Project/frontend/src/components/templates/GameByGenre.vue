@@ -26,7 +26,6 @@
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { ArticlesService } from '../../services/articles'
-import { useStore } from '../../store'
 import {
   IArticleData,
 } from '../../entities'
@@ -41,8 +40,6 @@ export default defineComponent({
   },
   async setup() {
 
-    const $store = useStore()
-    const email = computed(() => $store.state.email)
     const $route = useRoute()
     const genre = computed(() => $route.params.genre)
 
@@ -51,7 +48,6 @@ export default defineComponent({
     const articles: IArticleData[] = articlesResponse.data;
 
     return {
-      email,
       articles,
       genre
     };

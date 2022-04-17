@@ -77,10 +77,9 @@
           <q-td auto-width>
             <q-btn
               size="sm"
-              color="white"
               flat
               round
-              dense
+              color="white"
               @click="deleteGame(props.row.index, props.row.name)"
               icon="delete"
             >
@@ -130,13 +129,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
-import { ArticlesService } from '../../services/articles'
-import { useStore } from '../../store'
-import {
-  IArticleData,
-} from '../../entities'
-import { IArticlesService } from '../../services/articles/articles.types'
+import { defineComponent, ref } from 'vue';
 import StudioDeleteDialog from '../../components/molecules/StudioDeleteDialog.vue';
 
 const columns = [
@@ -206,14 +199,7 @@ export default defineComponent({
   components: {
     StudioDeleteDialog,
   },
-  async setup() {
-
-    const $store = useStore()
-    const email = computed(() => $store.state.email)
-
-    const artcileService: IArticlesService = new ArticlesService();
-    const articlesResponse = await artcileService.getAll();
-    const articles: IArticleData[] = articlesResponse.data;
+  setup() {
 
     const filterProperties = ref([
       'Newest',
@@ -234,8 +220,6 @@ export default defineComponent({
     }
 
     return {
-      email,
-      articles,
       columns,
       rows,
       filterProperties,
