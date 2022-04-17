@@ -2,10 +2,10 @@
   <div class="game-card">
     <q-card class="game-card__container" flat dark>
       <q-card-section class="q-pa-none">
-        <img
+        <q-img
           :src="img"
           alt="preview image"
-          class="game-card__img"
+          class="game-card__img bg-dark"
         />
       </q-card-section>
       <q-card-section class="q-pa-none">
