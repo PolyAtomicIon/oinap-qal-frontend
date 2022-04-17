@@ -1,35 +1,35 @@
 <template>
-  <q-layout
-    class="bg-dark"
-    view="hHh lpR lFf"
-  >
-    <studio-header
-      :add-game="toggleUploadGameDialog"
-    ></studio-header>
+  <base-layout>
+    <template #header>
+      <studio-header
+        :add-game="toggleUploadGameDialog"
+      ></studio-header>
+    </template>
 
-    <q-page-container class="page-container">
+    <template #drawer>
       <studio-drawer/>
-      <q-page
-        class="bg-dark-light q-pa-md"
+    </template>
+
+    <template #router-view>
+      <router-view />
+    </template>
+
+    <template #modals>
+      <studio-upload-dialog
+        :is-dialog-active="isUploadGameDialogActive"
+        :close-dialog="toggleUploadGameDialog"
+      />
+      <studio-add-game-form
+        :is-dialog-active="isAddGameFormActive"
+        :close-dialog="toggleAddGameForm"
       >
-        <Suspense>
-          <router-view />
-        </Suspense>
-        <studio-upload-dialog
-          :is-dialog-active="isUploadGameDialogActive"
-          :close-dialog="toggleUploadGameDialog"
-        />
-        <studio-add-game-form
-          :is-dialog-active="isAddGameFormActive"
-          :close-dialog="toggleAddGameForm"
-        >
-        </studio-add-game-form>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+      </studio-add-game-form>
+    </template>
+  </base-layout>
 </template>
 
 <script lang="ts">
+import BaseLayout from './BaseLayout.vue';
 import StudioHeader from '../components/molecules/StudioHeader.vue';
 import StudioDrawer from '../components/molecules/StudioDrawer.vue';
 import StudioUploadDialog from '../components/molecules/StudioUploadDialog.vue';
@@ -39,13 +39,13 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'StudioLayout',
   components: {
+    BaseLayout,
     StudioHeader,
     StudioDrawer,
     StudioUploadDialog,
     StudioAddGameForm,
   },
   setup() {
-    const leftDrawerOpen = ref(true)
     const step = ref(1)
 
     const isAddGameFormActive = ref(false)
@@ -62,11 +62,6 @@ export default defineComponent({
     }
 
     return {
-      leftDrawerOpen,
-      basic: ref(false),
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
       isUploadGameDialogActive,
       toggleUploadGameDialog,
       isAddGameFormActive,
@@ -75,24 +70,8 @@ export default defineComponent({
     };
   },
 
-
 });
 </script>
 
 <style lang="scss">
-.page-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  @media screen and (max-width: 1280px) {
-    margin: 0;
-  }
-  @media screen and (max-width: $breakpoint-sm) {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
 </style>

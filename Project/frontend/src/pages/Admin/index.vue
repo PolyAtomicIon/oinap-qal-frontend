@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div class="table-container">
     <div
       class="table__header"
     >
@@ -17,109 +17,107 @@
         style="width: 150px;"
       />
     </div>
-    <q-scroll-area style="height: 100%; max-width: 100%;">
-      <q-table
-        :rows="rows"
-        :columns="columns"
-        dark
-        flat
-        card-class="bg-dark-light"
-        table-class="text-white"
-        table-header-class="text-grey"
-        hide-bottom
-        hide-top
-        row-key="index"
-        class="table"
-      >
-        <template v-slot:header="props">
-          <q-tr
+    <q-table
+      :rows="rows"
+      :columns="columns"
+      dark
+      flat
+      card-class="bg-dark-light"
+      table-class="text-white"
+      table-header-class="text-grey"
+      hide-bottom
+      hide-top
+      row-key="index"
+      class="table__body"
+    >
+      <template v-slot:header="props">
+        <q-tr
+          :props="props"
+          class="text-grey"
+        >
+          <q-th
+            v-for="col in props.cols"
+            :key="col.name"
             :props="props"
-            class="text-grey"
           >
-            <q-th
-              v-for="col in props.cols"
-              :key="col.name"
-              :props="props"
+            {{ col.label }}
+          </q-th>
+          <q-th auto-width />
+          <q-th auto-width />
+          <q-th auto-width />
+        </q-tr>
+      </template>
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td
+            v-for="(col) in props.cols"
+            :key="col.name"
+            :props="props"
+          >
+            <q-img
+              v-if="col.name == 'cover'"
+              :src="col.value"
+              :ratio="16/9"
+              fit="cover"
+              class="rounded-borders"
+              width="96px"
+            />
+            <q-rating
+              v-else-if="col.name == 'rating'"
+              :model-value="col.value"
+              color="yellow-5"
+              icon="star_border"
+              icon-selected="star"
+            ></q-rating>
+            <span v-else >
+              {{ col.value }}
+            </span>
+          </q-td>
+          <!-- delete -->
+          <q-td auto-width>
+            <q-btn
+              size="sm"
+              color="red"
+              flat
+              round
+              dense
+              @click="deleteGame(props.row.index, props.row.name)"
+              icon="delete"
             >
-              {{ col.label }}
-            </q-th>
-            <q-th auto-width />
-            <q-th auto-width />
-            <q-th auto-width />
-          </q-tr>
-        </template>
-        <template v-slot:body="props">
-          <q-tr :props="props">
-            <q-td
-              v-for="(col) in props.cols"
-              :key="col.name"
-              :props="props"
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Reject</q-tooltip>
+            </q-btn>
+          </q-td>
+          <!-- edit -->
+          <q-td auto-width>
+            <q-btn
+              size="sm"
+              color="green"
+              flat
+              round
+              dense
+              @click="props.expand = !props.expand"
+              icon="done"
             >
-              <q-img
-                v-if="col.name == 'cover'"
-                :src="col.value"
-                :ratio="16/9"
-                fit="cover"
-                class="rounded-borders"
-                width="96px"
-              />
-              <q-rating
-                v-else-if="col.name == 'rating'"
-                :model-value="col.value"
-                color="yellow-5"
-                icon="star_border"
-                icon-selected="star"
-              ></q-rating>
-              <span v-else >
-                {{ col.value }}
-              </span>
-            </q-td>
-            <!-- delete -->
-            <q-td auto-width>
-              <q-btn
-                size="sm"
-                color="red"
-                flat
-                round
-                dense
-                @click="deleteGame(props.row.index, props.row.name)"
-                icon="delete"
-              >
-                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Reject</q-tooltip>
-              </q-btn>
-            </q-td>
-            <!-- edit -->
-            <q-td auto-width>
-              <q-btn
-                size="sm"
-                color="green"
-                flat
-                round
-                dense
-                @click="props.expand = !props.expand"
-                icon="done"
-              >
-                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Accept</q-tooltip>
-              </q-btn>
-            </q-td>
-            <!-- go to statistics -->
-            <q-td auto-width>
-              <q-btn
-                size="sm"
-                color="white"
-                flat
-                round
-                dense
-                @click="props.expand = !props.expand"
-                icon="chevron_right"
-              >
-                <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">View</q-tooltip>
-              </q-btn>
-            </q-td>
-          </q-tr>
-        </template>
-      </q-table>
-    </q-scroll-area>
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">Accept</q-tooltip>
+            </q-btn>
+          </q-td>
+          <!-- go to statistics -->
+          <q-td auto-width>
+            <q-btn
+              size="sm"
+              color="white"
+              flat
+              round
+              dense
+              @click="props.expand = !props.expand"
+              icon="chevron_right"
+            >
+              <q-tooltip class="bg-white text-dark" anchor="top right" self="center end">View</q-tooltip>
+            </q-btn>
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
 
     <studio-delete-dialog
       :is-dialog-active="isDeleteDialogActive"
@@ -235,13 +233,15 @@ export default defineComponent({
 
 <style lang="scss" >
 .table {
-  max-width: 100%;
-  height: 100%;
+  &-container {
+  }
   &__header {
     display: flex;
     align-items: center;
     color: $grey;
     margin-bottom: 20px;
+  }
+  &__body {
   }
 }
 </style>
