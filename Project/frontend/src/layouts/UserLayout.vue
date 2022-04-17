@@ -7,35 +7,21 @@
     </template>
 
     <template #drawer>
-      <app-drawer
-        :links-list="linksList"
-      />
+      <user-drawer />
     </template>
 
     <template #router-view>
-      <app-horizontal-drawer
-        :links-list="linksList"
-      />
       <router-view />
-    </template>
-
-    <template #modals>
-      <studio-add-game-dialog
-        :is-dialog-active="isAddGameDialogActive"
-        :close-dialog="toggleAddGameDialog"
-      />
     </template>
   </base-layout>
 </template>
 
 <script lang="ts">
 import BaseLayout from './BaseLayout.vue';
-import AppDrawer from '../components/molecules/AppDrawer.vue';
-import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
+import UserDrawer from '../components/molecules/UserDrawer.vue';
 import AppHeader from '../components/molecules/AppHeader.vue';
 
 import { defineComponent, ref } from 'vue';
-
 
 const linksList = [
   {
@@ -54,8 +40,7 @@ export default defineComponent({
   name: 'UserLayout',
   components: {
     BaseLayout,
-    AppDrawer,
-    AppHorizontalDrawer,
+    UserDrawer,
     AppHeader,
   },
   setup() {

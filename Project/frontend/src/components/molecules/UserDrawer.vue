@@ -4,35 +4,26 @@
     class="drawer"
     :width="drawerWidth"
   >
-    <q-list class="q-mt-sm category">
-      <q-item-label class="category__header" header> {{drawerTitle}} </q-item-label>
+    <q-list
+      align="left"
+      class="user-drawer"
+    >
+      <q-item class="q-mb-md">
+        <q-btn
+          to="/home"
+          unelevated
+          rounded
+          no-caps
+          color="primary"
+          class="text-white back-button q-mx-auto full-width text-weight-normal"
+          icon="chevron_left"
+          label="Back to games"
+        />
+      </q-item>
       <q-item
-        v-for="(link, index) in linksList"
-        :key="index"
-        class="category__item"
+        v-if="$route.path === '/user/profile'"
       >
-        <q-item-section>
-          <a
-            :class="[
-              'c-btn',
-              'c-btn--list-item',
-              isRouteActive(link.path) && 'c-btn--active',
-              'category__item__btn'
-            ]"
-            @click="navigateTo(link.path)"
-          >
-            <img
-              :src="`icons/${link.icon}.svg`"
-              alt="icon"
-              width="16"
-              height="16"
-              class="category__item__icon"
-            />
-            <span>
-              {{ link.title }}
-            </span>
-          </a>
-        </q-item-section>
+        <user-friends />
       </q-item>
     </q-list>
   </div>
@@ -41,20 +32,14 @@
 <script lang="ts">
 import { defineComponent, ref, } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import UserFriends from '../molecules/UserFriends.vue'
 
 export default defineComponent({
-  name: 'AppDrawer',
+  name: 'UserDrawer',
   components: {
+    UserFriends,
   },
   props: {
-    drawerTitle: {
-      type: String,
-      default: 'Easy Play'
-    },
-    linksList: {
-      type: Array,
-      default: () => ([])
-    }
   },
   setup() {
     const leftDrawerOpen = ref(true);
@@ -111,10 +96,9 @@ export default defineComponent({
     display: none;
   }
 }
-.category {
-  width: 240px;
+.user-drawer {
   margin-left: auto;
-
+  width: 240px;
   &__header {
     color: $white;
     font-size: 24px;
@@ -125,11 +109,13 @@ export default defineComponent({
     &:hover {
       background: none;
     }
-    &__icon {
-    }
     &__btn {
       width: max-content;
     }
+  }
+  .back-button {
+    font-size: 16px;
+    padding: 12px;
   }
 }
 </style>

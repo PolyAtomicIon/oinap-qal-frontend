@@ -8,6 +8,7 @@
 
     <template #drawer>
       <app-drawer
+        drawer-title="Your studio"
         :links-list="linksList"
       />
     </template>

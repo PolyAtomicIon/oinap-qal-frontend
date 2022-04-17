@@ -1,5 +1,5 @@
 <template>
-  <q-card class="friends text-white">
+  <q-card class="friends text-white " flat >
     <q-card-section class="q-py-md">
       <q-input dense dark class=" Friends__search" color="grey-5" label="Find friends"  label-color="grey-5">
         <template  v-slot:prepend>
@@ -15,7 +15,7 @@
         v-for="friends in friendsList"
         :key="friends.name"
         dense
-        class="friends__friend q-my-xs"
+        class="friends__friend q-my-sm"
       >
         <div class="friends__img q-mr-md"/>
         {{friends.name}}
@@ -60,6 +60,7 @@ export default {
 <style lang="scss">
 .friends{
   background-color:$secondary;
+  border-radius: 8px;
   &__img{
     width: 32px;
     height: 32px;

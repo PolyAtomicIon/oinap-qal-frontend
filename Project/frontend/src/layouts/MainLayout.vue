@@ -6,6 +6,7 @@
 
     <template #drawer>
       <app-drawer
+        drawer-title="Categories"
         :links-list="linksList"
       />
     </template>

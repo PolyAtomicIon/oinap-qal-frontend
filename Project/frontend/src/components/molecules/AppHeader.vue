@@ -113,7 +113,7 @@ export default defineComponent({
     max-width: 1280px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 180px repeat(2, 1fr);
+    grid-template-columns: 220px repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -136,7 +136,7 @@ export default defineComponent({
     &__logo {
       display: flex;
       align-items: center;
-      width: 150px;
+      width: 190px;
       cursor: pointer;
 
       @media screen and (max-width: $breakpoint-sm) {
