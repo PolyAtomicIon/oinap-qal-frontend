@@ -31,7 +31,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'statistics',
-        component: () => import('pages/Studio/Statistics.vue'),
+        component: () => import('pages/Studio/Statistics'),
       },
     ]
   },
