@@ -4,7 +4,7 @@
         <!-- file -->
         <div class="add-game__form__field">
           <label for="file">File</label>
-          <p class="text-primary q-py-sm">tetris_game.html5</p>
+          <p class="text-primary q-py-sm"> {{ form.fileName }} </p>
         </div>
 
         <!-- cover -->
@@ -105,24 +105,18 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue';
-
-interface IGameTag {
-  [key: string]: boolean;
-}
-
-interface IGameForm {
-  fileName: string;
-  cover: File | null;
-  name: string;
-  description: string;
-  tags: IGameTag;
-}
+import { IGameTag, IGameForm } from '../../models/Game.interfaces';
 
 export default defineComponent({
-  setup() {
-    const onSubmit = () => {
-      console.log('submit ', form);
-    };
+  name: 'StudioAddGameForm',
+  emits: ['submit'],
+  props: {
+    fileName: {
+      type: String,
+      default: ''
+    },
+  },
+  setup(props, {emit}) {
     const tags: IGameTag = reactive({
       game: true,
       space: false,
@@ -132,7 +126,8 @@ export default defineComponent({
     });
 
     const form: IGameForm = reactive({
-      fileName: 'string',
+      fileName: props.fileName,
+      file: null,
       cover: null,
       name: '',
       description: '',
@@ -143,6 +138,10 @@ export default defineComponent({
     const updateCover = () => {
       console.log(form.cover);
       if (form.cover) coverPreviewLink.value = URL.createObjectURL(form.cover);
+    };
+
+    const onSubmit = () => {
+      emit('submit', form)
     };
 
     return {

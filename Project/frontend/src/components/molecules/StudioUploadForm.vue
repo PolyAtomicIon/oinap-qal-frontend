@@ -7,13 +7,12 @@
       dark
       color="dark"
       class="bg-dark-light"
-      @added="closeDialog"
+      :value="value"
+      @added="fileAdded"
     >
       <template v-slot:header> </template>
       <template v-slot:list="scope">
-        <p v-if="scope.files.length > 0">Files is here</p>
         <div
-          v-else
           class="column justify-center items-center q-pa-sm q-gutter-y-md bg-dark-light"
         >
           <img src="../../assets/images/upload-img.svg" alt="upload" />
@@ -23,10 +22,10 @@
           </p>
           <q-btn
             v-if="scope.canAddFiles"
-            @click="scope.pickFiles"
             label="Choose file"
             color="primary"
             class="upload-btn q-mt-xs"
+            @click="scope.pickFiles"
           >
             <q-uploader-add-trigger />
             <q-tooltip>Pick Files</q-tooltip>
@@ -41,8 +40,21 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  setup() {
-    return {};
+  name: 'StudioUploadForm',
+  props: {
+    value: {
+      type: File,
+      default: null
+    },
+  },
+  emits: ['input'],
+  setup(props, { emit }) {
+    const fileAdded = (files: File[] ) => {
+      emit('input', files)
+    }
+    return {
+      fileAdded
+    };
   },
 });
 </script>

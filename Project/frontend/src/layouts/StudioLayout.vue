@@ -29,7 +29,7 @@
 import BaseLayout from './BaseLayout.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
 import StudioHeader from '../components/molecules/StudioHeader.vue';
-import StudioAddGameDialog from '../components/molecules/StudioAddGameDialog.vue';
+import StudioAddGameDialog from '../components/templates/StudioAddGameDialog.vue';
 
 import { defineComponent, ref } from 'vue';
 
