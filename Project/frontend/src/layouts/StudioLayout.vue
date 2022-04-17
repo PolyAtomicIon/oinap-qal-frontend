@@ -24,7 +24,6 @@
           :close-dialog="toggleAddGameForm"
         >
         </studio-add-game-form>
-
       </q-page>
     </q-page-container>
   </q-layout>
@@ -85,7 +84,7 @@ export default defineComponent({
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px minmax(0, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -93,7 +92,7 @@ export default defineComponent({
     margin: 0;
   }
   @media screen and (max-width: $breakpoint-sm) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

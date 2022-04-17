@@ -3,7 +3,7 @@
     class="iframe__container"
   >
     <iframe
-      src="http://192.168.1.9:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
+      src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
       frameborder="0"
       width="100%"
       height="100%"
