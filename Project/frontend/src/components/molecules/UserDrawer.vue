@@ -31,7 +31,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import UserFriends from '../molecules/UserFriends.vue'
 
 export default defineComponent({
@@ -65,24 +64,10 @@ export default defineComponent({
       false
     );
 
-    const $router = useRouter()
-    const $route = useRoute()
-    const navigateTo = (path: string) => {
-      void $router.push(path)
-    }
-    const isRouteActive = (path: string) => {
-      return $route.path == path
-    }
-
     return {
       leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
       iconLocation,
       drawerWidth,
-      navigateTo,
-      isRouteActive,
     };
   },
 });
@@ -115,7 +100,7 @@ export default defineComponent({
   }
   .back-button {
     font-size: 16px;
-    padding: 12px;
+    padding: 10px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <q-card flat class="user-profile text-white  q-px-lg q-py-lg">
+  <q-card flat class="user-profile text-white q-px-lg q-py-lg">
     <q-card-section horizontal>
       <q-img
         :src="require('src/assets/user/'+userAbout.img)"
@@ -7,11 +7,17 @@
         height="160px"
       ></q-img>
 
-      <q-card-section vertical class="justify-around">
-        <span class="text-h4">{{userAbout.name}}</span>
-        <div>
-          <q-icon  name="star" color="accent" size="10px"></q-icon>
-          <span>{{userAbout.rating}}</span>
+      <q-card-section vertical class="justify-around q-ml-md">
+        <h1 class="text-h1">{{userAbout.name}}</h1>
+        <div class="q-mt-lg">
+          <img
+            src="~/assets/icons/crown.svg"
+            alt="crown-icon"
+            class="q-mr-sm"
+            height="20"
+            width="24"
+          >
+          <span class="user-profile__rating">{{userAbout.rating}}</span>
         </div>
       </q-card-section>
     </q-card-section>
@@ -22,7 +28,7 @@
 const defUserProfile={
   img:'False.png',
   name:'Alexa Jackson',
-  rating: 5023
+  rating: '5,023'
 }
 export default {
   name: 'UserProfile',
@@ -38,5 +44,10 @@ export default {
 <style lang="scss">
 .user-profile{
   background: transparent;
+  &__rating {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 300;
+  }
 }
 </style>

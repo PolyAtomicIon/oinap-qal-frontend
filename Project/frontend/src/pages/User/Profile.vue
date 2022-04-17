@@ -1,19 +1,19 @@
 <template>
-  <div class="gamer-profile">
-        <my-profile/>
-        <my-ratings/>
-  </div>
+  <q-page>
+    <user-profile/>
+    <user-ratings/>
+  </q-page>
 </template>
 
 <script>
-import MyRatings from 'src/components/molecules/UserRatings.vue'
-import MyProfile from 'src/components/molecules/UserProfile.vue'
+import UserRatings from 'src/components/molecules/UserRatings.vue'
+import UserProfile from 'src/components/molecules/UserProfile.vue'
 
 export default {
   name: 'Profile',
   components:{
-    MyRatings,
-    MyProfile
+    UserRatings,
+    UserProfile
   },
 }
 </script>
