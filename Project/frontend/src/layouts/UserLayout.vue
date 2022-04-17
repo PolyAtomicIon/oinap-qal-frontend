@@ -21,20 +21,7 @@ import BaseLayout from './BaseLayout.vue';
 import UserDrawer from '../components/molecules/UserDrawer.vue';
 import AppHeader from '../components/molecules/AppHeader.vue';
 
-import { defineComponent, ref } from 'vue';
-
-const linksList = [
-  {
-    title: 'Profile',
-    icon: 'generics/games',
-    path: '/user/profile'
-  },
-  {
-    title: 'Settings',
-    icon: 'generics/statistics',
-    path: '/user/settings'
-  },
-];
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'UserLayout',
@@ -44,18 +31,7 @@ export default defineComponent({
     AppHeader,
   },
   setup() {
-    const step = ref(1)
-
-    const isAddGameDialogActive = ref(false)
-    const toggleAddGameDialog = () => {
-      isAddGameDialogActive.value = !isAddGameDialogActive.value
-    }
-
     return {
-      isAddGameDialogActive,
-      toggleAddGameDialog,
-      step,
-      linksList
     };
   },
 
