@@ -11,6 +11,9 @@
     </template>
 
     <template #router-view>
+      <app-horizontal-drawer
+        :links-list="linksList"
+      />
       <router-view />
     </template>
 
@@ -23,6 +26,7 @@
 import BaseLayout from './BaseLayout.vue';
 import AppHeader from '../components/molecules/AppHeader.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
+import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
 
 const linksList = [
   {
@@ -69,6 +73,7 @@ export default defineComponent({
     BaseLayout,
     AppHeader,
     AppDrawer,
+    AppHorizontalDrawer,
   },
   setup() {
     return {

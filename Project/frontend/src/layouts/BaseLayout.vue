@@ -12,7 +12,7 @@
       </slot>
 
       <q-page
-        class="bg-dark-light q-pa-md"
+        class="bg-dark-light"
       >
         <Suspense>
           <slot name="router-view">

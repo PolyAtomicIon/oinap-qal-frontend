@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="q-pa-md">
     <my-banner></my-banner>
     <router-view></router-view>
   </q-page>
