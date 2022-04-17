@@ -37,6 +37,14 @@
 
     &:hover {
       background: $dark-grey;
+    } 
+  }
+
+  &--active {
+    background: $primary;
+    &:hover {
+      background: $primary;
     }
+
   }
 }

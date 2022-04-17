@@ -8,6 +8,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         component: () => import('pages/Games/index.vue'),
+        children: [
+          {
+            path: ':genre',
+            component: () => import('components/templates/GameByGenre.vue'),
+          }
+        ]
       },
     ]
   },
@@ -22,6 +28,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         component: () => import('pages/Studio/index.vue'),
+      },
+      {
+        path: 'statistics',
+        component: () => import('pages/Studio/Statistics.vue'),
       },
     ]
   },

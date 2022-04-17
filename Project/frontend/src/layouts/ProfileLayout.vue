@@ -7,9 +7,7 @@
     </template>
 
     <template #drawer>
-      <app-drawer
-        :links-list="linksList"
-      />
+      <studio-drawer/>
     </template>
 
     <template #router-view>
@@ -32,33 +30,18 @@
 
 <script lang="ts">
 import BaseLayout from './BaseLayout.vue';
-import AppDrawer from '../components/molecules/AppDrawer.vue';
 import StudioHeader from '../components/molecules/StudioHeader.vue';
+import StudioDrawer from '../components/molecules/StudioDrawer.vue';
 import StudioUploadDialog from '../components/molecules/StudioUploadDialog.vue';
 import StudioAddGameForm from '../components/molecules/StudioAddGameForm.vue';
 
 import { defineComponent, ref } from 'vue';
-
-
-const linksList = [
-  {
-    title: 'My games',
-    icon: 'generics/games',
-    path: '/studio'
-  },
-  {
-    title: 'Statistics',
-    icon: 'generics/statistics',
-    path: '/studio/statistics'
-  },
-];
-
 export default defineComponent({
   name: 'StudioLayout',
   components: {
     BaseLayout,
-    AppDrawer,
     StudioHeader,
+    StudioDrawer,
     StudioUploadDialog,
     StudioAddGameForm,
   },
@@ -84,7 +67,6 @@ export default defineComponent({
       isAddGameFormActive,
       toggleAddGameForm,
       step,
-      linksList
     };
   },
 

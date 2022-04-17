@@ -5,20 +5,24 @@
     :width="drawerWidth"
   >
     <q-list class="q-mt-sm category">
-      <q-item-label class="category__header" header> Categories </q-item-label>
+      <q-item-label class="category__header" header> Your Studio </q-item-label>
       <q-item
-        v-for="(link, index) in essentialLinks"
+        v-for="(link, index) in linksList"
         :key="index"
         class="category__item"
-        @click="navigateToChapter(item)"
       >
         <q-item-section>
-          <button
-            class="c-btn c-btn--list-item category__item__btn"
-            @click="toggleLeftDrawer"
+          <a
+            :class="[
+              'c-btn',
+              'c-btn--list-item',
+              isRouteActive(link.path) && 'c-btn--active',
+              'category__item__btn'
+            ]"
+            @click="navigateTo(link.path)"
           >
             <img
-              :src="`icons/genres/${link.icon}.svg`"
+              :src="`icons/${link.icon}.svg`"
               alt="icon"
               width="16"
               height="16"
@@ -27,7 +31,7 @@
             <span>
               {{ link.title }}
             </span>
-          </button>
+          </a>
         </q-item-section>
       </q-item>
     </q-list>
@@ -35,42 +39,18 @@
 </template>
 
 <script lang="ts">
-const linksList = [
-  {
-    title: 'Arcades',
-    icon: 'Arcades',
-  },
-  {
-    title: 'Fighters',
-    icon: 'Fighters',
-  },
-  {
-    title: 'Quizzes',
-    icon: 'Quizzes',
-  },
-  {
-    title: 'Puzzles',
-    icon: 'Puzzles',
-  },
-  {
-    title: 'Races',
-    icon: 'Races',
-  },
-  {
-    title: 'Childish',
-    icon: 'Childish',
-  },
-  {
-    title: 'For Girls',
-    icon: 'For Girls',
-  },
-];
-
-import { defineComponent, ref, } from 'vue';
+import { defineComponent, ref, } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'AppDrawer',
   components: {},
+  props: {
+    linksList: {
+      type: Array,
+      default: () => ([])
+    }
+  },
   setup() {
     const leftDrawerOpen = ref(true);
     const iconLocation = (iconName: string) => {
@@ -95,14 +75,24 @@ export default defineComponent({
       false
     );
 
+    const $router = useRouter()
+    const $route = useRoute()
+    const navigateTo = (path: string) => {
+      void $router.push(path)
+    }
+    const isRouteActive = (path: string) => {
+      return $route.path == path
+    }
+
     return {
-      essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       iconLocation,
       drawerWidth,
+      navigateTo,
+      isRouteActive,
     };
   },
 });
