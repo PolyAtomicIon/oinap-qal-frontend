@@ -7,6 +7,7 @@
     <q-toolbar class="header">
       <div
         class="header__logo "
+        @click="$router.push('/home')"
       >
         <img
           class="header__logo__figure"
