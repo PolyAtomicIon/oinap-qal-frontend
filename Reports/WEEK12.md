@@ -38,3 +38,15 @@ This week I took a prototype of the mobile version of the application of our pro
 Me - https://youtube.com/shorts/CpFoV8RFV64?feature=share \
 Madi - https://youtube.com/shorts/GlPGJSo1DLY?feature=share \
 Erkin - https://youtube.com/shorts/ABJR1Y-6Nrk?feature=share
+
+## Frontend
+### Yernat Bekzat
+This week I've been working on connecting all features that was developed by me and by Abylay. After this I refactored code and worked on  connecting for real API, creating Models and changing state management from Vuex to a better and more friendly with typescrpit Pinia.
+
+Some screenshots
+![sign-in-desktop](week12/sign-in-desktop.PNG)
+![sign-in-mobile](week12/sign-in-mobile.PNG)
+![sign-up-desktop](week12/sign-up-desktop.PNG)
+![sign-up-mobile](week12/sign-up-mobile.PNG)
+![chart](week12/chart.PNG)
+![studio](week12/studio.PNG)
