@@ -25,7 +25,11 @@ For tags, we created a table with word stem and foreign key games. For the table
 
 ### Zhanbolat Bekmaganbetov
 
-In addition to implementing telegram bot, i was working on code refactoring and bug fixes, i fixed bug that was related to sorting by game rating, that was caused due to lack of records in GameFeedbacks for some games, they had null value, which could not be calculated, and started to refactor existing logic of statistics gathering logic, because it didn't take into account, date when game was played and who played
+In addition to implementing telegram bot, i was working on code refactoring and bug fixes, i fixed bug that was related to sorting by game rating, that was caused due to lack of records in GameFeedbacks for some games, they had null value, which could not be calculated, and started to refactor existing logic of statistics gathering logic, because it didn't take into account, date when game was played and who played, then i finished uploading and loading games endpoints, added CORS support. Improved code structure in users module
+
+https://github.com/180107180/diplom-backend/commit/dc0a62f5081c12db5711595932861c380d8cee4b
+https://github.com/180107180/diplom-backend/commit/0d4810a08151aa9d0f19f02edd87552cc7e75aa5
+https://github.com/180107180/diplom-backend/commit/cdfc431e7df2eba65984b5df6569306c207c8b2c
 
 # Jet Lee
 * Made kung-fu
