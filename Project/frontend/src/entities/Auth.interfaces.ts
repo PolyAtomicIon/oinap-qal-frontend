@@ -1,4 +1,4 @@
-import { IGameTag } from "./Game.interfaces"
+import { IGameTag } from './Game.interfaces'
 
 export interface ISignIn {
   username: string
