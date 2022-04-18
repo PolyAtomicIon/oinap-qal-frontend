@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="q-pa-md">
     <my-banner></my-banner>
     <router-view></router-view>
   </q-page>
@@ -7,8 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
-import MyBanner from '../../components/atoms/Banner.vue';
+import MyBanner from '../../components/molecules/Banner.vue';
 
 export default defineComponent({
   name: 'PageIndex',

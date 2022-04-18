@@ -2,9 +2,6 @@
   <article>
     <my-header
       :user="user"
-      @login="$emit('login')"
-      @logout="$emit('logout')"
-      @createAccount="$emit('createAccount')"
     />
 
     <section>
@@ -60,7 +57,7 @@
 
 <script>
 import './page.css';
-import MyHeader from './Header.vue';
+import MyHeader from '../components/organisms/Header.vue';
 
 export default {
   name: 'my-page',

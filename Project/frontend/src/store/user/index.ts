@@ -1,16 +1,21 @@
-import { Module } from 'vuex';
-import { UserInterface } from '../index';
-import state, { ExampleUserInterface } from './state';
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
+import { defineStore } from 'pinia';
 
-const user: Module<ExampleUserInterface, UserInterface> = {
-  namespaced: true,
-  actions,
-  getters,
-  mutations,
-  state,
+export type RootState = {
+  email: string
 };
 
-export default user;
+export const useStore = defineStore('user', {
+  state: () =>
+    ({
+      email: 'user@gmail.com'
+    } as RootState),
+  getters: {
+    getEmail: (state) => state.email,
+  },
+  actions: {
+    setEmail(otherEmail: string) {
+      console.log(otherEmail)
+      this.email = otherEmail;
+    },
+  },
+});

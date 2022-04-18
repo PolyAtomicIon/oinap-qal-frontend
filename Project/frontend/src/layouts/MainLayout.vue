@@ -1,20 +1,35 @@
 <template>
   <base-layout>
     <template #header>
-      <app-header></app-header>
+      <app-header
+        :sign-in="toggleSignInDialog"
+        :sign-up="toggleSignUpDialog"
+      ></app-header>
     </template>
 
     <template #drawer>
       <app-drawer
+        drawer-title="Categories"
         :links-list="linksList"
       />
     </template>
 
     <template #router-view>
+      <app-horizontal-drawer
+        :links-list="linksList"
+      />
       <router-view />
     </template>
 
     <template #modals>
+      <sign-in-dialog
+        :is-dialog-active="isSignInDialogActive"
+        :close-dialog="toggleSignInDialog"
+      />
+      <sign-up-dialog
+        :is-dialog-active="isSignUpDialogActive"
+        :close-dialog="toggleSignUpDialog"
+      />
     </template>
   </base-layout>
 </template>
@@ -23,6 +38,10 @@
 import BaseLayout from './BaseLayout.vue';
 import AppHeader from '../components/molecules/AppHeader.vue';
 import AppDrawer from '../components/molecules/AppDrawer.vue';
+import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
+import SignInDialog from '../components/templates/SignInDialog.vue';
+import SignUpDialog from '../components/templates/SignUpDialog.vue';
+import { defineComponent, ref } from 'vue';
 
 const linksList = [
   {
@@ -62,17 +81,30 @@ const linksList = [
   },
 ];
 
-import { defineComponent,  } from 'vue';
 export default defineComponent({
   name: 'MainLayout',
   components: {
     BaseLayout,
     AppHeader,
     AppDrawer,
+    AppHorizontalDrawer,
+    SignInDialog,
+    SignUpDialog,
   },
+
   setup() {
+    const isSignInDialogActive = ref(false)
+    const isSignUpDialogActive = ref(false)
     return {
-      linksList
+      linksList,
+      isSignInDialogActive,
+      toggleSignInDialog: () => {
+        isSignInDialogActive.value = !isSignInDialogActive.value
+      },
+      isSignUpDialogActive,
+      toggleSignUpDialog: () => {
+        isSignUpDialogActive.value = !isSignUpDialogActive.value
+      }
     };
   },
 });

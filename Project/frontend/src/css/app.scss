@@ -19,3 +19,40 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 }
+
+.text-h1 {
+  font-size: 32px;
+  line-height: 32px;
+  font-style: normal;
+  font-weight: 500;
+  margin: 16px 0;
+}
+
+.auth__form,
+.add-game__form {
+  .upload-btn {
+    border-radius: 14px !important;
+    padding: 8px 64px !important;
+  }
+  .q-field--standout.q-field--rounded .q-field__control {
+    border-radius: 14px !important;
+  }
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__native,
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__prefix,
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__suffix,
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__prepend,
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__append,
+  .q-field--standout.q-field--dark.q-field--highlighted .q-field__input {
+    color: $white;
+  }
+  .q-chip {
+    border: solid 2px $primary !important;
+    &--outline {
+      border-width: 2px !important;
+      border-color: #343434 !important;
+    }
+  }
+  .text-h1 {
+    font-weight: 300;
+  }
+}

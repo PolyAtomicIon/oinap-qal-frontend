@@ -3,6 +3,7 @@
 .c-btn {
   padding: 8px 24px;
   border-radius: $button-border-radius;
+  cursor: pointer;
 
   @media screen and (max-width: $breakpoint-xs) {
     font-size: 14px;
@@ -37,7 +38,7 @@
 
     &:hover {
       background: $dark-grey;
-    } 
+    }
   }
 
   &--active {

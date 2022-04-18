@@ -5,7 +5,7 @@
     :width="drawerWidth"
   >
     <q-list class="q-mt-sm category">
-      <q-item-label class="category__header" header> Your Studio </q-item-label>
+      <q-item-label class="category__header" header> {{drawerTitle}} </q-item-label>
       <q-item
         v-for="(link, index) in linksList"
         :key="index"
@@ -44,8 +44,13 @@ import { useRouter, useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'AppDrawer',
-  components: {},
+  components: {
+  },
   props: {
+    drawerTitle: {
+      type: String,
+      default: 'Easy Play'
+    },
     linksList: {
       type: Array,
       default: () => ([])
@@ -98,7 +103,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .drawer {
   background: $dark;
 
@@ -107,7 +112,7 @@ export default defineComponent({
   }
 }
 .category {
-  width: 200px;
+  width: 240px;
   margin-left: auto;
 
   &__header {

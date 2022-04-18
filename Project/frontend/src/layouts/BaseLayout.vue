@@ -12,7 +12,7 @@
       </slot>
 
       <q-page
-        class="bg-dark-light q-pa-md"
+        class="bg-dark-light"
       >
         <Suspense>
           <slot name="router-view">
@@ -54,7 +54,7 @@ export default defineComponent({
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: 240px minmax(0, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;

@@ -45,7 +45,7 @@
         </div>
         <a @click="forgotPassword='reset'">Forgot password</a>
         <div>
-          <router-link to="/Admin/Homepage">
+          <router-link to="/gamer">
             <my-button class="modal__btn" label="Sign in" rounded></my-button>
           </router-link>
         </div>
@@ -122,7 +122,7 @@
 
         </q-list>
         <div>
-          <router-link to="/Admin/Homepage">
+          <router-link to="/gamer">
             <my-button class="modal__btn" label="Sign in" rounded></my-button>
           </router-link>
         </div>
