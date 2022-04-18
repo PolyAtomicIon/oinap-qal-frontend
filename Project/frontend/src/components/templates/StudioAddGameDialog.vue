@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
-import { IGameTag, IGameForm } from '../../models/Game.interfaces';
+import { IGameTag, IGameForm } from '../../entities/Game.interfaces';
 import StudioUploadForm from '../molecules/StudioUploadForm.vue'
 import StudioAddGameForm from '../molecules/StudioAddGameForm.vue'
 

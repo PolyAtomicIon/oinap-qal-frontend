@@ -2,16 +2,13 @@
   <q-dialog
     :model-value="isDialogActive"
   >
-    <q-card dark class="bg-dark-light upload-file-card">
+    <q-card dark class="bg-dark-light">
       <q-card-section class="row items-center q-pb-none">
-        <div class="text-h6">Sign up</div>
         <q-space />
         <q-btn @click="closeDialog" icon="close" flat round dense />
       </q-card-section>
 
-      <q-card-section>
-        <sign-up-form />
-      </q-card-section>
+      <sign-up-form />
     </q-card>
   </q-dialog>
 </template>

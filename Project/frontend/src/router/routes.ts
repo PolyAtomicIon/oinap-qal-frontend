@@ -65,17 +65,17 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/mobile-modals',
-    component: () => import('layouts/UserLayout.vue'),
+    component: () => import('layouts/MobileViewerLayout.vue'),
     children: [
       {
         path: 'signin',
         name: 'signin',
-        component: () => import('../pages/User/Profile.vue')
+        component: () => import('../components/molecules/SignInForm.vue')
       },
       {
         path: 'signup',
         name: 'signup',
-        component: () => import('../pages/User/Settings.vue')
+        component: () => import('../components/molecules/SignUpForm.vue')
       },
     ]
   },
