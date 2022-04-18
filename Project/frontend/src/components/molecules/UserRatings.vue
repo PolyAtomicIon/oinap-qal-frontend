@@ -124,11 +124,18 @@ export default {
   border-radius: 8px;
   border: 1px solid $primary;
   padding: 10px;
+
   &__index, &__title, &__position {
     font-size: 20px;
+    @media screen and (max-width: $breakpoint-xs) {
+      font-size: 16px;
+    }
   }
   tr {
     height: 72px;
+    @media screen and (max-width: $breakpoint-xs) {
+      height: 24px;
+    }
   }
 }
 .user-ratings{

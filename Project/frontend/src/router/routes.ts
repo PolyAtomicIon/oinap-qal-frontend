@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
           {
             path: ':genre',
             component: () => import('components/templates/GameByGenre.vue'),
-          }
+          },
         ]
       },
     ]
@@ -59,6 +59,22 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'settings',
         name: 'settings',
+        component: () => import('../pages/User/Settings.vue')
+      },
+    ]
+  },
+  {
+    path: '/mobile-modals',
+    component: () => import('layouts/UserLayout.vue'),
+    children: [
+      {
+        path: 'signin',
+        name: 'signin',
+        component: () => import('../pages/User/Profile.vue')
+      },
+      {
+        path: 'signup',
+        name: 'signup',
         component: () => import('../pages/User/Settings.vue')
       },
     ]

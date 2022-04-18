@@ -61,15 +61,15 @@
       >
         <q-btn
           color="primary"
-          :size="$q.platform.mobile ? 'sm' : 'md'"
+          :size="$q.platform.is.mobile ? 'sm' : 'md'"
           class="text-white header__auth__btn"
-          @click="signIn"
+          @click="onSignIn"
           label="Sign in"
           no-caps
         />
         <button
           class="c-btn c-btn--flat"
-          @click="signUp"
+          @click="onSignUp"
         >
           Sign up
         </button>
@@ -83,6 +83,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useRouter, } from 'vue-router'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'AppHeader',
@@ -98,11 +100,33 @@ export default defineComponent({
       default: () => ({})
     },
   },
-  setup() {
+  setup(props) {
     const searchFragment = ref('');
 
+    const $router = useRouter()
+    const $q = useQuasar()
+    const onSignUp = () => {
+      if( $q.platform.is.mobile ) {
+        void $router.push('/mobile-modals/signup')
+      }
+      else{
+        props.signUp()
+      }
+    }
+    const onSignIn = () => {
+      if( $q.platform.is.mobile ) {
+        void $router.push('/mobile-modals/signin')
+      }
+      else{
+        props.signIn()
+      }
+    }
+
+
     return {
-      searchFragment
+      searchFragment,
+      onSignUp,
+      onSignIn,
     }
   }
 });
@@ -159,10 +183,6 @@ export default defineComponent({
       &-field {
         max-width: 300px;
 
-        @media screen and (max-width: $breakpoint-sm) {
-          max-width: 160px;
-        }
-
         &__input {
           &:active, &:focus {
             color: $white !important;
@@ -180,8 +200,8 @@ export default defineComponent({
       &__btn {
         padding: 0 15px !important;
         height: 26px;
-        @media screen and (max-screen: $breakpoint-sm) {
-          font-size: 10px !important;
+        @media screen and (max-width: $breakpoint-sm) {
+          font-size: 14px !important;
         }
       }
     }
