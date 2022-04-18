@@ -5,6 +5,7 @@
   },
   "exclude": [
     "node_modules",
-    "src/stories"
+    "src/stories",
+    "src/games-gh-pages"
   ]
 }

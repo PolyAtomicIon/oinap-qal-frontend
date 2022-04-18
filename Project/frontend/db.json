@@ -1,0 +1,88 @@
+{
+  "products": [
+  {
+    "img":"GameCard.png",
+    "title":"Element Blocks",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":2,
+    "categories": ["arcades","fighters","quizzes","puzzles","races","childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image34.png",
+    "title":"Onet connect",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":5,
+    "categories": ["fighters","quizzes","puzzles","races","childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image35.png",
+    "title":"Om nom run",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":4,
+    "categories": ["quizzes","puzzles","races","childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image36.png",
+    "title":"Wiggle",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":3,
+    "categories": ["puzzles","races","childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image37.png",
+    "title":"Maze",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":3,
+    "categories": ["races","childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image38.png",
+    "title":"Bubble tower",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":5,
+    "categories": ["childish","forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image39.png",
+    "title":"Slackinng game",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":4,
+    "categories": ["forGirls","forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image40.png",
+    "title":"Merge jewels",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":3,
+    "categories": ["forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image41.png",
+    "title":"Blazze kick",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":4,
+    "categories": ["forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image42.png",
+    "title":"Pop-it! 3D",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":1,
+    "categories": ["forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image43.png",
+    "title":"Yatzy classic",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":4,
+    "categories": ["forBoys","sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  },
+  {
+    "img":"image44.png",
+    "title":"3D anime fantasy",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, nulla lobortis ac enim mi, nulla dictum.",
+    "rating":5,
+    "categories": ["sport","casino","forTwo","balloons","strategies","adventures","educational","casual"]
+  }
+]
+}

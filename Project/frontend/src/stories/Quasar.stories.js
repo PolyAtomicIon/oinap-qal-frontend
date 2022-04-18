@@ -18,8 +18,8 @@ export const Components = () => ({
   data() {
     return {
       name: null,
-      role: 'User',
-      options: ['Admin', 'Supervisor', 'User']
+      role: 'user',
+      options: ['Admin', 'Supervisor', 'user']
     }
   }
 })

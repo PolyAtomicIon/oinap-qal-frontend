@@ -1,57 +1,85 @@
 import { RouteRecordRaw } from 'vue-router';
 
+
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/home',
     component: () => import('layouts/MainLayout.vue'),
+    props:true,
     children: [
       {
-        path: '/Admin',
-        component: () => import('../pages/Admin/AdminRegistration.vue')
+        path: '',
+        component: () => import('pages/Games/index.vue'),
+        children: [
+          {
+            path: ':genre',
+            component: () => import('components/templates/GameByGenre.vue'),
+          },
+        ]
       },
-      {
-        path: '/Developer',
-        component: () => import('../pages/Developer/DeveloperLogin.vue')
-      },
-      {
-        path: '/Developer/Registration',
-        component: () => import('../pages/Developer/DeveloperRegistration.vue')
-      },
-      {
-        path: 'Developer/ResetPassword',
-        component: () => import('../pages/ResetPassword.vue')
-      },
-      {
-        path: '/Gamer',
-        component: () => import('../pages/Gamer/GamerRegistration.vue')
-      }
-
     ]
   },
   {
-    path: '/ResetPassword',
-    component: () => import('../pages/ResetPassword.vue')
+    path: '/games/:id',
+    component: () => import('pages/Games/_slug.vue'),
   },
   {
-    path: '/Admin/Homepage',
-    component: () => import('../pages/Homepage.vue')
+    path: '/studio',
+    component: () => import('layouts/StudioLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Studio/index.vue'),
+      },
+      {
+        path: 'statistics',
+        component: () => import('pages/Studio/StatisticsContainer.vue'),
+      },
+    ]
   },
   {
-    path: '/Developer/Homepage',
-    component: () => import('../pages/Homepage.vue')
+    path: '/admin',
+    component: () => import('layouts/AdminLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Admin/index.vue'),
+      },
+    ]
   },
   {
-    path: '/Gamer/Homepage',
-    component: () => import('../pages/Homepage.vue')
+    path: '/user',
+    component: () => import('layouts/UserLayout.vue'),
+    children: [
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('../pages/User/Profile.vue')
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('../pages/User/Settings.vue')
+      },
+    ]
   },
   {
-    path: '/Gamer/Homepage',
-    component: () => import('../pages/Homepage.vue')
+    path: '/mobile-modals',
+    component: () => import('layouts/MobileViewerLayout.vue'),
+    children: [
+      {
+        path: 'signin',
+        name: 'signin',
+        component: () => import('../components/molecules/SignInForm.vue')
+      },
+      {
+        path: 'signup',
+        name: 'signup',
+        component: () => import('../components/molecules/SignUpForm.vue')
+      },
+    ]
   },
-  {
-    path: '/Admin/Profile',
-    component: () => import('../pages/Profile.vue')
-  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

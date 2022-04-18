@@ -1,112 +1,112 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+  <base-layout>
+    <template #header>
+      <app-header
+        :sign-in="toggleSignInDialog"
+        :sign-up="toggleSignUpDialog"
+      ></app-header>
+    </template>
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+    <template #drawer>
+      <app-drawer
+        drawer-title="Categories"
+        :links-list="linksList"
+      />
+    </template>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-      <q-tabs align="left">
-        <q-route-tab to="Admin" label="Admin" />
-        <q-route-tab to="Developer" label="Developer" />
-        <q-route-tab to="Gamer" label="Gamer" />
-      </q-tabs>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
+    <template #router-view>
+      <app-horizontal-drawer
+        :links-list="linksList"
+      />
       <router-view />
-    </q-page-container>
-  </q-layout>
+    </template>
+
+    <template #modals>
+      <sign-in-dialog
+        :is-dialog-active="isSignInDialogActive"
+        :close-dialog="toggleSignInDialog"
+      />
+      <sign-up-dialog
+        :is-dialog-active="isSignUpDialogActive"
+        :close-dialog="toggleSignUpDialog"
+      />
+    </template>
+  </base-layout>
 </template>
 
 <script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue';
+import BaseLayout from './BaseLayout.vue';
+import AppHeader from '../components/molecules/AppHeader.vue';
+import AppDrawer from '../components/molecules/AppDrawer.vue';
+import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
+import SignInDialog from '../components/templates/SignInDialog.vue';
+import SignUpDialog from '../components/templates/SignUpDialog.vue';
+import { defineComponent, ref } from 'vue';
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Arcades',
+    icon: 'genres/Arcades',
+    path: '/home/arcades'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Fighters',
+    icon: 'genres/Fighters',
+    path: '/home/fighters'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'Quizzes',
+    icon: 'genres/Quizzes',
+    path: '/home/quizzes'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
+    title: 'Puzzles',
+    icon: 'genres/Puzzles',
+    path: '/home/puzzles'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
+    title: 'Races',
+    icon: 'genres/Races',
+    path: '/home/races'
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
+    title: 'Childish',
+    icon: 'genres/Childish',
+    path: '/home/childish'
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'For Girls',
+    icon: 'genres/For Girls',
+    path: '/home/for-girls'
   },
 ];
 
-import { defineComponent, ref } from 'vue';
-
 export default defineComponent({
   name: 'MainLayout',
-
   components: {
-    EssentialLink,
+    BaseLayout,
+    AppHeader,
+    AppDrawer,
+    AppHorizontalDrawer,
+    SignInDialog,
+    SignUpDialog,
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
-
+    const isSignInDialogActive = ref(false)
+    const isSignUpDialogActive = ref(false)
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
+      linksList,
+      isSignInDialogActive,
+      toggleSignInDialog: () => {
+        isSignInDialogActive.value = !isSignInDialogActive.value
       },
+      isSignUpDialogActive,
+      toggleSignUpDialog: () => {
+        isSignUpDialogActive.value = !isSignUpDialogActive.value
+      }
     };
   },
 });
 </script>
+
