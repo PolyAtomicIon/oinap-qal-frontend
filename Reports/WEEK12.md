@@ -23,6 +23,9 @@ For tags, we created a table with word stem and foreign key games. For the table
 
 ![tags](./week12/yn3.png)
 
+### Zhanbolat Bekmaganbetov
+
+In addition to implementing telegram bot, i was working on code refactoring and bug fixes, i fixed bug that was related to sorting by game rating, that was caused due to lack of records in GameFeedbacks for some games, they had null value, which could not be calculated, and started to refactor existing logic of statistics gathering logic, because it didn't take into account, date when game was played and who played
 
 # Jet Lee
 * Made kung-fu
