@@ -33,12 +33,14 @@ export default defineComponent({
 <style lang="scss">
 .footer{
   &__container{
-    width: 650px;
+    width: 740px;
   }
   &__title{
     color: $dark-grey;
+    font-size: 16px;
   }
   &__links{
+    font-size: 16px;
     color: $purple;
     cursor: pointer;
   }
