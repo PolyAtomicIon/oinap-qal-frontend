@@ -9,7 +9,8 @@
           class="footer__title"
           @click="$router.push('/home')"
         >
-          <span>@2022 Graduaders</span>
+          <span>© 2022 </span>
+          <span class="q-pl-xs"> Graduaders</span>
         </div>
         <div
           class="footer__links flex justify-between q-pt-sm"
