@@ -1,10 +1,9 @@
 <template>
   <div
-    class="footer desktop-only bg-transparent"
+    class="footer bg-transparent"
   >
     <q-separator color="dark-grey"/>
-    <div class="footer__container">
-      <div class="footer q-pa-lg">
+    <div class="footer__container q-pa-lg">
         <div
           class="footer__title"
           @click="$router.push('/home')"
@@ -21,7 +20,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -33,16 +31,44 @@ export default defineComponent({
 <style lang="scss">
 .footer{
   &__container{
-    width: 740px;
+    max-width: 740px;
+    width: 100%;
   }
   &__title{
-    color: $dark-grey;
+    cursor: pointer;
+    color: $gray;
     font-size: 16px;
+    width: 150px;
+  }
+  &__title:hover{
+    color: $white;
   }
   &__links{
     font-size: 16px;
     color: $purple;
     cursor: pointer;
   }
+  &__links span:hover{
+    color: $accent;
+  }
+}
+@media only screen and (max-width: 725px) {
+  .footer{
+    &__container{
+      padding: 15px 0;
+      text-align: center;
+    }
+    &__title{
+      width: 100%;
+    }
+    &__links{
+      display: flex;
+      flex-direction: column;
+    }
+    &__links span{
+      padding: 15px 0;
+    }
+  }
+
 }
 </style>
