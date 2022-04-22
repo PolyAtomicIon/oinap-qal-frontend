@@ -5,52 +5,74 @@
       bordered
       flat
     >
-      <div class="flex q-px-lg">
-        <q-card-section>
-          <span class="text-white">Email</span>
-        </q-card-section>
+
+      <div class="flex q-px-lg q-py-sm items-center">
+        <span class="text-white">Email</span>
         <q-space/>
-        <q-card-actions>
-          <q-btn
+        <q-btn
             color="blue"
             flat
             dense
+            class="edit-email__edit-btn"
             :label="expanded?'Cancel':'Edit'"
             @click="expanded = !expanded"
           ></q-btn>
-        </q-card-actions>
       </div>
+
+
       <q-slide-transition>
-        <div v-show="expanded" class="q-px-lg q-py-lg">
-          <q-separator color="grey"></q-separator>
-          <q-card-section class="edit-email__current">
-            <label class="text-grey">Current email</label>
-            <p class="text-white">{{userEmail}}</p>
-          </q-card-section>
-          <q-card-actions vertical class="edit-email__current">
-            <label class="text-grey">New email</label>
-            <my-input type="email" :size="55" />
-          </q-card-actions>
-          <q-card-actions>
-            <q-btn unelevated rounded class="edit-email__btn" color="primary" label="Save"></q-btn>
-          </q-card-actions>
+        <div v-show="expanded">
+            <q-separator color="grey"></q-separator>
+          <q-form @submit="onSubmit" class="q-px-lg q-pt-lg">
+            <div class="q-px-none q-py-md edit-email__current">
+              <label class="text-grey flex block">Current email</label>
+              <span class="text-white">{{userEmail}}</span>
+            </div>
+
+            <div class="q-px-none q-pb-none edit-email__current">
+              <label for="newEmail" class="text-grey">New email</label>
+              <q-input
+                dense
+                standout
+                color="white"
+                bg-color="grey-9"
+                class="text-white q-mt-sm edit-email__input"
+                input-style="color:white"
+                v-model="editEmail"
+              >
+              </q-input>
+            </div>
+
+            <div class="q-px-none q-py-lg">
+              <q-btn
+                unelevated
+                dense
+                rounded
+                class="edit-email__btn"
+                color="primary"
+                type="submit"
+                label="Save">
+              </q-btn>
+            </div>
+          </q-form>
         </div>
       </q-slide-transition>
     </q-card>
-
   </div>
 </template>
 
 <script>
 import {ref} from 'vue';
-import MyInput from 'src/components/atoms/Input.vue'
 export default {
   name: 'EditEmail',
-  components:{
-    MyInput
-  },
   setup(){
+    const editEmail= ref('');
+    const onSubmit = () => {
+      console.log(editEmail.value)
+    };
     return{
+      editEmail,
+      onSubmit,
       expanded: ref(false)
     }
   },
@@ -66,8 +88,23 @@ export default {
 <style lang="scss">
 .edit-email{
   border: 1px solid $black2;
+  &__edit-btn{
+    font-size: 16px;
+    text-transform: capitalize;
+    border-radius: 0;
+    min-width: 50px;
+  }
   &__btn{
-    width: 35%;
+    width: 28%;
+    min-width:200px;
+    text-transform: capitalize;
+  }
+  &__input{
+    max-width: 550px;
+    width: 100%;
+  }
+  &__input .q-field__control{
+    border-radius: 16px;
   }
 }
 .edit-email-active{

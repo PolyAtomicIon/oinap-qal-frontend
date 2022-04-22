@@ -3,41 +3,82 @@
     <q-card
       bordered
       flat
-      v-bind:class="expanded?'edit-password-active bg-transparent ':'edit-password bg-transparent '"
+      v-bind:class="expanded?'edit-password-active ':'edit-password  '"
     >
-      <div class="flex q-px-lg">
-        <q-card-section>
-          <span class="text-white">Password</span>
-        </q-card-section>
+      <div class="flex q-px-lg q-py-sm items-center">
+        <span class="text-white">Password</span>
         <q-space/>
-        <q-card-actions>
-          <q-btn
-            color="blue"
-            flat
-            dense
-            :label="expanded?'Cancel':'Edit'"
-            @click="expanded = !expanded"
-          ></q-btn>
-        </q-card-actions>
+        <q-btn
+          color="blue"
+          flat
+          dense
+          class="edit-password__edit-btn"
+          :label="expanded?'Cancel':'Edit'"
+          @click="expanded = !expanded"
+        ></q-btn>
       </div>
-      <q-slide-transition class="q-px-lg q-py-lg">
+      <q-slide-transition>
         <div v-show="expanded">
-          <q-separator color="grey"></q-separator>
-          <q-card-actions vertical class="edit-password__section">
+          <q-separator class="edit-password__separator"/>
+
+          <q-form @submit="onSubmit" class="q-px-lg">
+          <div  class="edit-password__section q-px-none  ">
             <label class="text-grey block">Old password</label>
-            <my-input :type="'password'" class="edit-password__input" :size="55"></my-input>
-          </q-card-actions>
-          <q-card-actions vertical class="edit-password__section">
+            <q-input
+              dense
+              standout
+              color="white"
+              bg-color="grey-9"
+              class="text-white q-mt-sm edit-password__input"
+              input-style="color:white"
+              type="password"
+              v-model="oldPassword"
+            >
+            </q-input>
+          </div>
+
+          <div  class="edit-password__section q-px-none q-pt-lg">
             <label class="text-grey">New password</label>
-            <my-input :type="'password'" class="edit-password__input" :size="55"></my-input>
-          </q-card-actions>
-          <q-card-actions vertical class="edit-password__section">
+            <q-input
+              dense
+              standout
+              color="white"
+              bg-color="grey-9"
+              class="text-white q-mt-sm edit-password__input"
+              input-style="color:white"
+              type="password"
+              v-model="newPassword"
+            >
+            </q-input>
+          </div>
+
+          <div class="edit-password__section q-px-none q-pt-lg">
             <label class="text-grey">Repeat password</label>
-            <my-input :type="'password'" class="edit-password__input" :size="55"></my-input>
-          </q-card-actions>
-          <q-card-actions>
-            <q-btn unelevated rounded class="edit-password__btn" color="primary" label="Save"></q-btn>
-          </q-card-actions>
+            <q-input
+              dense
+              standout
+              color="white"
+              bg-color="grey-9"
+              class="text-white q-mt-sm edit-password__input"
+              input-style="color:white"
+              type="password"
+              v-model="repeatPassword"
+            >
+            </q-input>
+          </div>
+
+          <div class="q-px-none q-pt-md q-pb-lg">
+            <q-btn
+              unelevated
+              rounded
+              dense
+              class="edit-password__btn"
+              color="primary"
+              type="submit"
+              label="Save">
+            </q-btn>
+          </div>
+          </q-form>
         </div>
       </q-slide-transition>
     </q-card>
@@ -47,23 +88,30 @@
 
 <script>
 import {ref} from 'vue';
-import MyInput from 'src/components/atoms/Input.vue'
 
 export default {
   name: 'EditPassword',
-  components:{
-    MyInput
-  },
   setup(){
+    const oldPassword= ref('');
+    const newPassword= ref('');
+    const repeatPassword= ref('');
+    const onSubmit = () => {
+      console.log(oldPassword.value)
+      console.log(newPassword.value)
+      console.log(repeatPassword.value)
+    };
     return{
+      oldPassword,
+      newPassword,
+      repeatPassword,
+      onSubmit,
       expanded: ref(false),
     }
   },
-
   props:{
-    userEmail:{
-      Type:String,
-      default:'password'
+    password:{
+      type:String,
+      default:''
     }
   }
 }
@@ -72,11 +120,35 @@ export default {
 <style lang="scss">
 .edit-password{
   border: 1px solid $black2;
+  background-color: transparent;
+  &__separator{
+    background-color: $gray;
+  }
+  &__edit-btn{
+    font-size: 16px;
+    text-transform: capitalize;
+    border-radius: 0;
+    min-width: 50px;
+  }
   &__btn{
-    width:35%;
+    width: 28%;
+    min-width:200px;
+    text-transform: capitalize;
+
+  }
+  &__input{
+    max-width: 550px;
+    width: 100%;
+  }
+  &__input .q-field__control{
+    border-radius: 16px;
+  }
+  &__section{
+    padding: 30px 0 0 0;
   }
 }
 .edit-password-active{
+  background-color: transparent;
   border: 1px solid $purple;
 }
 
