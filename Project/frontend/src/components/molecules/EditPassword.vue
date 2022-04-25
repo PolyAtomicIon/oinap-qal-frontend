@@ -9,7 +9,7 @@
         <span class="text-white">Password</span>
         <q-space/>
         <q-btn
-          color="blue"
+          color="primary"
           flat
           dense
           class="edit-password__edit-btn"
@@ -127,7 +127,7 @@ export default {
   &__edit-btn{
     font-size: 16px;
     text-transform: capitalize;
-    border-radius: 0;
+    border-radius: 5px;
     min-width: 50px;
   }
   &__btn{
