@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 .game-card {
-
+  opacity: 0.1;
   &__container {
     background-color: $dark-light;
     color: white;
