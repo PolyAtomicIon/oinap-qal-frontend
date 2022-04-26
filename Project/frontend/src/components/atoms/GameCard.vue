@@ -1,7 +1,7 @@
 <template>
   <div class="game-card">
     <q-card class="game-card__container" flat dark>
-      <q-card-section class="q-pa-none">
+      <q-card-section class="q-pa-none q-pb-md">
         <q-img
           :src="img"
           alt="preview image"
