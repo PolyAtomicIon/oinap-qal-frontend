@@ -86,12 +86,6 @@ export default {
 
 <style lang="scss" scoped>
 .game-card {
-  width: 100%;
-  max-width: 300px;
-
-  @media screen and (max-width: $breakpoint-xs) {
-    max-width: 100%;
-  }
 
   &__container {
     background-color: $dark-light;
