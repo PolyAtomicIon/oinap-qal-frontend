@@ -1,10 +1,10 @@
 <template>
   <q-page class="flex column justify-between">
     <div class="q-pa-md">
-    <my-banner></my-banner>
-    <router-view></router-view>
+      <my-banner></my-banner>
+      <router-view></router-view>
     </div>
-    <app-footer/>
+    <app-footer />
   </q-page>
 </template>
 
@@ -20,11 +20,9 @@ export default defineComponent({
     AppFooter,
   },
   setup() {
-    return {
-    };
+    return {};
   },
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
