@@ -16,7 +16,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container class="page-container">
+    <q-page-container>
       <q-page
         class="bg-dark q-pa-sm"
       >
