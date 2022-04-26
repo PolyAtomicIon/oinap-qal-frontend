@@ -79,6 +79,10 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    @media screen and (max-width: $breakpoint-md) {
+      max-width: 350px;
+      justify-content: center;
+    }
     @media screen and (max-width: $breakpoint-sm) {
       max-width: 200px;
       justify-content: center;
@@ -106,6 +110,11 @@ export default {
   &__img {
     img {
       width: 280px;
+    }
+    @media screen and (max-width: $breakpoint-md) {
+      img {
+        width: 220px;
+      }
     }
     @media screen and (max-width: $breakpoint-sm) {
       img {
