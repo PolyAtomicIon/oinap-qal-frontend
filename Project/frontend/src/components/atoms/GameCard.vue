@@ -43,7 +43,7 @@
             @click="$router.push('/games/1')"
           >
             <img
-              src="icons/generics/chevron-right-white.svg"
+              :src="require(`/public/icons/generics/chevron-right-white.svg`)"
               alt="chevron-right"
               class="game-card__btn__icon"
             />

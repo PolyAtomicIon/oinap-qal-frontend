@@ -76,7 +76,7 @@ const linksList = [
   },
   {
     title: 'For Girls',
-    icon: 'genres/For Girls',
+    icon: 'genres/ForGirls',
     path: '/home/for-girls'
   },
 ];
