@@ -41,6 +41,7 @@
           dense
           standout
           rounded
+          autocomplete="new-username"
           dark
           bg-color="grey-9"
           class="q-mt-sm"
@@ -57,6 +58,7 @@
           dense
           standout
           rounded
+          autocomplete="new-username"
           dark
           bg-color="grey-9"
           class="q-mt-sm"
