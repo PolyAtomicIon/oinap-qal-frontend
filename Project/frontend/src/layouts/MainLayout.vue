@@ -2,8 +2,6 @@
   <base-layout>
     <template #header>
       <app-header
-        :sign-in="toggleSignInDialog"
-        :sign-up="toggleSignUpDialog"
       ></app-header>
     </template>
 
@@ -23,12 +21,8 @@
 
     <template #modals>
       <sign-in-dialog
-        :is-dialog-active="isSignInDialogActive"
-        :close-dialog="toggleSignInDialog"
       />
       <sign-up-dialog
-        :is-dialog-active="isSignUpDialogActive"
-        :close-dialog="toggleSignUpDialog"
       />
     </template>
   </base-layout>
@@ -41,7 +35,7 @@ import AppDrawer from '../components/molecules/AppDrawer.vue';
 import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
 import SignInDialog from '../components/templates/SignInDialog.vue';
 import SignUpDialog from '../components/templates/SignUpDialog.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 const linksList = [
   {
@@ -93,18 +87,8 @@ export default defineComponent({
   },
 
   setup() {
-    const isSignInDialogActive = ref(false)
-    const isSignUpDialogActive = ref(false)
     return {
       linksList,
-      isSignInDialogActive,
-      toggleSignInDialog: () => {
-        isSignInDialogActive.value = !isSignInDialogActive.value
-      },
-      isSignUpDialogActive,
-      toggleSignUpDialog: () => {
-        isSignUpDialogActive.value = !isSignUpDialogActive.value
-      }
     };
   },
 });
