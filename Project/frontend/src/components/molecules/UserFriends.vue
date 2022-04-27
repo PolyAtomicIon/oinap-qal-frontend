@@ -73,4 +73,12 @@ export default {
     width: 100%;
   }
 }
+@media screen and (max-width: $breakpoint-xs) {
+  .friends{
+    background-color: transparent;
+    &__friend{
+      margin: 15px 0;
+    }
+  }
+}
 </style>
