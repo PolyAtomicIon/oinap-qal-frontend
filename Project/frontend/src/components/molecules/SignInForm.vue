@@ -11,6 +11,7 @@
           dense
           standout
           rounded
+          autocomplete="username"
           dark
           bg-color="grey-9"
           class="q-mt-sm"
@@ -27,6 +28,7 @@
           standout
           rounded
           dark
+          autocomplete="current-password"
           bg-color="grey-9"
           class="q-mt-sm"
           type="password"

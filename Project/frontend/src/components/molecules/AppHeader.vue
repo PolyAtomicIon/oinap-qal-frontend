@@ -85,24 +85,17 @@
 import { defineComponent, ref } from 'vue';
 import { useRouter, } from 'vue-router'
 import { useQuasar } from 'quasar'
+import { useModalsStore } from '../../store/modals';
 
 export default defineComponent({
   name: 'AppHeader',
   components: {
   },
   props: {
-    signUp: {
-      type: Function,
-      default: () => ({})
-    },
-    signIn: {
-      type: Function,
-      default: () => ({})
-    },
   },
-  setup(props) {
+  setup() {
     const searchFragment = ref('');
-
+    const modals = useModalsStore();
     const $router = useRouter()
     const $q = useQuasar()
     const onSignUp = () => {
@@ -110,7 +103,7 @@ export default defineComponent({
         void $router.push('/mobile-modals/signup')
       }
       else{
-        props.signUp()
+        modals.setShowSignUpModal(true)
       }
     }
     const onSignIn = () => {
@@ -118,7 +111,7 @@ export default defineComponent({
         void $router.push('/mobile-modals/signin')
       }
       else{
-        props.signIn()
+        modals.setShowSignInModal(true)
       }
     }
 

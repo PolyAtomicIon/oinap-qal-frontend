@@ -32,14 +32,6 @@ export default defineComponent({
     AppHeader,
   },
   props: {
-    signUp: {
-      type: Function,
-      default: () => ({})
-    },
-    signIn: {
-      type: Function,
-      default: () => ({})
-    },
     addGame: {
       type: Function,
       default: () => ({})

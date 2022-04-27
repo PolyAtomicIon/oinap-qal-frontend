@@ -4,7 +4,7 @@ export type RootState = {
   email: string
 };
 
-export const useStore = defineStore('user', {
+export const useUserStore = defineStore('user', {
   state: () =>
     ({
       email: 'user@gmail.com'
