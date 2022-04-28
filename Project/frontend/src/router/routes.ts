@@ -77,6 +77,16 @@ const routes: RouteRecordRaw[] = [
         name: 'signup',
         component: () => import('../components/molecules/SignUpForm.vue')
       },
+      {
+        path: 'user-friends',
+        name: 'user-friends',
+        component: () => import('../components/molecules/UserFriends.vue')
+      },
+      {
+        path: 'user-ratings',
+        name: 'user-ratings',
+        component: () => import('../components/molecules/UserRatings.vue')
+      },
     ]
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="user-ratings q-mx-lg q-mt-lg">
+  <div class="user-ratings">
     <q-table
       :rows="rows"
       :columns="rating"
@@ -22,14 +22,14 @@
             :key="col.name"
             :props="props"
             :auto-width="col.name != 'rating'"
+            class="q-px-none"
           >
             <q-img
               v-if="col.name == 'cover'"
               :src="col.value"
               :ratio="16/9"
               fit="cover"
-              class="rounded-borders"
-              width="48px"
+              class="rounded-borders ratings__img"
             />
             <span
               v-else-if="col.name == 'rating'"
@@ -124,28 +124,24 @@ export default {
   border-radius: 8px;
   border: 1px solid $primary;
   padding: 10px;
-
+  &__img{
+    width: 48px;
+  }
   &__index, &__title, &__position {
     font-size: 20px;
-    @media screen and (max-width: $breakpoint-xs) {
-      font-size: 16px;
-    }
   }
   tr {
     height: 72px;
-    @media screen and (max-width: $breakpoint-xs) {
-      height: 24px;
-    }
   }
 }
 .user-ratings{
   background: transparent;
   min-height: 800px;
+  margin:25px 25px 0 25px;
   &__container{
     border:1px solid $purple;
     min-height: 400px;
   }
-
 }
 .game{
   display: flex;
@@ -155,5 +151,26 @@ export default {
 
   }
 }
-
+@media screen and (max-width: $breakpoint-xs) {
+  .ratings{
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    &__img{
+      width: 30px;
+    }
+    &__index, &__title, &__position {
+      font-size: 16px;
+    }
+    tr {
+      height: 56px;
+    }
+  }
+  .user-ratings{
+    margin: 0;
+    td{
+      padding:5px;
+    }
+  }
+}
 </style>
