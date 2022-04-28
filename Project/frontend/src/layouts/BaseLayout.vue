@@ -19,6 +19,11 @@
           </slot>
         </Suspense>
 
+        <sign-in-dialog
+        />
+        <sign-up-dialog
+        />
+
         <slot name="modals">
         </slot>
       </q-page>
@@ -27,11 +32,15 @@
 </template>
 
 <script lang="ts">
+import SignInDialog from '../components/templates/SignInDialog.vue';
+import SignUpDialog from '../components/templates/SignUpDialog.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'BaseLayout',
   components: {
+    SignInDialog,
+    SignUpDialog,
   },
   setup() {
     const leftDrawerOpen = ref(true)

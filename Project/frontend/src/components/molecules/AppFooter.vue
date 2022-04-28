@@ -43,6 +43,7 @@ export default defineComponent({
   }
   &__links a {
     text-decoration: none;
+    color: $primary;
     &:hover {
       color: $white;
     }

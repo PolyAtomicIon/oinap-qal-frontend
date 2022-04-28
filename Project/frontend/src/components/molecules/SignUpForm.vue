@@ -41,6 +41,7 @@
           dense
           standout
           rounded
+          autocomplete="new-username"
           dark
           bg-color="grey-9"
           class="q-mt-sm"
@@ -57,6 +58,7 @@
           dense
           standout
           rounded
+          autocomplete="new-username"
           dark
           bg-color="grey-9"
           class="q-mt-sm"
@@ -180,6 +182,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .auth__form {
   width: 500px;
+  margin: 0 auto;
   border-radius: 14px;
   padding: 0 16px;
   padding-bottom: 24px;

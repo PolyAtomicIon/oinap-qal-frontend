@@ -22,7 +22,7 @@
             @click="navigateTo(link.path)"
           >
             <img
-              :src="`icons/${link.icon}.svg`"
+              :src="require(`/public/icons/${link.icon}.svg`)"
               alt="icon"
               width="16"
               height="16"

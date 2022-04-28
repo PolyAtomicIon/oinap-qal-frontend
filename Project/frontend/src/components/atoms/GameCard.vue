@@ -1,7 +1,7 @@
 <template>
   <div class="game-card">
     <q-card class="game-card__container" flat dark>
-      <q-card-section class="q-pa-none">
+      <q-card-section class="q-pa-none q-pb-md">
         <q-img
           :src="img"
           alt="preview image"
@@ -43,7 +43,7 @@
             @click="$router.push('/games/1')"
           >
             <img
-              src="icons/generics/chevron-right-white.svg"
+              :src="require(`/public/icons/generics/chevron-right-white.svg`)"
               alt="chevron-right"
               class="game-card__btn__icon"
             />
@@ -86,12 +86,6 @@ export default {
 
 <style lang="scss" scoped>
 .game-card {
-  width: 100%;
-  max-width: 300px;
-
-  @media screen and (max-width: $breakpoint-xs) {
-    max-width: 100%;
-  }
 
   &__container {
     background-color: $dark-light;
