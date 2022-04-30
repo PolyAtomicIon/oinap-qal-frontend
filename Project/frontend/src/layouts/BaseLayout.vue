@@ -10,7 +10,7 @@
 
       <slot name="drawer">
       </slot>
-
+  
       <q-page
         class="bg-dark-light"
       >
@@ -18,11 +18,6 @@
           <slot name="router-view">
           </slot>
         </Suspense>
-
-        <sign-in-dialog
-        />
-        <sign-up-dialog
-        />
 
         <slot name="modals">
         </slot>
@@ -32,15 +27,11 @@
 </template>
 
 <script lang="ts">
-import SignInDialog from '../components/templates/SignInDialog.vue';
-import SignUpDialog from '../components/templates/SignUpDialog.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'BaseLayout',
   components: {
-    SignInDialog,
-    SignUpDialog,
   },
   setup() {
     const leftDrawerOpen = ref(true)

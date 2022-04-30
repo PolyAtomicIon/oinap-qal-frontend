@@ -7,7 +7,7 @@
     >
       <game-card
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
-        v-for="game in articles"
+        v-for="game in Games"
         :key="game.id"
         :img="game.picture"
         :title="game.title"
@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, reactive, onMounted } from 'vue';
+import { defineComponent, computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { ArticlesService } from '../../services/articles/';
-import { IArticleData } from '../../entities';
-import { IArticlesService } from '../../services/articles/articles.types';
+
+import { IGameData } from '../../entities';
+import { IGamesService, provider } from '../../services/index';
 
 import GameCard from '../atoms/GameCard.vue';
 import GameCardPlaceholder from '../atoms/placeholders/GameCard.vue';
@@ -44,21 +44,30 @@ export default defineComponent({
     const $route = useRoute();
     const genre = computed(() => $route.params.genre);
 
-    const artcileService: IArticlesService = new ArticlesService();
-    let articles: IArticleData[] = reactive([]);
+    const artcileService: IGamesService = provider().Games;
+    let Games = ref<IGameData[]>([]);
     let isFetched = ref(false);
-
-    onMounted(async () => {
-      const articlesResponse = await artcileService.getAll();
-      articles.push(...articlesResponse.data)
+    const fetchGamesByGenre = async () => {
+      isFetched.value = false
+      Games.value = [];
+      const GamesResponse = await artcileService.getAll();
+      Games.value = GamesResponse.data;
       isFetched.value = true
-    });
+    }
+
+    onMounted(fetchGamesByGenre);
 
     return {
-      articles,
+      Games,
       genre,
       isFetched,
+      fetchGamesByGenre
     };
+  },
+  watch: {
+    async genre() {
+      await this.fetchGamesByGenre()
+    }
   },
 });
 </script>

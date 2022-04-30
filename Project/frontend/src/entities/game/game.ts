@@ -1,7 +1,7 @@
-import { IArticle, IArticleData } from './article.types'
+import { IGame, IGameData } from './game.types'
 import { IComment, Comment } from '../comment'
 
-export class Article implements IArticle {
+export class Game implements IGame {
   readonly id?: number
   readonly title: string
   readonly content: string
@@ -12,7 +12,7 @@ export class Article implements IArticle {
   readonly tags: string[]
   readonly comments: IComment[]
 
-  constructor (data: IArticleData) {
+  constructor (data: IGameData) {
     if (data.id) {
       this.id = data.id
     }

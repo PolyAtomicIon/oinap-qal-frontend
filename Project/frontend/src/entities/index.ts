@@ -1,2 +1,2 @@
-export * from './article'
+export * from './game'
 export * from './comment'

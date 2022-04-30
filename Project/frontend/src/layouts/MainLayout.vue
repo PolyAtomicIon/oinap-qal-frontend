@@ -41,37 +41,37 @@ const linksList = [
   {
     title: 'Arcades',
     icon: 'genres/Arcades',
-    path: '/home/arcades'
+    path: '/arcades'
   },
   {
     title: 'Fighters',
     icon: 'genres/Fighters',
-    path: '/home/fighters'
+    path: '/fighters'
   },
   {
     title: 'Quizzes',
     icon: 'genres/Quizzes',
-    path: '/home/quizzes'
+    path: '/quizzes'
   },
   {
     title: 'Puzzles',
     icon: 'genres/Puzzles',
-    path: '/home/puzzles'
+    path: '/puzzles'
   },
   {
     title: 'Races',
     icon: 'genres/Races',
-    path: '/home/races'
+    path: '/races'
   },
   {
     title: 'Childish',
     icon: 'genres/Childish',
-    path: '/home/childish'
+    path: '/childish'
   },
   {
     title: 'For Girls',
     icon: 'genres/ForGirls',
-    path: '/home/for-girls'
+    path: '/for-girls'
   },
 ];
 

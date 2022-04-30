@@ -1,7 +1,7 @@
-import { IArticleData, IArticle } from './article.types'
-import { Article } from './article'
+import { IGameData, IGame } from './game.types'
+import { Game } from './game'
 
-export const mockArticlesData = (): IArticleData[] => [{
+export const mockGamesData = (): IGameData[] => [{
   id: 1,
   title: 'title',
   content: 'content',
@@ -23,4 +23,4 @@ export const mockArticlesData = (): IArticleData[] => [{
   comments: []
 }]
 
-export const mockArticles = (data: IArticleData[] = mockArticlesData()): IArticle[] => data.map(item => new Article(item))
+export const mockGames = (data: IGameData[] = mockGamesData()): IGame[] => data.map(item => new Game(item))

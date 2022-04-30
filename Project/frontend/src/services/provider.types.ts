@@ -1,5 +1,5 @@
-import { IArticlesService } from './articles/'
+import { IGamesService } from './games'
 
 export interface IProvider {
-  articles: IArticlesService
+  Games: IGamesService
 }

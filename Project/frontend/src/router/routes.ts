@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/home',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     props:true,
     children: [
