@@ -8,11 +8,11 @@ const routes: RouteRecordRaw[] = [
     props:true,
     children: [
       {
-        path: '',
+        path: ':category',
         component: () => import('pages/Games/index.vue'),
         children: [
           {
-            path: ':genre',
+            path: ':categoryId',
             component: () => import('components/templates/GameByGenre.vue'),
           },
         ]

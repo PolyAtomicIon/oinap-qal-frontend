@@ -1,7 +1,6 @@
 import {
   IGame,
   IGameData,
-  ICommentData,
 } from 'src/entities'
 import { IGamesService } from './game.types'
 import { AxiosResponse } from 'axios'
@@ -18,11 +17,12 @@ export class GamesService implements IGamesService {
     return await ApiService.get('/games');
   }
 
-  async getOneById (id: number): Promise<AxiosResponse<IGame> | undefined> {
-    return await ApiService.get(`/games/${id}`);
+  async getAllByCategoryId (id: number): Promise<AxiosResponse<IGameData[]>> {
+    return await ApiService.get(`/games/?category=${id}`);
   }
 
-  async createComment (gameId: number, commentData: ICommentData):  Promise<AxiosResponse<IGame>> {
-    return await ApiService.post(`/games/${gameId}`, commentData);
+  async getOneById (id: number): Promise<AxiosResponse<IGame> | undefined> {
+    return await ApiService.get(`/game/${id}`);
   }
+
 }

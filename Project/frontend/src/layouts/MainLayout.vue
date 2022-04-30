@@ -39,39 +39,16 @@ import { defineComponent } from 'vue';
 
 const linksList = [
   {
+    id: 1,
     title: 'Arcades',
     icon: 'genres/Arcades',
-    path: '/arcades'
+    path: '/Arcades/1'
   },
   {
+    id: 2,
     title: 'Fighters',
     icon: 'genres/Fighters',
-    path: '/fighters'
-  },
-  {
-    title: 'Quizzes',
-    icon: 'genres/Quizzes',
-    path: '/quizzes'
-  },
-  {
-    title: 'Puzzles',
-    icon: 'genres/Puzzles',
-    path: '/puzzles'
-  },
-  {
-    title: 'Races',
-    icon: 'genres/Races',
-    path: '/races'
-  },
-  {
-    title: 'Childish',
-    icon: 'genres/Childish',
-    path: '/childish'
-  },
-  {
-    title: 'For Girls',
-    icon: 'genres/ForGirls',
-    path: '/for-girls'
+    path: '/Fighters/2'
   },
 ];
 

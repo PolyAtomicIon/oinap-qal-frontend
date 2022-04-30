@@ -1,13 +1,10 @@
 <template>
   <div class="games-by-genre">
-    <h1 class="games-by-genre__title">{{ genre }}</h1>
-    <div
-      v-if="isFetched"
-      class="row q-col-gutter-md"
-    >
+    <h1 class="games-by-genre__title">{{ categoryTitle }}</h1>
+    <div v-if="isFetched" class="row q-col-gutter-md">
       <game-card
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
-        v-for="game in Games"
+        v-for="game in games"
         :key="game.id"
         :img="game.picture"
         :title="game.title"
@@ -42,32 +39,37 @@ export default defineComponent({
   },
   setup() {
     const $route = useRoute();
-    const genre = computed(() => $route.params.genre);
+    const categoryTitle = computed(() => $route.params.category);
+    const categoryId = computed(() => $route.params.categoryId);
 
-    const artcileService: IGamesService = provider().Games;
-    let Games = ref<IGameData[]>([]);
+    const gameService: IGamesService = provider().Games;
+    let games = ref<IGameData[]>([]);
     let isFetched = ref(false);
-    const fetchGamesByGenre = async () => {
-      isFetched.value = false
-      Games.value = [];
-      const GamesResponse = await artcileService.getAll();
-      Games.value = GamesResponse.data;
-      isFetched.value = true
-    }
 
-    onMounted(fetchGamesByGenre);
+    const fetchGamesByCategory = async () => {
+      isFetched.value = false;
+      games.value = [];
+      const GamesResponse = await gameService.getAllByCategoryId(
+        +categoryId.value
+      );
+      games.value = GamesResponse.data;
+      isFetched.value = true;
+    };
+
+    onMounted(fetchGamesByCategory);
 
     return {
-      Games,
-      genre,
+      games,
+      categoryId,
+      categoryTitle,
       isFetched,
-      fetchGamesByGenre
+      fetchGamesByCategory,
     };
   },
   watch: {
-    async genre() {
-      await this.fetchGamesByGenre()
-    }
+    async categoryId() {
+      await this.fetchGamesByCategory();
+    },
   },
 });
 </script>
