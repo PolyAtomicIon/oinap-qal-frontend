@@ -49,10 +49,10 @@ export default defineComponent({
     const fetchGamesByCategory = async () => {
       isFetched.value = false;
       games.value = [];
-      const GamesResponse = await gameService.getAllByCategoryId(
+      const gamesResponse = await gameService.getAllByCategoryId(
         +categoryId.value
       );
-      games.value = GamesResponse.data;
+      games.value = gamesResponse.data;
       isFetched.value = true;
     };
 

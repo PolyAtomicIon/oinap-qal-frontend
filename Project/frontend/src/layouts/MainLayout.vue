@@ -1,29 +1,24 @@
 <template>
   <base-layout>
     <template #header>
-      <app-header
-      ></app-header>
+      <app-header></app-header>
     </template>
 
     <template #drawer>
       <app-drawer
         drawer-title="Categories"
-        :links-list="linksList"
+        :links-list="categoriesStore.getCategories"
       />
     </template>
 
     <template #router-view>
-      <app-horizontal-drawer
-        :links-list="linksList"
-      />
+      <app-horizontal-drawer :links-list="categoriesStore.getCategories" />
       <router-view />
     </template>
 
     <template #modals>
-      <sign-in-dialog
-      />
-      <sign-up-dialog
-      />
+      <sign-in-dialog />
+      <sign-up-dialog />
     </template>
   </base-layout>
 </template>
@@ -35,22 +30,8 @@ import AppDrawer from '../components/molecules/AppDrawer.vue';
 import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
 import SignInDialog from '../components/templates/SignInDialog.vue';
 import SignUpDialog from '../components/templates/SignUpDialog.vue';
-import { defineComponent } from 'vue';
-
-const linksList = [
-  {
-    id: 1,
-    title: 'Arcades',
-    icon: 'genres/Arcades',
-    path: '/Arcades/1'
-  },
-  {
-    id: 2,
-    title: 'Fighters',
-    icon: 'genres/Fighters',
-    path: '/Fighters/2'
-  },
-];
+import { defineComponent, onMounted } from 'vue';
+import { useCategoriesStore } from '../store/categories';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -62,12 +43,15 @@ export default defineComponent({
     SignInDialog,
     SignUpDialog,
   },
-
   setup() {
+    const categoriesStore = useCategoriesStore();
+    onMounted(async () => {
+      await categoriesStore.fetchCategories();
+    });
+
     return {
-      linksList,
+      categoriesStore,
     };
   },
 });
 </script>
-
