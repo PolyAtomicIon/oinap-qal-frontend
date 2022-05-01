@@ -19,28 +19,24 @@
           </slot>
         </Suspense>
 
-        <sign-in-dialog
-        />
-        <sign-up-dialog
-        />
-
         <slot name="modals">
         </slot>
+
+        <app-footer></app-footer>
       </q-page>
+
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script lang="ts">
-import SignInDialog from '../components/templates/SignInDialog.vue';
-import SignUpDialog from '../components/templates/SignUpDialog.vue';
-
 import { defineComponent, ref } from 'vue';
+import AppFooter from '../components/molecules/AppFooter.vue';
 export default defineComponent({
   name: 'BaseLayout',
   components: {
-    SignInDialog,
-    SignUpDialog,
+    AppFooter
   },
   setup() {
     const leftDrawerOpen = ref(true)

@@ -3,16 +3,20 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/home',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    props:true,
+    props: true,
     children: [
       {
         path: '',
         component: () => import('pages/Games/index.vue'),
+      },
+      {
+        path: ':category',
+        component: () => import('pages/Games/index.vue'),
         children: [
           {
-            path: ':genre',
+            path: ':categoryId',
             component: () => import('components/templates/GameByGenre.vue'),
           },
         ]

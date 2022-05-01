@@ -7,8 +7,8 @@
     <q-list class="q-mt-sm category">
       <q-item-label class="category__header" header> {{drawerTitle}} </q-item-label>
       <q-item
-        v-for="(link, index) in linksList"
-        :key="index"
+        v-for="link in linksList"
+        :key="link.id"
         class="category__item"
       >
         <q-item-section>

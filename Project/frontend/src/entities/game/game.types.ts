@@ -1,6 +1,6 @@
 import { IComment, ICommentData } from 'src/entities'
 
-export interface IArticleData {
+export interface IGameData {
   readonly id?: number
   readonly title: string
   readonly content: string
@@ -13,6 +13,6 @@ export interface IArticleData {
   readonly comments: ICommentData[]
 }
 
-export interface IArticle extends IArticleData {
+export interface IGame extends IGameData {
   readonly comments: IComment[]
 }
