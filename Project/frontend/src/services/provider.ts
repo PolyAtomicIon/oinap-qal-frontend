@@ -1,6 +1,8 @@
-import { ArticlesService } from './articles/index'
+import { GamesService } from './games/index'
+import { CategoriesService } from './category/index'
 import { IProvider } from './provider.types'
 
 export const provider = (): IProvider => ({
-  articles: new ArticlesService()
+  Games: new GamesService(),
+  Categories: new CategoriesService(),
 })

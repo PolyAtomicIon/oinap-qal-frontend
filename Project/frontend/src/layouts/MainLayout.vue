@@ -1,29 +1,24 @@
 <template>
   <base-layout>
     <template #header>
-      <app-header
-      ></app-header>
+      <app-header></app-header>
     </template>
 
     <template #drawer>
       <app-drawer
         drawer-title="Categories"
-        :links-list="linksList"
+        :links-list="categoriesStore.getCategories"
       />
     </template>
 
     <template #router-view>
-      <app-horizontal-drawer
-        :links-list="linksList"
-      />
+      <app-horizontal-drawer :links-list="categoriesStore.getCategories" />
       <router-view />
     </template>
 
     <template #modals>
-      <sign-in-dialog
-      />
-      <sign-up-dialog
-      />
+      <sign-in-dialog />
+      <sign-up-dialog />
     </template>
   </base-layout>
 </template>
@@ -35,45 +30,8 @@ import AppDrawer from '../components/molecules/AppDrawer.vue';
 import AppHorizontalDrawer from '../components/molecules/AppHorizontalDrawer.vue';
 import SignInDialog from '../components/templates/SignInDialog.vue';
 import SignUpDialog from '../components/templates/SignUpDialog.vue';
-import { defineComponent } from 'vue';
-
-const linksList = [
-  {
-    title: 'Arcades',
-    icon: 'genres/Arcades',
-    path: '/home/arcades'
-  },
-  {
-    title: 'Fighters',
-    icon: 'genres/Fighters',
-    path: '/home/fighters'
-  },
-  {
-    title: 'Quizzes',
-    icon: 'genres/Quizzes',
-    path: '/home/quizzes'
-  },
-  {
-    title: 'Puzzles',
-    icon: 'genres/Puzzles',
-    path: '/home/puzzles'
-  },
-  {
-    title: 'Races',
-    icon: 'genres/Races',
-    path: '/home/races'
-  },
-  {
-    title: 'Childish',
-    icon: 'genres/Childish',
-    path: '/home/childish'
-  },
-  {
-    title: 'For Girls',
-    icon: 'genres/ForGirls',
-    path: '/home/for-girls'
-  },
-];
+import { defineComponent, onMounted } from 'vue';
+import { useCategoriesStore } from '../store/categories';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -85,12 +43,15 @@ export default defineComponent({
     SignInDialog,
     SignUpDialog,
   },
-
   setup() {
+    const categoriesStore = useCategoriesStore();
+    onMounted(async () => {
+      await categoriesStore.fetchCategories();
+    });
+
     return {
-      linksList,
+      categoriesStore,
     };
   },
 });
 </script>
-

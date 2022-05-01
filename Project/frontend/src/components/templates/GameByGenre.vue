@@ -1,13 +1,10 @@
 <template>
   <div class="games-by-genre">
-    <h1 class="games-by-genre__title">{{ genre }}</h1>
-    <div
-      v-if="isFetched"
-      class="row q-col-gutter-md"
-    >
+    <h1 class="games-by-genre__title">{{ categoryTitle }}</h1>
+    <div v-if="isFetched" class="row q-col-gutter-md">
       <game-card
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
-        v-for="game in articles"
+        v-for="game in games"
         :key="game.id"
         :img="game.picture"
         :title="game.title"
@@ -25,11 +22,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, reactive, onMounted } from 'vue';
+import { defineComponent, computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { ArticlesService } from '../../services/articles/';
-import { IArticleData } from '../../entities';
-import { IArticlesService } from '../../services/articles/articles.types';
+
+import { IGameData } from '../../entities';
+import { IGamesService, provider } from '../../services/index';
 
 import GameCard from '../atoms/GameCard.vue';
 import GameCardPlaceholder from '../atoms/placeholders/GameCard.vue';
@@ -42,23 +39,37 @@ export default defineComponent({
   },
   setup() {
     const $route = useRoute();
-    const genre = computed(() => $route.params.genre);
+    const categoryTitle = computed(() => $route.params.category);
+    const categoryId = computed(() => $route.params.categoryId);
 
-    const artcileService: IArticlesService = new ArticlesService();
-    let articles: IArticleData[] = reactive([]);
+    const gameService: IGamesService = provider().Games;
+    let games = ref<IGameData[]>([]);
     let isFetched = ref(false);
 
-    onMounted(async () => {
-      const articlesResponse = await artcileService.getAll();
-      articles.push(...articlesResponse.data)
-      isFetched.value = true
-    });
+    const fetchGamesByCategory = async () => {
+      isFetched.value = false;
+      games.value = [];
+      const gamesResponse = await gameService.getAllByCategoryId(
+        +categoryId.value
+      );
+      games.value = gamesResponse.data;
+      isFetched.value = true;
+    };
+
+    onMounted(fetchGamesByCategory);
 
     return {
-      articles,
-      genre,
+      games,
+      categoryId,
+      categoryTitle,
       isFetched,
+      fetchGamesByCategory,
     };
+  },
+  watch: {
+    async categoryId() {
+      await this.fetchGamesByCategory();
+    },
   },
 });
 </script>
