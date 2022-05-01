@@ -10,7 +10,7 @@
 
       <slot name="drawer">
       </slot>
-  
+
       <q-page
         class="bg-dark-light"
       >
@@ -21,17 +21,22 @@
 
         <slot name="modals">
         </slot>
+
+        <app-footer></app-footer>
       </q-page>
+
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script lang="ts">
-
 import { defineComponent, ref } from 'vue';
+import AppFooter from '../components/molecules/AppFooter.vue';
 export default defineComponent({
   name: 'BaseLayout',
   components: {
+    AppFooter
   },
   setup() {
     const leftDrawerOpen = ref(true)
