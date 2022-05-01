@@ -1,11 +1,9 @@
 <template>
-  <div class="gamer-settings flex column justify-between full-height">
-    <div>
-      <edit-profile />
-      <edit-email />
-      <edit-password />
-    </div>
-  </div>
+  <q-page class="">
+    <edit-profile />
+    <edit-email />
+    <edit-password />
+  </q-page>
 </template>
 <script>
 import EditProfile from 'src/components/molecules/EditUserProfile.vue';
