@@ -2,8 +2,8 @@
   <div class="q-mt-xl share">
     <span class="share__title">Share with your friends</span>
     <div class="share__links">
-      <q-item class="share__link">
-        <img :src="require('../../../assets/icons/copylink.svg')" alt="copy-link" width="38">
+      <q-item class="share__link" >
+        <img :src="require('../../../assets/icons/copylink.svg')" alt="copy-link" width="38" @click="share">
         <span>Copy Link</span>
       </q-item>
       <q-item class="share__link">
@@ -26,9 +26,22 @@
   </div>
 </template>
 
-<script>
+<script >
+const share = () => {
+  const shareData = {
+    title: 'Easy Play',
+    text: 'Play game',
+    url: 'https://developer.mozilla.org'
+  }
+  void window.navigator.share(shareData)
+}
 export default {
-  name: 'SdkDrawerShare'
+  name: 'SdkDrawerShare',
+  setup() {
+    return {
+      share
+    }
+  }
 }
 </script>
 

@@ -31,8 +31,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .leaders{
+  @media screen and (max-width: $breakpoint-sm) {
+    font-size: 16px;
+  }
   &__title{
     font-size: 24px;
   }

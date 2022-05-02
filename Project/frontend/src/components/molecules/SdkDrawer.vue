@@ -19,6 +19,7 @@
       :model-value="64"
       unit="px"
       style="height: 100%"
+      :limits="[64, Infinity]"
     >
 
       <template v-slot:before>
@@ -44,7 +45,6 @@
         <q-tab-panels
           v-model="tab"
           animated
-          swipeable
           vertical
           transition-prev="jump-up"
           transition-next="jump-up"
@@ -200,8 +200,8 @@ export default defineComponent({
     }
     &__btn{
       position: absolute;
-      top: 5px;
-      right: 20px;
+      top: 24px;
+      right: 24px;
       z-index: 1;
       color: white;
     }

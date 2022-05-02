@@ -1,5 +1,5 @@
 <template>
-  <q-card class="comment bg-transparent">
+  <q-card flat class="comment bg-transparent">
     <div class="flex">
       <div class="comment__img q-mr-md"/>
       <div class="flex column">
