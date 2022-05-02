@@ -56,7 +56,7 @@ export default defineComponent({
 
 <style lang="scss">
 .page-container {
-  height: 100vh;
+  // height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
@@ -71,7 +71,7 @@ export default defineComponent({
     grid-template-columns: minmax(0, 1fr);
   }
 }
-.scroll-container {
-  overflow-y: scroll;
-}
+// .scroll-container {
+//   overflow-y: scroll;
+// }
 </style>
