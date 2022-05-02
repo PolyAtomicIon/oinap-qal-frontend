@@ -1,11 +1,11 @@
 <template>
   <div class="flex q-mt-xl">
     <div class="q-pr-md flex items-center">
-      <img :src="require('../../../assets/images/'+img)" width="120">
+      <img :src="require('../../../assets/images/'+img)" width="100">
     </div>
     <div class="flex column justify-around">
-      <h6 class="info__title q-ma-none">{{title}}</h6>
-      <span class="info__about text-grey">Author:{{author}}</span>
+      <span class="info__title q-ma-none">{{title}}</span>
+      <span class="info__about text-grey">Author: {{author}}</span>
       <div>
         <q-rating
           :model-value="rating"
@@ -55,10 +55,11 @@ export default {
 <style lang="scss">
 .info{
   &__about{
-    font-size: 24px;
+    font-size: 16px;
   }
   &__title{
-    font-size: 32px;
+    font-size: 24px;
+    line-height: 32px;
   }
 }
 </style>

@@ -13,6 +13,7 @@
 
     <sdk-drawer
       :left-drawer-open="leftDrawerOpen"
+      @close="toggleLeftDrawer"
     ></sdk-drawer>
 
     <q-page-container class="sdk__page-container">

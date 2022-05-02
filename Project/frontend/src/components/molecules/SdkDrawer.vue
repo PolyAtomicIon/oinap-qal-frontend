@@ -4,9 +4,17 @@
     side="left"
     overlay
     elevated
-    class="bg-dark flex column justify-center "
+    class="bg-dark relative-position flex column justify-center "
     :width="responsiveWidth"
   >
+    <q-btn
+      dense
+      flat
+      round
+      icon="close"
+      @click="this.$emit('close')"
+      class="sdk__btn bg-secondary"
+    />
     <q-splitter
       :model-value="64"
       unit="px"
@@ -32,6 +40,7 @@
       </template>
 
       <template v-slot:after>
+
         <q-tab-panels
           v-model="tab"
           animated
@@ -43,6 +52,7 @@
           dark
           style="height: 100%"
         >
+
           <q-tab-panel name="info">
             <info
               :title="gameAbout.title"
@@ -59,17 +69,14 @@
             />
           </q-tab-panel>
 
-          <q-tab-panel name="rating">
-            <div class="text-h4 q-mb-md">Movies</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          <q-tab-panel class="q-pa-none" name="rating">
+            <leaders
+              :leaders="gameAbout.leaders"
+            />
           </q-tab-panel>
+
           <q-tab-panel name="share">
-            <div class="text-h4 q-mb-md">Movies</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <share/>
           </q-tab-panel>
         </q-tab-panels>
       </template>
@@ -84,6 +91,8 @@ import { defineComponent, ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import Info from '../atoms/sdk-drawer/SdkDrawerInfo.vue'
 import Feedback from '../atoms/sdk-drawer/SdkDrawerFeedback.vue'
+import Leaders from '../atoms/sdk-drawer/SdkDrawerLeaderboard.vue'
+import Share from '../atoms/sdk-drawer/SdkDrawerShare.vue'
 
 const defGameInfo= {
   img:'image43.png',
@@ -120,6 +129,28 @@ const defGameInfo= {
       comment:'We have a problem\n' +
         ':D'
     },
+  ],
+  leaders:[
+    {
+      name:'Ellen Humburg',
+      score:14444,
+    },
+    {
+      name:'Alice Smit',
+      score:10203,
+    },
+    {
+      name:'Jack Maslow',
+      score:9001,
+    },
+    {
+      name:'Tom Holland',
+      score:5505,
+    },
+    {
+      name:'Robert Downey Jr',
+      score:4765,
+    },
   ]
 }
 
@@ -127,7 +158,9 @@ export default defineComponent({
   name: 'SdkDrawer',
   components: {
     Info,
-    Feedback
+    Feedback,
+    Leaders,
+    Share
   },
   props: {
     leftDrawerOpen: {
@@ -165,6 +198,12 @@ export default defineComponent({
       background: $dark;
       width: 64px;
     }
-
+    &__btn{
+      position: absolute;
+      top: 5px;
+      right: 20px;
+      z-index: 1;
+      color: white;
+    }
   }
 </style>
