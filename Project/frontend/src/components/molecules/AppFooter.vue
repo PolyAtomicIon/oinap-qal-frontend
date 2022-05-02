@@ -52,8 +52,8 @@ export default defineComponent({
 @media only screen and (max-width: 725px) {
   .footer {
     &__container {
-      padding: 15px 0;
-      text-align: center;
+      padding: 15px;
+      text-align: left;
     }
     &__title {
       width: 100%;
@@ -63,7 +63,7 @@ export default defineComponent({
       flex-direction: column;
     }
     &__links a {
-      padding: 15px 0;
+      padding: 5px 0;
     }
   }
 }
