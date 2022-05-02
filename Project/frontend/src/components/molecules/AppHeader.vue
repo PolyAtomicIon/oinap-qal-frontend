@@ -2,7 +2,6 @@
   <q-header
     v-if="!$q.fullscreen.isActive"
     class="bg-dark"
-    reveal
   >
     <q-toolbar class="header">
       <div

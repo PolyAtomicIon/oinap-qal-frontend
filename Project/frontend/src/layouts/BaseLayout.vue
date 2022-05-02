@@ -12,7 +12,7 @@
       </slot>
 
       <q-page
-        class="bg-dark-light scroll-container"
+        class="bg-dark-light main-content"
       >
         <Suspense>
           <slot name="router-view">
@@ -64,14 +64,17 @@ export default defineComponent({
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  grid-template-areas: "drawer main-content";
   @media screen and (max-width: 1280px) {
     margin: 0;
   }
   @media screen and (max-width: $breakpoint-sm) {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "main-content";
   }
 }
-// .scroll-container {
-//   overflow-y: scroll;
-// }
+.main-content {
+  grid-area: main-content;
+  height: max-content;
+}
 </style>

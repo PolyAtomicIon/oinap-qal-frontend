@@ -107,6 +107,10 @@ export default defineComponent({
 .drawer {
   background: $dark;
 
+  position: fixed;
+  top: 72px;
+  grid-area: nav;
+
   @media screen and (max-width: $breakpoint-sm) {
     display: none;
   }

@@ -1,10 +1,8 @@
 <template>
-  <q-page class="flex column justify-between">
-    <div class="q-pa-md">
-      <my-banner></my-banner>
-      <router-view></router-view>
-    </div>
-  </q-page>
+  <div class="q-pa-md full-height">
+    <my-banner></my-banner>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,4 +20,5 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
