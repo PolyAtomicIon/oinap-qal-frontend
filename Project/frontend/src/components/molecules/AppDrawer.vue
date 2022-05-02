@@ -111,7 +111,7 @@ export default defineComponent({
   top: 72px;
   grid-area: nav;
 
-  @media screen and (max-width: $breakpoint-sm) {
+  @media screen and (max-width: $breakpoint-md) {
     display: none;
   }
 }

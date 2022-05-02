@@ -68,7 +68,7 @@ export default defineComponent({
   @media screen and (max-width: 1280px) {
     margin: 0;
   }
-  @media screen and (max-width: $breakpoint-sm) {
+  @media screen and (max-width: $breakpoint-md) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "main-content";
   }

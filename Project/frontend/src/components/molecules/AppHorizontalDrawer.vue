@@ -41,10 +41,6 @@ export default defineComponent({
     }
   },
   setup() {
-    const iconLocation = (iconName: string) => {
-      return `~assets/icons/genres/${iconName}.svg`;
-    };
-
     const $router = useRouter()
     const $route = useRoute()
     const navigateTo = (path: string) => {
@@ -55,7 +51,6 @@ export default defineComponent({
     }
 
     return {
-      iconLocation,
       navigateTo,
       isRouteActive,
     };
@@ -67,10 +62,13 @@ export default defineComponent({
 .category {
   min-width: 100%;
   height: 72px;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
   overflow-x: scroll;
+  @media screen and (max-width: $breakpoint-md) {
+    display: flex;
+  }
   &__item {
     height: 42px;
     min-width: 128px;
