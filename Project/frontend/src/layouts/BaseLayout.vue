@@ -12,7 +12,7 @@
       </slot>
 
       <q-page
-        class="bg-dark-light"
+        class="bg-dark-light scroll-container"
       >
         <Suspense>
           <slot name="router-view">
@@ -56,6 +56,7 @@ export default defineComponent({
 
 <style lang="scss">
 .page-container {
+  height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
@@ -69,5 +70,8 @@ export default defineComponent({
   @media screen and (max-width: $breakpoint-sm) {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+.scroll-container {
+  overflow-y: scroll;
 }
 </style>
