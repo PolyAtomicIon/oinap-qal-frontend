@@ -1,15 +1,13 @@
 <template>
-  <q-card
-    class="iframe__container"
-  >
+  <q-card class="iframe__container">
     <iframe
-      src="http://127.0.0.1:5500/Project/frontend/games-gh-pages/games-gh-pages/bounce/index.html"
+      src="https://biz-oinaimyz.herokuapp.com/index.html"
       frameborder="0"
       width="100%"
       height="100%"
       ref="iframe"
       class="iframe"
-      @load="showAd"
+      @load="onIframeLoaded"
     >
     </iframe>
     <!-- controller -->
@@ -35,27 +33,38 @@
 
     </q-card> -->
     <!-- ad window -->
-    <q-card v-show="adActive" class="q-pa-lg ad-container" ref="ad-container" square bordered>
+    <q-card
+      v-show="adActive"
+      class="q-pa-lg ad-container"
+      ref="ad-container"
+      square
+      bordered
+    >
       <span>There will be Ad</span>
-      <q-btn @click="closeAd" color="black" round icon="close" class="q-ml-lg"></q-btn>
+      <q-btn
+        @click="closeAd"
+        color="black"
+        round
+        icon="close"
+        class="q-ml-lg"
+      ></q-btn>
     </q-card>
   </q-card>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref} from 'vue';
-import fixProblemWithViewHeight from '../../services/utils'
+import { defineComponent, onMounted, ref } from 'vue';
+import fixProblemWithViewHeight from '../../services/utils';
 // import QCard from 'quasar'
 
 export default defineComponent({
-  name: 'DemoSdk',
+  name: 'SDKGameContainer',
   setup() {
-
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
 
-    const adActive = ref(false);
+    const adActive = ref(true);
     const showAd = () => {
       adActive.value = true;
     };
@@ -65,33 +74,37 @@ export default defineComponent({
 
     interface gameMessageInterface {
       data: {
-        name: string
-        finalScore: number
-      }
+        name: string;
+        finalScore: number;
+      };
     }
 
     // catch messages from iframe
     window.onmessage = (e: gameMessageInterface) => {
       // @ts-ignore
-      if( e.data.name === 'gameFinished' ){
-      // @ts-ignore
-        score.value = e.data.finalScore
+      if (e.data.name === 'gameFinished') {
+        // @ts-ignore
+        score.value = e.data.finalScore;
       }
-      if( e.data.name === 'showAd' ){
-      // @ts-ignore
-      showAd();
+      if (e.data.name === 'showAd') {
+        // @ts-ignore
+        showAd();
       }
     };
 
     const pauseGame = () => {
       // console.log(iframe.value)
       iframe.value?.contentWindow?.postMessage('pause', '*');
-    }
+    };
 
     const restartGame = () => {
       // console.log(iframe.value)
       iframe.value?.contentWindow?.postMessage('restart', '*');
-    }
+    };
+
+    const onIframeLoaded = () => {
+      console.log('Game Loaded');
+    };
 
     onMounted(fixProblemWithViewHeight);
 
@@ -104,8 +117,9 @@ export default defineComponent({
       adActive,
       showAd,
       closeAd,
-    }
-  }
+      onIframeLoaded,
+    };
+  },
 });
 </script>
 
@@ -116,9 +130,9 @@ $inner-container-height: 96px;
   width: 100%;
   &__container {
     position: relative;
-    background: $secondary;
     width: 100%;
     height: calc(100vh - 138px);
+    background: $secondary;
     @media screen and (max-width: $breakpoint-sm) {
       height: calc(var(--vh, 1vh) * 100 - 50px);
     }
@@ -139,7 +153,12 @@ $inner-container-height: 96px;
   position: absolute;
   top: 0;
   left: 0;
-  background: $dark-grey;
+  background: linear-gradient(
+    120deg,
+    #8451d9 0%,
+    #6000ff 72.09%,
+    #4000ab 100%
+  );
   color: white;
   font-size: 24px;
   font-weight: bold;
