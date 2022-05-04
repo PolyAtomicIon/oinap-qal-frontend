@@ -23,7 +23,7 @@
     >
 
       <template v-slot:before>
-        <div class="absolute-center">
+        <div class="absolute-top">
           <q-tabs
             v-model="tab"
             indicator-color="transparent"
