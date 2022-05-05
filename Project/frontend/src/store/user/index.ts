@@ -1,20 +1,23 @@
 import { defineStore } from 'pinia';
 
 export type RootState = {
-  email: string
+  loggedIn: boolean;
+  email: string;
 };
 
 export const useUserStore = defineStore('user', {
   state: () =>
     ({
-      email: 'user@gmail.com'
+      loggedIn: false,
+      email: 'user@gmail.com',
     } as RootState),
   getters: {
     getEmail: (state) => state.email,
+    getFullName: (): string => 'John Jiop',
   },
   actions: {
     setEmail(otherEmail: string) {
-      console.log(otherEmail)
+      console.log(otherEmail);
       this.email = otherEmail;
     },
   },
