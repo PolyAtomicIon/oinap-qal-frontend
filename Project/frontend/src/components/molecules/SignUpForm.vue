@@ -63,7 +63,7 @@
           bg-color="grey-9"
           class="q-mt-sm"
           type="password"
-          v-model="form.repeatPassword"
+          v-model="form.password2"
         >
         </q-input>
       </div>
@@ -74,7 +74,7 @@
 
         <div class="q-gutter-xs q-mt-md">
           <q-chip
-            v-for="(value, name) in form.tags"
+            v-for="(value, name) in form.categories"
             :key="name"
             :color="value ? 'primary' : 'grey'"
             :outline="!value"
@@ -95,11 +95,7 @@
 
       <!-- rules -->
       <div class="auth__form__field">
-        <q-checkbox
-          v-model="isRulesAccepted"
-          dark
-          color="gray"
-        />
+        <q-checkbox v-model="form.is_accepted" dark color="gray" />
         <span>
           I accept all
           <q-btn
@@ -139,15 +135,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { ISignUp } from '../../entities/Auth.interfaces';
 import { IGameTag } from '../../entities/Game.interfaces';
+import { useUserStore } from '../../store/user';
+import { useModalsStore } from '../../store/modals';
 
 export default defineComponent({
   name: 'SignInForm',
   props: {},
   setup() {
-    const tags: IGameTag = reactive({
+    const categories: IGameTag = reactive({
       game: true,
       space: false,
       multiplayer: false,
@@ -159,21 +157,25 @@ export default defineComponent({
       username: '',
       email: '',
       password: '',
-      repeatPassword: '',
-      tags: tags,
+      password2: '',
+      role: 'USER',
+      categories: categories,
+      is_accepted: false,
     });
 
-    const isRulesAccepted = ref(false);
+    const user = useUserStore();
+    const modals = useModalsStore();
 
     const onSubmit = () => {
       console.log(form);
+      void user.signIn(form);
+      modals.setShowSignUpModal(false);
     };
 
     return {
       onSubmit,
-      tags,
+      categories,
       form,
-      isRulesAccepted,
     };
   },
 });

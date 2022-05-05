@@ -1,8 +1,6 @@
 <template>
   <q-carousel
     v-model="slide"
-    transition-prev="scale"
-    transition-next="scale"
     animated
     control-color="white"
     arrows
@@ -10,12 +8,64 @@
   >
     <q-carousel-slide name="map" class="banner row flex justify-between">
       <div class="banner__about">
+        <span class="banner__title block text-white"> Game2 </span>
+        <span class="banner__description block">
+          Invite your friends and play together Phaser!
+        </span>
+        <div>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
+        </div>
+      </div>
+      <div class="banner__img">
+        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide name="f" class="banner row flex justify-between">
+      <div class="banner__about">
+        <span class="banner__title block text-white"> Phasefdr </span>
+        <span class="banner__description block">
+          Invite your friends and play together Phaser!
+        </span>
+        <div>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
+        </div>
+      </div>
+      <div class="banner__img">
+        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide name="e" class="banner row flex justify-between">
+      <div class="banner__about">
         <span class="banner__title block text-white"> Phaser </span>
         <span class="banner__description block">
           Invite your friends and play together Phaser!
         </span>
         <div>
-          <q-btn no-caps unelevated text-color="primary" color="white" label="Play now"> </q-btn>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
         </div>
       </div>
       <div class="banner__img">

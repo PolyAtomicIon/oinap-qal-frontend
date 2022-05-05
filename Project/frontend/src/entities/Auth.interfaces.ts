@@ -1,14 +1,16 @@
-import { IGameTag } from './Game.interfaces'
+import { IGameTag } from './Game.interfaces';
 
 export interface ISignIn {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 export interface ISignUp {
-  username: string
-  email: string
-  password: string
-  repeatPassword: string
-  tags: IGameTag
+  username: string;
+  email: string;
+  password: string;
+  password2: string;
+  role: string;
+  categories: IGameTag;
+  is_accepted: boolean;
 }

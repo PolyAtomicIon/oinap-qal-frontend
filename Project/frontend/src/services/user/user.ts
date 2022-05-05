@@ -5,10 +5,10 @@ import { api as ApiService } from 'src/boot/axios';
 
 export class UsersService implements IUsersService {
   async signIn(payload: ISignIn): Promise<AxiosResponse> {
-    return await ApiService.post('/signin', payload);
+    return await ApiService.post('/users/login_view/', payload);
   }
 
   async signUp(payload: ISignUp): Promise<AxiosResponse> {
-    return await ApiService.post('/signup', payload);
+    return await ApiService.post('/users/register_view/', payload);
   }
 }

@@ -47,7 +47,7 @@
         />
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
-      <div class="header__auth" v-if="loggedIn">
+      <div class="header__auth" v-if="!user.loggedIn">
         <q-btn
           color="primary"
           :size="$q.platform.is.mobile ? 'sm' : 'md'"

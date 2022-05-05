@@ -1,6 +1,5 @@
 <template>
   <q-card-section class="auth__form">
-
     <h1 class="text-h1 text-center text-white q-mb-lg">Sign In</h1>
 
     <q-form @submit="onSubmit" class="q-mt-lg q-gutter-md">
@@ -73,19 +72,24 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import { ISignIn } from '../../entities/Auth.interfaces';
+import { useUserStore } from '../../store/user';
+import { useModalsStore } from '../../store/modals';
 
 export default defineComponent({
   name: 'SignInForm',
-  props: {
-  },
+  props: {},
   setup() {
     const form: ISignIn = reactive({
       username: '',
-      password: ''
+      password: '',
     });
 
+    const user = useUserStore();
+    const modals = useModalsStore();
     const onSubmit = () => {
-      console.log(form)
+      console.log(form);
+      void user.signIn(form);
+      modals.setShowSignInModal(false);
     };
 
     return {
