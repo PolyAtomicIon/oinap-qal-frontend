@@ -94,3 +94,46 @@ body {
     background-position: 0% 71%;
   }
 }
+
+.loader {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important;
+  background: linear-gradient(45deg, transparent, transparent 40%, #6000ff);
+  animation: gradientLoader 2s linear infinite;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: $dark;
+    border-radius: 50% !important;
+    z-index: 1000;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: linear-gradient(45deg, transparent, transparent 40%, #6000ff);
+    border-radius: 50% !important;
+    z-index: 1;
+    filter: blur(30px);
+  }
+}
+@keyframes gradientLoader {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(20deg);
+  }
+}

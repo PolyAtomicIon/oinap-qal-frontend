@@ -3,8 +3,8 @@
     v-model="slide"
     animated
     control-color="white"
-    transition-prev="slide-left"
-    transition-next="slide-right"
+    transition-prev="jump-right"
+    transition-next="jump-left"
     arrows
     class="carousels q-mt-md"
   >

@@ -33,6 +33,19 @@
 
     </q-card> -->
     <!-- ad window -->
+    <transition name="fade">
+      <q-card v-if="!isGameLoaded" class="loader-container" square>
+        <div>
+          <div class="loader"></div>
+          <img
+            class="absolute-center"
+            :src="require('../../assets/logo/logo.svg')"
+            height="42"
+            alt=""
+          />
+        </div>
+      </q-card>
+    </transition>
     <q-card
       v-show="adActive"
       class="q-pa-lg ad-container"
@@ -64,6 +77,7 @@ export default defineComponent({
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
     const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html');
+    const isGameLoaded = ref(false);
 
     const adActive = ref(true);
     const showAd = () => {
@@ -104,6 +118,7 @@ export default defineComponent({
     };
 
     const onIframeLoaded = () => {
+      isGameLoaded.value = true;
       console.log('Game Loaded');
     };
 
@@ -124,6 +139,7 @@ export default defineComponent({
       closeAd,
       onIframeLoaded,
       gameUrl,
+      isGameLoaded,
     };
   },
 });
@@ -166,5 +182,30 @@ $inner-container-height: 96px;
   font-weight: bold;
 
   @include dynamic-gradient-background;
+}
+
+.loader-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: $dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
 }
 </style>

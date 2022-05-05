@@ -1,9 +1,9 @@
 <template>
-  <div class="flex q-mt-xl">
+  <div class="flex q-mt-xl q-gutter-y-sm">
     <div class="q-pr-md flex items-center">
       <img :src="require('../../../assets/images/' + img)" width="100" />
     </div>
-    <div class="flex column justify-around">
+    <div class="flex column justify-around q-gutter-y-xs">
       <span class="info__title q-ma-none">{{ title }}</span>
       <span class="info__about text-grey">Author: {{ author }}</span>
       <div>
