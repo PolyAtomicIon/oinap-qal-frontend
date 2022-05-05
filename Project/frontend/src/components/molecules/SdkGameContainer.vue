@@ -1,7 +1,7 @@
 <template>
   <q-card class="iframe__container">
     <iframe
-      src="https://biz-oinaimyz.herokuapp.com/index.html"
+      :src="gameUrl"
       frameborder="0"
       width="100%"
       height="100%"
@@ -63,6 +63,7 @@ export default defineComponent({
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
+    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html')
 
     const adActive = ref(true);
     const showAd = () => {
@@ -106,7 +107,13 @@ export default defineComponent({
       console.log('Game Loaded');
     };
 
-    onMounted(fixProblemWithViewHeight);
+    onMounted(
+      () => {
+        const queryParams = location.hash?.split('#')?.[1]?.split('?')?.[1];
+        gameUrl.value += '?' + queryParams;
+        fixProblemWithViewHeight();
+      }
+    );
 
     return {
       iframe,
@@ -118,6 +125,7 @@ export default defineComponent({
       showAd,
       closeAd,
       onIframeLoaded,
+      gameUrl,
     };
   },
 });
