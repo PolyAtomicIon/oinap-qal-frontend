@@ -3,6 +3,8 @@
     v-model="slide"
     animated
     control-color="white"
+    transition-prev="slide-left"
+    transition-next="slide-right"
     arrows
     class="carousels q-mt-md"
   >
@@ -92,12 +94,7 @@ export default {
 
 <style lang="scss" scoped>
 .carousels {
-  background: linear-gradient(
-    85.28deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+  background: transparent;
   border-radius: 24px;
   height: 300px;
 
@@ -106,12 +103,8 @@ export default {
   }
 }
 .banner {
-  background: linear-gradient(
-    85.28deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+  @include dynamic-gradient-background;
+
   border-radius: 24px;
   padding: 40px 80px;
 

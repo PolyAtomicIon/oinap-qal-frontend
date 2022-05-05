@@ -63,7 +63,7 @@ export default defineComponent({
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
-    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html')
+    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html');
 
     const adActive = ref(true);
     const showAd = () => {
@@ -107,13 +107,11 @@ export default defineComponent({
       console.log('Game Loaded');
     };
 
-    onMounted(
-      () => {
-        const queryParams = location.hash?.split('#')?.[1]?.split('?')?.[1];
-        gameUrl.value += '?' + queryParams;
-        fixProblemWithViewHeight();
-      }
-    );
+    onMounted(() => {
+      const queryParams = location.hash?.split('#')?.[1]?.split('?')?.[1];
+      gameUrl.value += '?' + queryParams;
+      fixProblemWithViewHeight();
+    });
 
     return {
       iframe,
@@ -133,6 +131,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 $inner-container-height: 96px;
+
 .iframe {
   height: 100%;
   width: 100%;
@@ -161,14 +160,11 @@ $inner-container-height: 96px;
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(
-    120deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+
   color: white;
   font-size: 24px;
   font-weight: bold;
+
+  @include dynamic-gradient-background;
 }
 </style>

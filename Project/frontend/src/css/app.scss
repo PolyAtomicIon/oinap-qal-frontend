@@ -60,3 +60,37 @@ body {
 .extra-rounded-borders {
   border-radius: 20px !important;
 }
+
+@-webkit-keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
+@-moz-keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
+@keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
