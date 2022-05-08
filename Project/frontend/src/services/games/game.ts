@@ -1,23 +1,23 @@
 import {
   IGame,
-  IGameData,
+  IGameDTO,
 } from 'src/entities'
 import { IGamesService } from './game.types'
 import { AxiosResponse } from 'axios'
 import { api as ApiService } from 'src/boot/axios'
 
 export class GamesService implements IGamesService {
-  data: IGameData[] = [];
+  data: IGameDTO[] = [];
 
   constructor () {
     this.data = []
   }
 
-  async getAll (): Promise<AxiosResponse<IGameData[]>> {
+  async getAll (): Promise<AxiosResponse<IGameDTO>> {
     return await ApiService.get('/games');
   }
 
-  async getAllByCategoryId (id: number): Promise<AxiosResponse<IGameData[]>> {
+  async getAllByCategoryId (id: number): Promise<AxiosResponse<IGameDTO>> {
     return await ApiService.get(`/games/?category=${id}`);
   }
 

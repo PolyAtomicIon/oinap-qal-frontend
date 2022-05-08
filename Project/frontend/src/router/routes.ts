@@ -24,7 +24,7 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/games/:id',
+    path: '/games/:game_id',
     component: () => import('pages/Games/_slug.vue'),
   },
   {

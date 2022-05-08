@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mobile-only category"
+    class="category"
   >
     <a
       v-for="(link, index) in linksList"
@@ -68,6 +68,7 @@ export default defineComponent({
   overflow-x: scroll;
   @media screen and (max-width: $breakpoint-md) {
     display: flex;
+    
   }
   &__item {
     height: 42px;

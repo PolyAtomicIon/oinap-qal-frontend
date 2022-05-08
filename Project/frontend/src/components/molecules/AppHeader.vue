@@ -1,7 +1,7 @@
 <template>
   <q-header v-if="!$q.fullscreen.isActive" class="bg-dark">
     <q-toolbar class="header">
-      <div class="header__logo" @click="$router.push('/home')">
+      <div class="header__logo" @click="$router.push('/')">
         <img
           class="header__logo__figure"
           :src="require('../../assets/logo/logo.svg')"
@@ -26,7 +26,7 @@
         input-class="header__search-field__input"
       >
         <template v-slot:append>
-          <q-icon v-if="!searchFragment" name="search" />
+          <q-icon v-if="!searchFragment" name="search" color="grey"/>
           <q-icon
             v-else
             name="clear"

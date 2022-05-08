@@ -70,6 +70,7 @@ export default defineComponent({
   .sdk {
     position: relative;
     &__highscore-container {
+      display: none;
       padding: 20px 0;
       background: $secondary;
       text-align: center;

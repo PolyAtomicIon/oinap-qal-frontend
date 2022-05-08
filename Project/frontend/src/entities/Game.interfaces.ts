@@ -10,3 +10,10 @@ export interface IGameForm {
   description: string;
   tags: IGameTag;
 }
+
+export interface IGameRouteQueries {
+  uid: string
+  iid: string
+  chatid: string
+  msgid: string
+}

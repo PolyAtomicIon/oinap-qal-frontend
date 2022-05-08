@@ -10,28 +10,6 @@
       @load="onIframeLoaded"
     >
     </iframe>
-    <!-- controller -->
-    <!-- <q-card
-      class="q-pa-lg iframe__inner row justify-between"
-      ref="sdk"
-      square
-      bordered
-    >
-      <q-toolbar>
-        <q-btn-group>
-          <q-btn color="accent" icon="pause" @click="pauseGame" />
-          <q-btn color="accent" icon="refresh" @click="restartGame" />
-        </q-btn-group>
-        <q-btn
-          color="secondary"
-          @click="$q.fullscreen.toggle()"
-          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-          :label="$q.fullscreen.isActive ? 'Exit Fullscreen' : 'Go Fullscreen'"
-        />
-      </q-toolbar>
-      <div class=""></div>
-
-    </q-card> -->
     <!-- ad window -->
     <transition name="fade">
       <q-card v-if="!isGameLoaded" class="loader-container" square>
@@ -56,8 +34,9 @@
       <span>There will be Ad</span>
       <q-btn
         @click="closeAd"
-        color="black"
+        color="white"
         round
+        flat
         icon="close"
         class="q-ml-lg"
       ></q-btn>
@@ -67,16 +46,20 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router'
+import { GameMessageInterface, IGameRouteQueries } from '../../entities';
+import { provider } from '../../services';
 import fixProblemWithViewHeight from '../../services/utils';
 // import QCard from 'quasar'
 
 export default defineComponent({
   name: 'SDKGameContainer',
   setup() {
+    const $route = useRoute();
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
-    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html');
+    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/games/');
     const isGameLoaded = ref(false);
 
     const adActive = ref(true);
@@ -86,20 +69,26 @@ export default defineComponent({
     const closeAd = () => {
       adActive.value = false;
     };
+    const onGameFinished = async (finalScore: number) => {
+      score.value = finalScore;
 
-    interface gameMessageInterface {
-      data: {
-        name: string;
-        finalScore: number;
-      };
+      // @ts-ignore
+      const { uid, iid, chatid, msgid }: IGameRouteQueries = $route.path;
+
+      if (uid && msgid && chatid) {
+        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/chat/${chatid}/msg/${msgid}/score/${score.value}`)
+      }
+      else if (uid && iid) {
+        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/iid/${iid}/score/${score.value}`)
+      }
     }
 
     // catch messages from iframe
-    window.onmessage = (e: gameMessageInterface) => {
+    window.onmessage = async (e: GameMessageInterface) => {
       // @ts-ignore
       if (e.data.name === 'gameFinished') {
         // @ts-ignore
-        score.value = e.data.finalScore;
+        await onGameFinished(+e.data.finalScore);
       }
       if (e.data.name === 'showAd') {
         // @ts-ignore
@@ -123,8 +112,9 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      const queryParams = location.hash?.split('#')?.[1]?.split('?')?.[1];
-      gameUrl.value += '?' + queryParams;
+      const gameFileId = $route.params.game_id;
+      gameUrl.value += gameFileId.toString() + '/index.html';
+
       fixProblemWithViewHeight();
     });
 
@@ -154,7 +144,8 @@ $inner-container-height: 96px;
   &__container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 138px);
+    // height: calc(100vh - 138px);
+    height: calc(var(--vh, 1vh) * 100 - 74px);
     background: $secondary;
     @media screen and (max-width: $breakpoint-sm) {
       height: calc(var(--vh, 1vh) * 100 - 50px);
