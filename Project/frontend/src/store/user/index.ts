@@ -22,29 +22,33 @@ export const useUserStore = defineStore('user', {
       console.log(otherEmail);
       this.email = otherEmail;
     },
-    signIn(payload: ISignIn) {
-      this.loggedIn = true;
-      return;
-      provider()
-        .User.signIn(payload)
-        .then(() => {
-          this.loggedIn = true;
-        })
-        .catch((error) => {
-          console.log('Error signing in', error);
-        });
+    signIn(payload: ISignIn): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        provider()
+          .User.signIn(payload)
+          .then(() => {
+            this.loggedIn = true;
+            resolve(true);
+          })
+          .catch((error) => {
+            console.log('Error signing in', error);
+            reject();
+          });
+      });
     },
-    signUp(payload: ISignUp) {
-      this.loggedIn = true;
-      return;
-      provider()
-        .User.signUp(payload)
-        .then(() => {
-          this.loggedIn = true;
-        })
-        .catch((error) => {
-          console.log('Error signing up', error);
-        });
+    signUp(payload: ISignUp): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        provider()
+          .User.signUp(payload)
+          .then(() => {
+            this.loggedIn = true;
+            resolve(true);
+          })
+          .catch((error) => {
+            console.log('Error signing up', error);
+            reject();
+          });
+      });
     },
   },
 });

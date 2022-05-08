@@ -15,6 +15,8 @@
           bg-color="grey-9"
           class="q-mt-sm"
           v-model="form.username"
+          error-message="Please use maximum 3 characters"
+          :error="onError"
         >
         </q-input>
       </div>
@@ -32,6 +34,8 @@
           class="q-mt-sm"
           type="password"
           v-model="form.password"
+          error-message="Password "
+          :error="onError"
         >
         </q-input>
       </div>
@@ -70,7 +74,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { ISignIn } from '../../entities/Auth.interfaces';
 import { useUserStore } from '../../store/user';
 import { useModalsStore } from '../../store/modals';
@@ -79,6 +83,7 @@ export default defineComponent({
   name: 'SignInForm',
   props: {},
   setup() {
+    const onError = ref(false);
     const form: ISignIn = reactive({
       username: '',
       password: '',
@@ -87,14 +92,20 @@ export default defineComponent({
     const user = useUserStore();
     const modals = useModalsStore();
     const onSubmit = () => {
-      console.log(form);
-      void user.signIn(form);
-      modals.setShowSignInModal(false);
+      void user
+        .signIn(form)
+        .then(() => {
+          modals.setShowSignInModal(false);
+        })
+        .catch(() => {
+          onError.value = true;
+        });
     };
 
     return {
       onSubmit,
       form,
+      onError,
     };
   },
 });

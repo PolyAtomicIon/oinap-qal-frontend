@@ -84,7 +84,7 @@
             clickable
             @click="
               () => {
-                form.tags[name] = !form.tags[name];
+                form.categories[name] = !form.categories[name];
               }
             "
           >
@@ -167,9 +167,9 @@ export default defineComponent({
     const modals = useModalsStore();
 
     const onSubmit = () => {
-      console.log(form);
-      void user.signIn(form);
-      modals.setShowSignUpModal(false);
+      void user.signUp(form).then(() => {
+        modals.setShowSignUpModal(false);
+      });
     };
 
     return {
