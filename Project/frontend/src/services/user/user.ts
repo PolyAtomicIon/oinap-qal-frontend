@@ -7,12 +7,16 @@ export class UsersService implements IUsersService {
   async signIn(payload: ISignIn): Promise<AxiosResponse> {
     return await ApiService.post('/users/login_view/', payload, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
       },
     });
   }
 
   async signUp(payload: ISignUp): Promise<AxiosResponse> {
-    return await ApiService.post('/users/register_view/', payload);
+    return await ApiService.post('/users/register_view/', payload, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
   }
 }
