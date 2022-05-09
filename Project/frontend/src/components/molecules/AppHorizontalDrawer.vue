@@ -68,13 +68,15 @@ export default defineComponent({
   overflow-x: scroll;
   @media screen and (max-width: $breakpoint-md) {
     display: flex;
-    
+
   }
   &__item {
     height: 42px;
-    min-width: 128px;
     background: $dark-grey;
     text-align: center;
+    span {
+      white-space:nowrap;
+    }
     &:first-child {
       margin-left: 20px;
     }

@@ -20,12 +20,21 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.text-h1 {
-  font-size: 32px;
-  line-height: 32px;
-  font-style: normal;
-  font-weight: 500;
-  margin: 16px 0;
+.text {
+  &-h1 {
+    font-size: 32px;
+    line-height: 32px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+  &-h2 {
+    font-size: 22px;
+    line-height: 22px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 8px 0;
+  }
 }
 
 .auth__form,
