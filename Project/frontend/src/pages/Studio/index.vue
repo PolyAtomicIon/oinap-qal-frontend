@@ -56,6 +56,7 @@
               color="yellow-5"
               icon="star_border"
               icon-selected="star"
+              style="min-width: 80px;"
             ></q-rating>
             <span v-else>
               {{ col.value }}
