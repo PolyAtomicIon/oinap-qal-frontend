@@ -152,6 +152,10 @@ body {
   background: $dark-light;
   width: 10px;
   height: 10px;
+  @media screen and (max-width: $breakpoint-sm) {
+    width: 2px;
+    height: 2px;
+  }
 }
 
 /* Track */

@@ -19,6 +19,9 @@
           </slot>
         </Suspense>
 
+
+        <sign-in-dialog />
+        <sign-up-dialog />
         <slot name="modals">
         </slot>
 
@@ -33,10 +36,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import AppFooter from '../components/molecules/AppFooter.vue';
+import SignInDialog from '../components/templates/SignInDialog.vue';
+import SignUpDialog from '../components/templates/SignUpDialog.vue';
 export default defineComponent({
   name: 'BaseLayout',
   components: {
-    AppFooter
+    AppFooter,
+    SignInDialog,
+    SignUpDialog,
   },
   setup() {
     const leftDrawerOpen = ref(true)
