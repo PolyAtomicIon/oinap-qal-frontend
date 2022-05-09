@@ -61,13 +61,25 @@ export default defineComponent({
     const score = ref(0);
     const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/games/');
     const isGameLoaded = ref(false);
-
     const adActive = ref(true);
+
     const showAd = () => {
       adActive.value = true;
     };
     const closeAd = () => {
       adActive.value = false;
+    };
+    const pauseGame = () => {
+      // console.log(iframe.value)
+      iframe.value?.contentWindow?.postMessage('pause', '*');
+    };
+    const restartGame = () => {
+      // console.log(iframe.value)
+      iframe.value?.contentWindow?.postMessage('restart', '*');
+    };
+    const onIframeLoaded = () => {
+      isGameLoaded.value = true;
+      console.log('Game Loaded');
     };
     const onGameFinished = async (finalScore: number) => {
       score.value = finalScore;
@@ -83,6 +95,13 @@ export default defineComponent({
       }
     }
 
+    onMounted(() => {
+      const gameFileId = $route.params.game_id;
+      gameUrl.value += gameFileId.toString() + '/index.html';
+
+      fixProblemWithViewHeight();
+    });
+
     // catch messages from iframe
     window.onmessage = async (e: GameMessageInterface) => {
       // @ts-ignore
@@ -95,28 +114,6 @@ export default defineComponent({
         showAd();
       }
     };
-
-    const pauseGame = () => {
-      // console.log(iframe.value)
-      iframe.value?.contentWindow?.postMessage('pause', '*');
-    };
-
-    const restartGame = () => {
-      // console.log(iframe.value)
-      iframe.value?.contentWindow?.postMessage('restart', '*');
-    };
-
-    const onIframeLoaded = () => {
-      isGameLoaded.value = true;
-      console.log('Game Loaded');
-    };
-
-    onMounted(() => {
-      const gameFileId = $route.params.game_id;
-      gameUrl.value += gameFileId.toString() + '/index.html';
-
-      fixProblemWithViewHeight();
-    });
 
     return {
       iframe,
