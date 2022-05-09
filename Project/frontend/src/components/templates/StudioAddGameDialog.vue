@@ -1,10 +1,18 @@
 <template>
-  <q-dialog
-    :model-value="isDialogActive"
-  >
+  <q-dialog :model-value="isDialogActive">
     <q-card dark class="bg-dark-light upload-file-card">
       <q-card-section class="row items-center q-pb-none">
-        <div class="text-h6">Add game</div>
+        <div class="flex items-center">
+          <span class="text-h6">Add game</span>
+          <q-btn
+            class="q-ml-sm"
+            color="primary"
+            round
+            flat
+            to="/studio/guide"
+            icon="info"
+          />
+        </div>
         <q-space />
         <q-btn @click="closeDialog" icon="close" flat round dense />
       </q-card-section>
@@ -24,29 +32,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive } from 'vue';
 import { IGameTag, IGameForm } from '../../entities/Game.interfaces';
-import StudioUploadForm from '../molecules/StudioUploadForm.vue'
-import StudioAddGameForm from '../molecules/StudioAddGameForm.vue'
+import StudioUploadForm from '../molecules/StudioUploadForm.vue';
+import StudioAddGameForm from '../molecules/StudioAddGameForm.vue';
 
 export default defineComponent({
   name: 'StudioAddGameDialog',
   components: {
     StudioUploadForm,
-    StudioAddGameForm
+    StudioAddGameForm,
   },
   props: {
     isDialogActive: {
       type: Boolean,
-      default: false
+      default: false,
     },
     closeDialog: {
       type: Function,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup(props) {
-    const step = ref(1)
+    const step = ref(1);
 
     let form: IGameForm = reactive({
       fileName: 'string',
@@ -58,38 +66,32 @@ export default defineComponent({
     });
 
     const fileUploaded = (file: File[]) => {
-      if( file.length > 0 && !file[0] ){
-        return
+      if (file.length > 0 && !file[0]) {
+        return;
       }
-      form.file = file[0]
-      form.fileName = file[0].name
-      step.value = 2
-    }
+      form.file = file[0];
+      form.fileName = file[0].name;
+      step.value = 2;
+    };
 
-    const onSubmit = ({
-      name,
-      description,
-      cover,
-      tags
-    }: IGameForm) => {
-      form.name = name
-      form.description = description
-      form.cover = cover
-      form.tags = tags
+    const onSubmit = ({ name, description, cover, tags }: IGameForm) => {
+      form.name = name;
+      form.description = description;
+      form.cover = cover;
+      form.tags = tags;
 
-      step.value = 1
-      props.closeDialog()
-    }
+      step.value = 1;
+      props.closeDialog();
+    };
 
     return {
       step,
       form,
       fileUploaded,
-      onSubmit
-    }
+      onSubmit,
+    };
   },
-})
+});
 </script>
 
-<style lang="scss" scoped >
-</style>
+<style lang="scss" scoped></style>
