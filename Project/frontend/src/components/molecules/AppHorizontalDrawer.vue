@@ -66,9 +66,9 @@ export default defineComponent({
   align-items: center;
   gap: 10px;
   overflow-x: scroll;
+
   @media screen and (max-width: $breakpoint-md) {
     display: flex;
-
   }
   &__item {
     height: 42px;

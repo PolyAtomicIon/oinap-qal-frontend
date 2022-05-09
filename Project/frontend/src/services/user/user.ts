@@ -7,7 +7,7 @@ export class UsersService implements IUsersService {
   async signIn(payload: ISignIn): Promise<AxiosResponse> {
     return await ApiService.post('/users/login_view/', payload, {
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
       },
     });
   }
