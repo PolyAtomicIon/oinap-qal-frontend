@@ -1,28 +1,15 @@
 <template>
-  <q-dialog
-    :model-value="isDialogActive"
-  >
-    <q-card
-      dark
-      class="delete-dialog bg-dark-light q-pa-sm"
-    >
-      <q-card-section
-        class="row items-center q-pb-none"
-      >
-        <div class="text-h6">Delete {{gameTitle}}</div>
+  <q-dialog :model-value="isDialogActive">
+    <q-card dark class="delete-dialog bg-dark-light q-pa-sm">
+      <q-card-section class="row items-center q-pb-none">
+        <div class="text-h6">Delete {{ gameTitle }}</div>
         <q-space />
-        <q-btn
-          @click="closeDialog"
-          icon="close"
-          flat
-          round
-          dense
-        />
+        <q-btn @click="closeDialog" icon="close" flat round dense />
       </q-card-section>
-      <q-card-section
-        class="row items-center q-pb-none"
-      >
-        <p class="q-px-sm">Are you sure that you want to delete "{{gameTitle}}"?</p>
+      <q-card-section class="row items-center q-pb-none">
+        <p class="q-px-sm">
+          Are you sure that you want to delete "{{ gameTitle }}"?
+        </p>
       </q-card-section>
       <q-card-actions class="buttons">
         <q-btn
@@ -47,49 +34,55 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-
   props: {
     isDialogActive: {
       type: Boolean,
-      default: false
+      default: false,
     },
     closeDialog: {
       type: Function,
-      default: () => ({})
+      default: () => ({}),
     },
     gameTitle: {
       type: String,
-      default: ''
+      default: '',
     },
     deleteGame: {
       type: Function,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup() {
-
-    return {
-    }
+    return {};
   },
-})
+});
 </script>
 
 // override Quasar styles
-<style lang="scss" >
-  .delete-dialog {
-    width: 400px;
-    .buttons {
-      display: flex;
-      flex-direction: row;
-      gap: 16px;
-      .btn {
-        flex-grow: 1;
-        border-radius: 14px !important;
-        padding: 8px 64px !important;
+<style lang="scss">
+.delete-dialog {
+  width: 400px;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    @media screen and (max-width: $breakpoint-sm) {
+      flex-direction: column;
+    }
+
+    .btn {
+      margin: 0;
+      flex-grow: 1;
+      border-radius: 14px !important;
+      padding: 8px 64px !important;
+      @media screen and (max-width: $breakpoint-sm) {
+        width: 100%;
       }
     }
   }
+}
 </style>
