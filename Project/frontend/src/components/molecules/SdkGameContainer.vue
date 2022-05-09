@@ -73,7 +73,7 @@ export default defineComponent({
       score.value = finalScore;
 
       // @ts-ignore
-      const { uid, iid, chatid, msgid }: IGameRouteQueries = $route.path;
+      const { uid, iid, chatid, msgid }: IGameRouteQueries = $route.query;
 
       if (uid && msgid && chatid) {
         await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/chat/${chatid}/msg/${msgid}/score/${score.value}`)
