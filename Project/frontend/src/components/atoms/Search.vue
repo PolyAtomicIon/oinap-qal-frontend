@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input  class="search__input" type="search" Placeholder="search">
+    <input  class="search__input" type="search"  Placeholder="search">
     <q-icon class="search__icon" size="18px" color="grey-7" name="search" ></q-icon>
   </div>
 </template>

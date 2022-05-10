@@ -12,6 +12,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/Games/index.vue'),
       },
       {
+        name: 'search',
+        path: ':searchString',
+        component: () => import('components/templates/GamesBySearchString.vue')
+      },
+      {
         path: ':category',
         component: () => import('pages/Games/index.vue'),
         children: [
@@ -21,6 +26,7 @@ const routes: RouteRecordRaw[] = [
           },
         ]
       },
+
     ]
   },
   {

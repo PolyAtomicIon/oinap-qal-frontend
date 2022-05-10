@@ -19,17 +19,27 @@
           alt="logo-title"
         >
       </div>
+      <div>
       <q-input
         v-model="searchFragment"
         placeholder="Search"
-        dense
         rounded
         standout
+        filled
+        dense
         dark
-        class="fit header__search-field mobile-hide"
+        :class="[
+          'fit',
+          'header__search-field',
+          'mobile-hide',
+          isFocused && 'header__search-field_active'
+          ]"
         bg-color="grey-9"
         color="white"
         input-class="header__search-field__input"
+        @focus="focus"
+        @blur="unFocus"
+        @keyup.enter="navigateTo(searchFragment)"
       >
         <template v-slot:append>
           <q-icon v-if="!searchFragment" name="search" />
@@ -42,6 +52,85 @@
           />
         </template>
       </q-input>
+
+      <q-slide-transition duration="10">
+        <div class="bg-dark-grey header__search-transition" v-show="isFocused">
+          <p class="q-ma-none">Search by rating</p>
+          <div class="flex wrap">
+            <div class="header__search-rating-container">
+              <div class="header__search-rating">
+                <q-rating
+                  model-value=1
+                  size="1.2em"
+                  readonly
+                  color="yellow-5"
+                  icon="star_border"
+                  icon-selected="star"
+                ></q-rating>
+              </div >
+            </div>
+            <div class="header__search-rating-container">
+              <div class="header__search-rating">
+                <q-rating
+                  model-value=2
+                  size="1.2em"
+                  readonly
+                  color="yellow-5"
+                  icon="star_border"
+                  icon-selected="star"
+                ></q-rating>
+              </div>
+            </div>
+            <div class="header__search-rating-container">
+              <div class="header__search-rating">
+                <q-rating
+                  model-value=3
+                  size="1.2em"
+                  readonly
+                  color="yellow-5"
+                  icon="star_border"
+                  icon-selected="star"
+                ></q-rating>
+              </div>
+            </div>
+            <div class="header__search-rating-container">
+              <div class="header__search-rating">
+                <q-rating
+                  model-value=4
+                  size="1.2em"
+                  readonly
+                  color="yellow-5"
+                  icon="star_border"
+                  icon-selected="star"
+                ></q-rating>
+              </div>
+            </div>
+            <div class="header__search-rating-container">
+              <div class="header__search-rating">
+                <q-rating
+                  model-value=5
+                  size="1.2em"
+                  readonly
+                  color="yellow-5"
+                  icon="star_border"
+                  icon-selected="star"
+                ></q-rating>
+              </div>
+            </div>
+          </div>
+          <p class="q-ma-none">Search by rating</p>
+          <div class="flex wrap">
+            <div v-for="hash in hashList"
+                 :key="hash"
+                 class="header__search-rating-container">
+              <div class="header__search-hash">
+                <span>{{hash}}</span>
+              </div >
+            </div>
+          </div>
+        </div>
+      </q-slide-transition>
+      </div>
       <div
         class="mobile-only"
       >
@@ -86,6 +175,7 @@ import { useRouter, } from 'vue-router'
 import { useQuasar } from 'quasar'
 import { useModalsStore } from '../../store/modals';
 
+
 export default defineComponent({
   name: 'AppHeader',
   components: {
@@ -97,6 +187,7 @@ export default defineComponent({
     const modals = useModalsStore();
     const $router = useRouter()
     const $q = useQuasar()
+    const isFocused=ref(false)
     const onSignUp = () => {
       if( $q.platform.is.mobile ) {
         void $router.push('/mobile-modals/signup')
@@ -113,12 +204,27 @@ export default defineComponent({
         modals.setShowSignInModal(true)
       }
     }
-
+    const hashList=['#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel'];
+    const navigateTo = (path: string) => {
+      void $router.push({name:'search',params:{searchString:path}})
+      isFocused.value=false
+    }
+    const focus = () => {
+      isFocused.value=true
+    }
+    const unFocus = () => {
+      isFocused.value=false
+    }
 
     return {
       searchFragment,
       onSignUp,
       onSignIn,
+      navigateTo,
+      isFocused,
+      focus,
+      unFocus,
+      hashList
     }
   }
 });
@@ -134,6 +240,7 @@ export default defineComponent({
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     padding: 16px 24px;
+
 
     @media screen and (max-width: $breakpoint-lg) {
       max-width: 1280px;
@@ -174,6 +281,10 @@ export default defineComponent({
     &__search{
       &-field {
         max-width: 300px;
+        &_active{
+          max-width: 500px;
+          width: 100%;
+        }
 
         &__input {
           &:active, &:focus {
@@ -181,9 +292,36 @@ export default defineComponent({
           }
         }
       }
-      &-btn {
+      &-btn {}
+      &-transition{
+        padding: 10px;
+        position: fixed;
+        max-width: 500px;
+        width: 100%;
+        border-radius: 0 0 30px 30px;
+        @media screen and (max-width: $breakpoint-sm) {
+          display: none;
+        }
+      }
+      &-rating{
+        padding: 3px 6px;
+        margin: 6px;
+        border-radius: 16px;
+        border: 1px solid $gray;
+        cursor: pointer;
+      }
+      &-rating-container :hover{
+        background-color: $grey;
+      }
+      &-hash{
+        padding: 5px 7px;
+        margin: 6px;
+        border-radius: 16px;
+        border: 1px solid $gray;
+        cursor: pointer;
       }
     }
+
     &__auth {
       display: flex;
       align-items: center;
