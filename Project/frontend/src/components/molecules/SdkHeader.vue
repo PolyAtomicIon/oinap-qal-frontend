@@ -33,11 +33,11 @@
           color="primary"
           :size="$q.platform.mobile ? 'sm' : 'md'"
           class="text-white header__auth__btn"
-          @click="signIn"
+          @click="onSignIn"
           label="Sign in"
           no-caps
         />
-        <button class="c-btn c-btn--flat" @click="signUp">Sign up</button>
+        <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
       </div>
     </q-toolbar>
   </q-header>
@@ -45,6 +45,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
+import { useModalsStore } from '../../store/modals';
 
 export default defineComponent({
   name: 'SdkHeader',
@@ -54,18 +57,30 @@ export default defineComponent({
       type: Function,
       default: () => ({}),
     },
-    signIn: {
-      type: Function,
-      default: () => ({}),
-    },
-    signUp: {
-      type: Function,
-      default: () => ({}),
-    },
   },
   setup() {
     const leftDrawerOpen = ref(false);
+    const modals = useModalsStore();
+    const $q = useQuasar();
+    const $router = useRouter();
+    const onSignUp = () => {
+      if ($q.platform.is.mobile) {
+        void $router.push('/mobile-modals/signup');
+      } else {
+        modals.setShowSignUpModal(true);
+      }
+    };
+    const onSignIn = () => {
+      if ($q.platform.is.mobile) {
+        void $router.push('/mobile-modals/signin');
+      } else {
+        modals.setShowSignInModal(true);
+      }
+    };
+
     return {
+      onSignUp,
+      onSignIn,
       leftDrawerOpen,
     };
   },
