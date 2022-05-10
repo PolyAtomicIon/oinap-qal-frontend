@@ -217,6 +217,9 @@ export default defineComponent({
         &:hover {
           color: $white;
         }
+        &:active, &:focus {
+          color: $primary;
+        }
       }
     }
   }
