@@ -6,10 +6,11 @@
         <span>© 2022 </span>
         <span class="q-pl-xs"> Graduaders</span>
       </div>
-      <div class="footer__links flex justify-between q-pt-sm">
-        <a href="#">Пользовательское соглашение</a>
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Техническая поддержка</a>
+      <div class="footer__links flex q-gutter-x-md q-pt-sm">
+        <router-link to="/user/profile">Profile Page</router-link>
+        <router-link to="/user/settings">Settings Page</router-link>
+        <router-link to="/studio">Studio</router-link>
+        <router-link to="/studio/guide">Rules and Guide</router-link>
       </div>
     </div>
   </div>

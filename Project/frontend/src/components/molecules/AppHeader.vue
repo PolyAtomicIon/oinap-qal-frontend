@@ -47,7 +47,7 @@
         />
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
-      <div class="header__auth" v-if="!user.loggedIn">
+      <div class="header__auth q-mr-md" v-if="!user.loggedIn">
         <q-btn
           color="primary"
           :size="$q.platform.is.mobile ? 'sm' : 'md'"
@@ -130,6 +130,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     padding: 8px 24px;
+    padding-right: 0;
   }
 
   &__logo {
