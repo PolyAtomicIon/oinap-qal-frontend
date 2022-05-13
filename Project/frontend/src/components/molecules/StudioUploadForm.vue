@@ -60,15 +60,21 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.upload-file -card {
+.upload-file-card {
   max-width: 450px;
-  @media screen and (max-screen: $breakpoint-sm) {
+  @media screen and (max-width: $breakpoint-sm) {
     max-width: 300px;
   }
 }
 .upload-btn {
   border-radius: 14px !important;
   padding: 8px 64px !important;
+}
+.q-uploader {
+  @media screen and (max-width: $breakpoint-sm) {
+    width: 260px !important;
+    max-height: 400px !important;
+  }
 }
 // .q-uploader__header {
 //   &:before {

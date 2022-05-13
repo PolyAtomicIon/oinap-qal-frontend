@@ -2,6 +2,7 @@
   <app-header>
     <template v-slot:add-button>
       <q-btn
+        v-if="user.loggedIn"
         size="md"
         class="text-white desktop-only"
         color="primary"
@@ -11,6 +12,7 @@
         @click="addGame"
       />
       <q-btn
+        v-if="user.loggedIn"
         size="sm"
         class="text-white mobile-only"
         color="primary"
@@ -25,6 +27,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AppHeader from './AppHeader.vue'
+import { useUserStore } from '../../store/user';
 
 export default defineComponent({
   name: 'StudioHeader',
@@ -38,8 +41,10 @@ export default defineComponent({
     }
   },
   setup() {
+    const user = useUserStore();
 
     return {
+      user
     }
   }
 });

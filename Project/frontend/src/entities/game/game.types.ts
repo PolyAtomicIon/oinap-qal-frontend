@@ -16,3 +16,7 @@ export interface IGameData {
 export interface IGame extends IGameData {
   readonly comments: IComment[]
 }
+
+export interface IGameDTO {
+  data: IGame[]
+};

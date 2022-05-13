@@ -1,21 +1,73 @@
 <template>
   <q-carousel
     v-model="slide"
-    transition-prev="scale"
-    transition-next="scale"
     animated
     control-color="white"
+    transition-prev="jump-right"
+    transition-next="jump-left"
     arrows
     class="carousels q-mt-md"
   >
     <q-carousel-slide name="map" class="banner row flex justify-between">
+      <div class="banner__about">
+        <span class="banner__title block text-white"> Game2 </span>
+        <span class="banner__description block">
+          Invite your friends and play together Phaser!
+        </span>
+        <div>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
+        </div>
+      </div>
+      <div class="banner__img">
+        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide name="f" class="banner row flex justify-between">
+      <div class="banner__about">
+        <span class="banner__title block text-white"> Phasefdr </span>
+        <span class="banner__description block">
+          Invite your friends and play together Phaser!
+        </span>
+        <div>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
+        </div>
+      </div>
+      <div class="banner__img">
+        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide name="e" class="banner row flex justify-between">
       <div class="banner__about">
         <span class="banner__title block text-white"> Phaser </span>
         <span class="banner__description block">
           Invite your friends and play together Phaser!
         </span>
         <div>
-          <q-btn no-caps unelevated text-color="primary" color="white" label="Play now"> </q-btn>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            to="/games/1"
+          >
+          </q-btn>
         </div>
       </div>
       <div class="banner__img">
@@ -42,12 +94,7 @@ export default {
 
 <style lang="scss" scoped>
 .carousels {
-  background: linear-gradient(
-    85.28deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+  background: transparent;
   border-radius: 24px;
   height: 300px;
 
@@ -56,12 +103,8 @@ export default {
   }
 }
 .banner {
-  background: linear-gradient(
-    85.28deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+  @include dynamic-gradient-background;
+
   border-radius: 24px;
   padding: 40px 80px;
 

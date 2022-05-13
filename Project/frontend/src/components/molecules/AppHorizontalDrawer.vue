@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mobile-only category"
+    class="category"
   >
     <a
       v-for="(link, index) in linksList"
@@ -66,14 +66,17 @@ export default defineComponent({
   align-items: center;
   gap: 10px;
   overflow-x: scroll;
+
   @media screen and (max-width: $breakpoint-md) {
     display: flex;
   }
   &__item {
     height: 42px;
-    min-width: 128px;
     background: $dark-grey;
     text-align: center;
+    span {
+      white-space:nowrap;
+    }
     &:first-child {
       margin-left: 20px;
     }

@@ -10,29 +10,20 @@
       @load="onIframeLoaded"
     >
     </iframe>
-    <!-- controller -->
-    <!-- <q-card
-      class="q-pa-lg iframe__inner row justify-between"
-      ref="sdk"
-      square
-      bordered
-    >
-      <q-toolbar>
-        <q-btn-group>
-          <q-btn color="accent" icon="pause" @click="pauseGame" />
-          <q-btn color="accent" icon="refresh" @click="restartGame" />
-        </q-btn-group>
-        <q-btn
-          color="secondary"
-          @click="$q.fullscreen.toggle()"
-          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-          :label="$q.fullscreen.isActive ? 'Exit Fullscreen' : 'Go Fullscreen'"
-        />
-      </q-toolbar>
-      <div class=""></div>
-
-    </q-card> -->
     <!-- ad window -->
+    <transition name="fade">
+      <q-card v-if="!isGameLoaded" class="loader-container" square>
+        <div>
+          <div class="loader"></div>
+          <img
+            class="absolute-center"
+            :src="require('../../assets/logo/logo.svg')"
+            height="42"
+            alt=""
+          />
+        </div>
+      </q-card>
+    </transition>
     <q-card
       v-show="adActive"
       class="q-pa-lg ad-container"
@@ -43,8 +34,9 @@
       <span>There will be Ad</span>
       <q-btn
         @click="closeAd"
-        color="black"
+        color="white"
         round
+        flat
         icon="close"
         class="q-ml-lg"
       ></q-btn>
@@ -54,66 +46,74 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router'
+import { GameMessageInterface, IGameRouteQueries } from '../../entities';
+import { provider } from '../../services';
 import fixProblemWithViewHeight from '../../services/utils';
 // import QCard from 'quasar'
 
 export default defineComponent({
   name: 'SDKGameContainer',
   setup() {
+    const $route = useRoute();
     const iframe = ref<HTMLIFrameElement | null>(null);
     const sdk = ref<HTMLDivElement | null>(null);
     const score = ref(0);
-    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/index.html')
-
+    const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/games/');
+    const isGameLoaded = ref(false);
     const adActive = ref(true);
+
     const showAd = () => {
       adActive.value = true;
     };
     const closeAd = () => {
       adActive.value = false;
     };
+    const pauseGame = () => {
+      // console.log(iframe.value)
+      iframe.value?.contentWindow?.postMessage('pause', '*');
+    };
+    const restartGame = () => {
+      // console.log(iframe.value)
+      iframe.value?.contentWindow?.postMessage('restart', '*');
+    };
+    const onIframeLoaded = () => {
+      isGameLoaded.value = true;
+      console.log('Game Loaded');
+    };
+    const onGameFinished = async (finalScore: number) => {
+      score.value = finalScore;
 
-    interface gameMessageInterface {
-      data: {
-        name: string;
-        finalScore: number;
-      };
+      // @ts-ignore
+      const { uid, iid, chatid, msgid }: IGameRouteQueries = $route.query;
+
+      if (uid && msgid && chatid) {
+        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/chat/${chatid}/msg/${msgid}/score/${score.value}`)
+      }
+      else if (uid && iid) {
+        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/iid/${iid}/score/${score.value}`)
+      }
     }
 
+    onMounted(() => {
+      const gameFileId = $route.params.game_id;
+      gameUrl.value += gameFileId.toString() + '/index.html';
+
+      fixProblemWithViewHeight();
+    });
+
     // catch messages from iframe
-    window.onmessage = (e: gameMessageInterface) => {
+    window.onmessage = async (e: GameMessageInterface) => {
       // @ts-ignore
       if (e.data.name === 'gameFinished') {
         // @ts-ignore
-        score.value = e.data.finalScore;
+        await onGameFinished(+e.data.finalScore);
       }
       if (e.data.name === 'showAd') {
         // @ts-ignore
         showAd();
       }
     };
-
-    const pauseGame = () => {
-      // console.log(iframe.value)
-      iframe.value?.contentWindow?.postMessage('pause', '*');
-    };
-
-    const restartGame = () => {
-      // console.log(iframe.value)
-      iframe.value?.contentWindow?.postMessage('restart', '*');
-    };
-
-    const onIframeLoaded = () => {
-      console.log('Game Loaded');
-    };
-
-    onMounted(
-      () => {
-        const queryParams = location.hash?.split('#')?.[1]?.split('?')?.[1];
-        gameUrl.value += '?' + queryParams;
-        fixProblemWithViewHeight();
-      }
-    );
 
     return {
       iframe,
@@ -126,6 +126,7 @@ export default defineComponent({
       closeAd,
       onIframeLoaded,
       gameUrl,
+      isGameLoaded,
     };
   },
 });
@@ -133,13 +134,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 $inner-container-height: 96px;
+
 .iframe {
   height: 100%;
   width: 100%;
   &__container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 138px);
+    // height: calc(100vh - 138px);
+    height: calc(var(--vh, 1vh) * 100 - 74px);
     background: $secondary;
     @media screen and (max-width: $breakpoint-sm) {
       height: calc(var(--vh, 1vh) * 100 - 50px);
@@ -161,14 +164,36 @@ $inner-container-height: 96px;
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(
-    120deg,
-    #8451d9 0%,
-    #6000ff 72.09%,
-    #4000ab 100%
-  );
+
   color: white;
   font-size: 24px;
   font-weight: bold;
+
+  @include dynamic-gradient-background;
+}
+
+.loader-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: $dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
 }
 </style>

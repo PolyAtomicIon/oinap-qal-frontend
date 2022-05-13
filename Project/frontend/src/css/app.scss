@@ -20,12 +20,28 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.text-h1 {
-  font-size: 32px;
-  line-height: 32px;
-  font-style: normal;
-  font-weight: 500;
-  margin: 16px 0;
+.text {
+  &-h1 {
+    font-size: 32px;
+    line-height: 32px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+  &-h2 {
+    font-size: 22px;
+    line-height: 22px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 8px 0;
+  }
+  &-h3 {
+    font-size: 20px;
+    line-height: 20px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 6px 0;
+  }
 }
 
 .auth__form,
@@ -59,4 +75,109 @@ body {
 
 .extra-rounded-borders {
   border-radius: 20px !important;
+}
+
+@-webkit-keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
+@-moz-keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
+@keyframes dynamicGradient {
+  0% {
+    background-position: 0% 71%;
+  }
+  50% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 71%;
+  }
+}
+
+.loader {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important;
+  background: linear-gradient(45deg, transparent, transparent 40%, #6000ff);
+  animation: gradientLoader 2s linear infinite;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: $dark;
+    border-radius: 50% !important;
+    z-index: 1000;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: linear-gradient(45deg, transparent, transparent 40%, #6000ff);
+    border-radius: 50% !important;
+    z-index: 1;
+    filter: blur(30px);
+  }
+}
+@keyframes gradientLoader {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(20deg);
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  background: $dark-light;
+  width: 10px;
+  height: 10px;
+  @media screen and (max-width: $breakpoint-sm) {
+    width: 2px;
+    height: 2px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px $dark-light;
+  // border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  // border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba($primary, 0.7);
 }

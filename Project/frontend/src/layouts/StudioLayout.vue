@@ -50,6 +50,11 @@ const linksList = [
     icon: 'generics/statistics',
     path: '/studio/statistics'
   },
+  {
+    title: 'Guide',
+    icon: 'generics/document',
+    path: '/studio/guide'
+  },
 ];
 
 export default defineComponent({

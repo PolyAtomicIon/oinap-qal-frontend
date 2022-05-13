@@ -12,18 +12,18 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: #8451D9;
+$primary: #8451d9;
 $secondary: #202020;
 $accent: #9c27b0;
 
-$white: #FFFFFF;
+$white: #ffffff;
 
 $dark: #181818;
 $dark-light: #202020;
 $grey: #858585;
 $dark-grey: #343434;
-$gray:#858585;
-$purple:#8451D9;
+$gray: #858585;
+$purple: #8451d9;
 $dark: #1d1d1d;
 $black2: #343434;
 
@@ -34,3 +34,12 @@ $warning: #f2c037;
 
 $button-border-radius: 20px;
 $button-padding: 4px 24px;
+
+@mixin dynamic-gradient-background {
+  background: linear-gradient(120deg, #664799 0%, #6000ff 72.09%, #4000ab 100%);
+  background-size: 400% 400%;
+
+  -webkit-animation: dynamicGradient 3s ease infinite;
+  -moz-animation: dynamicGradient 3s ease infinite;
+  animation: dynamicGradient 3s ease infinite;
+}

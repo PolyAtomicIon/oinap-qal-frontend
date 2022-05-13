@@ -6,9 +6,9 @@
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
         v-for="game in games"
         :key="game.id"
-        :img="game.picture"
+        :img="game.cover"
         :title="game.title"
-        :description="game.content"
+        :description="game.description"
       ></game-card>
     </div>
     <div v-else class="row q-col-gutter-md">
@@ -52,7 +52,7 @@ export default defineComponent({
       const gamesResponse = await gameService.getAllByCategoryId(
         +categoryId.value
       );
-      games.value = gamesResponse.data;
+      games.value = gamesResponse.data.data as IGameData[];
       isFetched.value = true;
     };
 

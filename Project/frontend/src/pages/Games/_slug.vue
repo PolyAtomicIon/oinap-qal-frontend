@@ -28,6 +28,9 @@
 
         <game-container></game-container>
       </q-page>
+
+      <sign-in-dialog />
+      <sign-up-dialog />
     </q-page-container>
 
   </q-layout>
@@ -37,6 +40,8 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import SdkHeader from '../../components/molecules/SdkHeader.vue'
 import SdkDrawer from '../../components/molecules/SdkDrawer.vue'
+import SignInDialog from '../../components/templates/SignInDialog.vue';
+import SignUpDialog from '../../components/templates/SignUpDialog.vue';
 import GameContainer from '../../components/molecules/SdkGameContainer.vue';
 import fixProblemWithViewHeight from '../../services/utils'
 
@@ -45,7 +50,9 @@ export default defineComponent({
   components: {
     SdkHeader,
     SdkDrawer,
-    GameContainer
+    GameContainer,
+    SignInDialog,
+    SignUpDialog,
   },
   setup () {
     const leftDrawerOpen = ref(false);
@@ -70,6 +77,7 @@ export default defineComponent({
   .sdk {
     position: relative;
     &__highscore-container {
+      display: none;
       padding: 20px 0;
       background: $secondary;
       text-align: center;

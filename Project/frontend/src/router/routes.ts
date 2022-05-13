@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/games/:id',
+    path: '/games/:game_id',
     component: () => import('pages/Games/_slug.vue'),
   },
   {
@@ -44,6 +44,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'statistics',
         component: () => import('pages/Studio/StatisticsContainer.vue'),
+      },
+      {
+        path: 'guide',
+        component: () => import('pages/Studio/Guide.vue'),
       },
     ]
   },
