@@ -13,12 +13,13 @@
           alt="logo-title"
         />
       </div>
+      <div class="">
       <q-input
         v-model="searchFragment"
         placeholder="Search"
         dense
+        filled
         rounded
-        standout
         dark
         :class="[
           'fit',
@@ -29,6 +30,9 @@
         bg-color="grey-9"
         color="white"
         input-class="header__search-field__input"
+        @keyup.enter="navigateTo(searchFragment)"
+        @focus="focus"
+        @blur="unFocus"
       >
         <template v-slot:append>
           <q-icon v-if="!searchFragment" name="search" color="grey"/>
@@ -41,86 +45,6 @@
           />
         </template>
       </q-input>
-      <div class="mobile-only">
-
-      <q-slide-transition duration="10">
-        <div class="bg-dark-grey header__search-transition" v-show="isFocused">
-          <p class="q-ma-none">Search by rating</p>
-          <div class="flex wrap">
-            <div class="header__search-rating-container">
-              <div class="header__search-rating">
-                <q-rating
-                  model-value=1
-                  size="1.2em"
-                  readonly
-                  color="yellow-5"
-                  icon="star_border"
-                  icon-selected="star"
-                ></q-rating>
-              </div >
-            </div>
-            <div class="header__search-rating-container">
-              <div class="header__search-rating">
-                <q-rating
-                  model-value=2
-                  size="1.2em"
-                  readonly
-                  color="yellow-5"
-                  icon="star_border"
-                  icon-selected="star"
-                ></q-rating>
-              </div>
-            </div>
-            <div class="header__search-rating-container">
-              <div class="header__search-rating">
-                <q-rating
-                  model-value=3
-                  size="1.2em"
-                  readonly
-                  color="yellow-5"
-                  icon="star_border"
-                  icon-selected="star"
-                ></q-rating>
-              </div>
-            </div>
-            <div class="header__search-rating-container">
-              <div class="header__search-rating">
-                <q-rating
-                  model-value=4
-                  size="1.2em"
-                  readonly
-                  color="yellow-5"
-                  icon="star_border"
-                  icon-selected="star"
-                ></q-rating>
-              </div>
-            </div>
-            <div class="header__search-rating-container">
-              <div class="header__search-rating">
-                <q-rating
-                  model-value=5
-                  size="1.2em"
-                  readonly
-                  color="yellow-5"
-                  icon="star_border"
-                  icon-selected="star"
-                ></q-rating>
-              </div>
-            </div>
-          </div>
-          <p class="q-ma-none">Search by rating</p>
-          <div class="flex wrap">
-            <div v-for="hash in hashList"
-                 :key="hash"
-                 class="header__search-rating-container">
-              <div class="header__search-hash">
-                <span>{{hash}}</span>
-              </div >
-            </div>
-          </div>
-        </div>
-      </q-slide-transition>
-      </div>
       <div
         class="mobile-only"
       >
@@ -132,6 +56,86 @@
           size="md"
           class="header__search-btn"
         />
+      </div>
+      <q-slide-transition :duration="200">
+        <div class=" bg-dark-grey header__search-transition" v-show="isFocused">
+          <div class="q-pa-md">
+            <p class="q-ma-none">Search by rating</p>
+            <div class="flex wrap">
+              <div class="header__search-rating-container">
+                <div class="header__search-rating">
+                  <q-rating
+                    model-value=1
+                    size="1.2em"
+                    readonly
+                    color="yellow-5"
+                    icon="star_border"
+                    icon-selected="star"
+                  ></q-rating>
+                </div >
+              </div>
+              <div class="header__search-rating-container">
+                <div class="header__search-rating">
+                  <q-rating
+                    model-value=2
+                    size="1.2em"
+                    readonly
+                    color="yellow-5"
+                    icon="star_border"
+                    icon-selected="star"
+                  ></q-rating>
+                </div>
+              </div>
+              <div class="header__search-rating-container">
+                <div class="header__search-rating">
+                  <q-rating
+                    model-value=3
+                    size="1.2em"
+                    readonly
+                    color="yellow-5"
+                    icon="star_border"
+                    icon-selected="star"
+                  ></q-rating>
+                </div>
+              </div>
+              <div class="header__search-rating-container">
+                <div class="header__search-rating">
+                  <q-rating
+                    model-value=4
+                    size="1.2em"
+                    readonly
+                    color="yellow-5"
+                    icon="star_border"
+                    icon-selected="star"
+                  ></q-rating>
+                </div>
+              </div>
+              <div class="header__search-rating-container">
+                <div class="header__search-rating">
+                  <q-rating
+                    model-value=5
+                    size="1.2em"
+                    readonly
+                    color="yellow-5"
+                    icon="star_border"
+                    icon-selected="star"
+                  ></q-rating>
+                </div>
+              </div>
+            </div>
+            <p class="q-ma-none">Search by rating</p>
+            <div class="flex wrap">
+              <div v-for="hash in hashList"
+                   :key="hash"
+                   class="header__search-rating-container">
+                <div class="header__search-hash">
+                  <span>{{hash}}</span>
+                </div >
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-slide-transition>
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
       <div class="header__auth" v-if="!user.loggedIn">
@@ -191,6 +195,7 @@ export default defineComponent({
     }
     const focus = () => {
       isFocused.value=true
+      console.log('???')
     }
     const unFocus = () => {
       isFocused.value=false
@@ -261,15 +266,40 @@ export default defineComponent({
   &__search {
     &-field {
       max-width: 300px;
-
+      &_active{
+        max-width: 505px;
+      }
       &__input {
         &:active,
         &:focus {
           color: $white !important;
         }
       }
+
     }
     &-btn {
+    }
+    &-transition{
+      border-radius: 0 0 24px 24px;
+      position: fixed;
+      max-width: 505px;
+    }
+    &-rating{
+      padding: 6px 6px;
+      border: 1px solid $grey;
+      border-radius: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 5px;
+    }
+    &-rating:hover{
+      background-color: $grey;
+    }
+    &-hash{
+      padding: 5px 10px;
+      border: 1px solid $grey;
+      border-radius: 50px;
+      margin: 5px;
     }
   }
   &__auth {
