@@ -1,5 +1,5 @@
 import {
-  IGameData,
+  IGameData, IGameDTO,
 } from 'src/entities'
 import { IGamesSearchService } from 'src/services'
 import { AxiosResponse } from 'axios'
@@ -13,16 +13,16 @@ export class GamesSearchService implements IGamesSearchService {
   }
 
 
-  async getAllBySearch (string: string): Promise<AxiosResponse<IGameData[]>> {
-    return await ApiService.get(`/search/?string=${string}`);
+  async getAllBySearch (string: string): Promise<AxiosResponse<IGameDTO>> {
+    return await ApiService.get(`/search/?title=${string}`);
   }
 
   async getAllByHashtag (string: string): Promise<AxiosResponse<IGameData[]>> {
     return await ApiService.get(`/search/?string=${string}`);
   }
 
-  async getAllByRating (rating: number): Promise<AxiosResponse<IGameData[]>> {
-    return await ApiService.get(`/search/?string=${rating}`);
+  async getAllByRating (rating: number): Promise<AxiosResponse<IGameDTO>> {
+    return await ApiService.get(`/search/?total_rate=${rating}`);
   }
 
 

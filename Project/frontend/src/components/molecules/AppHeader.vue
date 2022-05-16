@@ -62,10 +62,10 @@
           <div class="q-pa-md">
             <p class="q-ma-none">Search by rating</p>
             <div class="flex wrap">
-              <div class="header__search-rating-container">
-                <div class="header__search-rating">
+              <div v-for="n in 6" :key="n" class="header__search-rating-container" @click="navigateTo('rating',n-1)">
+                <div class="header__search-rating" >
                   <q-rating
-                    model-value=1
+                    :model-value=n-1
                     size="1.2em"
                     readonly
                     color="yellow-5"
@@ -74,61 +74,13 @@
                   ></q-rating>
                 </div >
               </div>
-              <div class="header__search-rating-container">
-                <div class="header__search-rating">
-                  <q-rating
-                    model-value=2
-                    size="1.2em"
-                    readonly
-                    color="yellow-5"
-                    icon="star_border"
-                    icon-selected="star"
-                  ></q-rating>
-                </div>
-              </div>
-              <div class="header__search-rating-container">
-                <div class="header__search-rating">
-                  <q-rating
-                    model-value=3
-                    size="1.2em"
-                    readonly
-                    color="yellow-5"
-                    icon="star_border"
-                    icon-selected="star"
-                  ></q-rating>
-                </div>
-              </div>
-              <div class="header__search-rating-container">
-                <div class="header__search-rating">
-                  <q-rating
-                    model-value=4
-                    size="1.2em"
-                    readonly
-                    color="yellow-5"
-                    icon="star_border"
-                    icon-selected="star"
-                  ></q-rating>
-                </div>
-              </div>
-              <div class="header__search-rating-container">
-                <div class="header__search-rating">
-                  <q-rating
-                    model-value=5
-                    size="1.2em"
-                    readonly
-                    color="yellow-5"
-                    icon="star_border"
-                    icon-selected="star"
-                  ></q-rating>
-                </div>
-              </div>
             </div>
             <p class="q-ma-none">Search by rating</p>
             <div class="flex wrap">
               <div v-for="hash in hashList"
                    :key="hash"
                    class="header__search-rating-container">
-                <div class="header__search-hash">
+                <div class="header__search-hash" @click="hashFunction(hash)">
                   <span>{{hash}}</span>
                 </div >
               </div>
@@ -189,26 +141,35 @@ export default defineComponent({
       }
     };
     const hashList=['#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel'];
-    const navigateTo = (path: string) => {
-      void $router.push({name:'search',params:{searchString:path}})
+    const navigateTo = (path: string, index=-1) => {
+      if(index!=-1){
+        void $router.push({name:'rating',params:{rating:index}})
+      }
+      else{
+      void $router.push({name:'searchString', params:{searchString: path}})
+      }
       isFocused.value=false
+    }
+    const hashFunction = (hash: string) =>{
+      searchFragment.value+=hash
     }
     const focus = () => {
       isFocused.value=true
-      console.log('???')
     }
     const unFocus = () => {
-      isFocused.value=false
+      setTimeout(() => isFocused.value=false,100
+      )
     }
 
     return {
-      searchFragment,
       onSignUp,
       onSignIn,
       navigateTo,
-      isFocused,
       focus,
       unFocus,
+      hashFunction,
+      searchFragment,
+      isFocused,
       hashList,
       user
     }
@@ -283,6 +244,9 @@ export default defineComponent({
       border-radius: 0 0 24px 24px;
       position: fixed;
       max-width: 505px;
+      @media screen and (max-width: $breakpoint-sm) {
+        display: none;
+      }
     }
     &-rating{
       padding: 6px 6px;
@@ -300,6 +264,10 @@ export default defineComponent({
       border: 1px solid $grey;
       border-radius: 50px;
       margin: 5px;
+      cursor: pointer;
+    }
+    &-hash:hover{
+      background-color: $grey;
     }
   }
   &__auth {

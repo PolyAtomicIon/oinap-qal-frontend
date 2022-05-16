@@ -1,14 +1,15 @@
 <template>
   <div class="games-by-search">
-    <h1 class="games-by-search__title">Search</h1>
+    <h1 class="games-by-search__title">{{ this.$route.params.searchString }}</h1>
+    <h1 v-if="this.$route.params.rating" class="games-by-search__title">{{ this.$route.params.rating }}</h1>
     <div v-if="isFetched" class="row q-col-gutter-md">
       <game-card
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
         v-for="game in games"
         :key="game.id"
-        :img="game.picture"
+        :img="game.cover"
         :title="game.title"
-        :description="game.content"
+        :description="game.description"
       ></game-card>
     </div>
     <div v-else class="row q-col-gutter-md">
@@ -19,7 +20,6 @@
       ></game-card-placeholder>
     </div>
   </div>
-  <h1>{{searchString}}</h1>
 </template>
 
 <script lang="ts">
@@ -33,14 +33,15 @@ import GameCard from '../atoms/GameCard.vue';
 import GameCardPlaceholder from '../atoms/placeholders/GameCard.vue';
 
 export default defineComponent({
-  name: 'GameByGenre',
+  name: 'GameBySearchString',
   components: {
     GameCard,
     GameCardPlaceholder,
   },
   setup() {
     const $route = useRoute();
-    const searchString = computed(() => $route.params.searchString);
+    const searchString = computed(() => $route.params.searchString)
+    const searchRating = computed(() => $route.params.rating)
 
     const gameSearchService: IGamesSearchService = provider().Search;
     let games = ref<IGameData[]>([]);
@@ -50,10 +51,23 @@ export default defineComponent({
     const fetchGamesBySearch = async () => {
       isFetched.value = false;
       games.value = [];
-      const gamesResponse = await gameSearchService.getAllBySearch(
-        searchString.value[0]
-      );
-      games.value = gamesResponse.data;
+      let gamesResponse
+      if(+searchRating.value!=-1 && searchRating.value){
+        gamesResponse = await gameSearchService.getAllByRating(
+          +searchRating.value
+        );
+        games.value = gamesResponse.data.data as IGameData[];
+        console.log('good')
+      }
+      else{
+        gamesResponse = await gameSearchService.getAllBySearch(
+          searchString.value as string
+        );
+        games.value = gamesResponse.data.data as IGameData[];
+
+        console.log(searchRating.value)
+
+      }
       isFetched.value = true;
     };
     onMounted(fetchGamesBySearch);
@@ -66,7 +80,7 @@ export default defineComponent({
     };
   },
   watch: {
-    async Search() {
+    async searchString() {
       await this.fetchGamesBySearch();
     },
   },

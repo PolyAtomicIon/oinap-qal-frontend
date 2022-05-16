@@ -1,6 +1,7 @@
-import { IGameData } from 'src/entities'
+import { IGameDTO} from 'src/entities'
 import { AxiosResponse } from 'axios'
 
 export interface IGamesSearchService {
-  getAllBySearch(string: string): Promise<AxiosResponse<IGameData[]>>
+  getAllBySearch(string: string): Promise<AxiosResponse<IGameDTO>>
+  getAllByRating(rating: number): Promise<AxiosResponse<IGameDTO>>
 }
