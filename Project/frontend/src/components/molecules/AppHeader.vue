@@ -18,24 +18,28 @@
         v-model="searchFragment"
         placeholder="Search"
         dense
-        filled
-        rounded
+        standout
         dark
         :class="[
           'fit',
           'header__search-field',
-          'mobile-hide',
-          isFocused && 'header__search-field_active'
+          !searchMobile && 'mobile-hide',
+          inputWidth && 'header__search-field_active',
           ]"
         bg-color="grey-9"
         color="white"
         input-class="header__search-field__input"
         @keyup.enter="navigateTo(searchFragment)"
-        @focus="focus"
+        @click="focus"
         @blur="unFocus"
       >
         <template v-slot:append>
-          <q-icon v-if="!searchFragment" name="search" color="grey"/>
+          <q-icon
+            v-if="!searchFragment"
+            name="search"
+            color="grey"
+            @click="close($event)"
+          />
           <q-icon
             v-else
             name="clear"
@@ -49,24 +53,26 @@
         class="mobile-only"
       >
         <q-btn
+          v-if="!searchMobile"
           flat
           round
           icon="search"
           color="grey"
           size="md"
           class="header__search-btn"
+          @click="searchMobile=true"
         />
       </div>
-      <q-slide-transition :duration="200">
+      <q-slide-transition :duration="100">
         <div class=" bg-dark-grey header__search-transition" v-show="isFocused">
-          <div class="q-pa-md">
+          <div class="header__search-transition-container">
             <p class="q-ma-none">Search by rating</p>
             <div class="flex wrap">
               <div v-for="n in 6" :key="n" class="header__search-rating-container" @click="navigateTo('rating',n-1)">
                 <div class="header__search-rating" >
                   <q-rating
                     :model-value=n-1
-                    size="1.2em"
+                    :size="$q.platform.is.mobile ? '1em' : '1.2em'"
                     readonly
                     color="yellow-5"
                     icon="star_border"
@@ -88,17 +94,13 @@
           </div>
         </div>
       </q-slide-transition>
-      </div>
+        </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
       <div class="header__auth" v-if="!user.loggedIn">
-        <q-btn
-          color="primary"
-          :size="$q.platform.is.mobile ? 'sm' : 'md'"
-          class="text-white header__auth__btn"
+        <button
+          class="text-white header__auth__btn bg-primary"
           @click="onSignIn"
-          label="Sign in"
-          no-caps
-        />
+        >Sign in</button>
         <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
         <slot name="add-button"> </slot>
       </div>
@@ -123,6 +125,8 @@ export default defineComponent({
     const searchFragment = ref('');
     const modals = useModalsStore();
     const isFocused=ref(false)
+    const inputWidth=ref(false)
+    const searchMobile=ref(false)
     const user = useUserStore();
     const $router = useRouter();
     const $q = useQuasar();
@@ -154,13 +158,26 @@ export default defineComponent({
       searchFragment.value+=hash
     }
     const focus = () => {
-      isFocused.value=true
+      setTimeout(() => isFocused.value=true,100
+      )
+      setTimeout(() => inputWidth.value=true,100
+      )
+      console.log('???')
     }
     const unFocus = () => {
       setTimeout(() => isFocused.value=false,100
       )
+      setTimeout(() => inputWidth.value=false,350
+      )
     }
-
+    const close = (event:PointerEvent) => {
+      event.preventDefault()
+       isFocused.value=false
+      setTimeout(() => inputWidth.value=false,350
+      )
+      setTimeout(() => searchMobile.value=false,300
+      )
+    }
     return {
       onSignUp,
       onSignIn,
@@ -168,8 +185,11 @@ export default defineComponent({
       focus,
       unFocus,
       hashFunction,
+      close,
       searchFragment,
       isFocused,
+      inputWidth,
+      searchMobile,
       hashList,
       user
     }
@@ -225,10 +245,16 @@ export default defineComponent({
     }
   }
   &__search {
+    &-field .q-field__control {
+      border-radius: 50px;
+    }
     &-field {
       max-width: 300px;
       &_active{
-        max-width: 505px;
+        min-width: 505px;
+      }
+      &_active .q-field__control {
+        border-radius: 24px 24px 0 0;
       }
       &__input {
         &:active,
@@ -236,7 +262,6 @@ export default defineComponent({
           color: $white !important;
         }
       }
-
     }
     &-btn {
     }
@@ -244,8 +269,10 @@ export default defineComponent({
       border-radius: 0 0 24px 24px;
       position: fixed;
       max-width: 505px;
-      @media screen and (max-width: $breakpoint-sm) {
-        display: none;
+      width: 100%;
+      margin-top: 2px;
+      &-container{
+        margin: 15px;
       }
     }
     &-rating{
@@ -269,19 +296,56 @@ export default defineComponent({
     &-hash:hover{
       background-color: $grey;
     }
+    @media screen and (max-width: 380px) {
+      &-field{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        padding:5px 10px;
+        &_active{
+          min-width: 100%;
+        }
+        &_active .q-field__control {
+          border-radius: 14px;
+        }
+      }
+      &-transition{
+        max-width: 94%;
+        left: 3%;
+        border-radius: 10px;
+        margin-top: 22px;
+        padding:0;
+        &-container{
+          margin: 10px;
+        }
+      }
+      &-rating{
+        padding: 4px 4px;
+        margin: 2px;
+        cursor: pointer;
+      }
+      &-hash{
+        padding: 3px 8px;
+        margin: 2px;
+      }
+    }
+
   }
   &__auth {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-
     &__btn {
       padding: 0 15px !important;
-      height: 26px;
+      height: 36px;
+      border-radius: 24px;
+      border-style: none;
       @media screen and (max-width: $breakpoint-sm) {
         font-size: 14px !important;
       }
     }
   }
+
 }
 </style>
