@@ -14,87 +14,87 @@
         />
       </div>
       <div class="">
-      <q-input
-        v-model="searchFragment"
-        placeholder="Search"
-        dense
-        standout
-        dark
-        :class="[
+        <q-input
+          v-model="searchFragment"
+          placeholder="Search"
+          dense
+          standout
+          dark
+          :class="[
           'fit',
           'header__search-field',
           !searchMobile && 'mobile-hide',
           inputWidth && 'header__search-field_active',
           ]"
-        bg-color="grey-9"
-        color="white"
-        input-class="header__search-field__input"
-        @keyup.enter="navigateTo(searchFragment)"
-        @click="focus"
-        @blur="unFocus"
-      >
-        <template v-slot:append>
-          <q-icon
-            v-if="!searchFragment"
-            name="search"
+          bg-color="grey-9"
+          color="white"
+          input-class="header__search-field__input"
+          @keyup.enter="navigateTo(searchFragment)"
+          @click="focus"
+          @blur="unFocus"
+        >
+          <template v-slot:append>
+            <q-icon
+              v-if="!searchFragment"
+              name="search"
+              color="grey"
+              @click="close($event)"
+            />
+            <q-icon
+              v-else
+              name="clear"
+              color="white"
+              class="cursor-pointer"
+              @click="searchFragment = ''"
+            />
+          </template>
+        </q-input>
+        <div
+          class="mobile-only"
+        >
+          <q-btn
+            v-if="!searchMobile"
+            flat
+            round
+            icon="search"
             color="grey"
-            @click="close($event)"
+            size="md"
+            class="header__search-btn"
+            @click="searchMobile=true"
           />
-          <q-icon
-            v-else
-            name="clear"
-            color="white"
-            class="cursor-pointer"
-            @click="searchFragment = ''"
-          />
-        </template>
-      </q-input>
-      <div
-        class="mobile-only"
-      >
-        <q-btn
-          v-if="!searchMobile"
-          flat
-          round
-          icon="search"
-          color="grey"
-          size="md"
-          class="header__search-btn"
-          @click="searchMobile=true"
-        />
-      </div>
-      <q-slide-transition :duration="100">
-        <div class=" bg-dark-grey header__search-transition" v-show="isFocused">
-          <div class="header__search-transition-container">
-            <p class="q-ma-none">Search by rating</p>
-            <div class="flex wrap">
-              <div v-for="n in 6" :key="n" class="header__search-rating-container" @click="navigateTo('rating',n-1)">
-                <div class="header__search-rating" >
-                  <q-rating
-                    :model-value=n-1
-                    :size="$q.platform.is.mobile ? '1em' : '1.2em'"
-                    readonly
-                    color="yellow-5"
-                    icon="star_border"
-                    icon-selected="star"
-                  ></q-rating>
-                </div >
+        </div>
+        <q-slide-transition :duration="100">
+          <div class=" bg-dark-grey header__search-transition" v-show="isFocused">
+            <div class="header__search-transition-container">
+              <p class="q-ma-none">Search by rating</p>
+              <div class="flex wrap">
+                <div v-for="n in 6" :key="n" class="header__search-rating-container" @click="navigateTo('rating',n-1)">
+                  <div class="header__search-rating" >
+                    <q-rating
+                      :model-value=n-1
+                      :size="$q.platform.is.mobile ? '1em' : '1.2em'"
+                      readonly
+                      color="yellow-5"
+                      icon="star_border"
+                      icon-selected="star"
+                    ></q-rating>
+                  </div >
+                </div>
               </div>
-            </div>
-            <p class="q-ma-none">Search by rating</p>
-            <div class="flex wrap">
-              <div v-for="hash in hashList"
-                   :key="hash"
-                   class="header__search-rating-container">
-                <div class="header__search-hash" @click="hashFunction(hash)">
-                  <span>{{hash}}</span>
-                </div >
+              <p class="q-ma-none">Search by rating</p>
+              <div class="flex wrap">
+                <div v-for="hash in hashList"
+                     :key="hash"
+                     class="header__search-rating-container">
+                  <div class="header__search-hash" @click="hashFunction(hash)">
+                    <span>{{hash}}</span>
+                  </div >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </q-slide-transition>
-        </div>
+        </q-slide-transition>
+      </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
       <div class="header__auth" v-if="!user.loggedIn">
         <button
@@ -150,7 +150,7 @@ export default defineComponent({
         void $router.push({name:'rating',params:{rating:index}})
       }
       else{
-      void $router.push({name:'searchString', params:{searchString: path}})
+        void $router.push({name:'searchString', params:{searchString: path}})
       }
       isFocused.value=false
     }
@@ -172,7 +172,7 @@ export default defineComponent({
     }
     const close = (event:PointerEvent) => {
       event.preventDefault()
-       isFocused.value=false
+      isFocused.value=false
       setTimeout(() => inputWidth.value=false,350
       )
       setTimeout(() => searchMobile.value=false,300
@@ -346,6 +346,7 @@ export default defineComponent({
       }
     }
   }
+
 
 }
 </style>

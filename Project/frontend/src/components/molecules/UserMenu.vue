@@ -1,6 +1,6 @@
 <template>
   <div class="user-menu">
-    <q-avatar class="q-mr-sm">
+    <q-avatar class="q-mr-sm cursor-pointer" @click="toggleMenu">
       <img src="https://cdn.quasar.dev/img/avatar.png" />
     </q-avatar>
     <q-btn-dropdown
@@ -8,24 +8,24 @@
       dark
       :label="userFullName"
       dropdown-icon="keyboard_arrow_down"
-      :ripple="false"
+      v-model="menuState"
       content-class="bg-dark"
     >
       <q-list dark>
-        <q-item clickable v-close-popup @click="onItemClick">
+        <q-item clickable v-close-popup to="/user/profile">
           <q-item-section>
-            <q-item-label>Photos</q-item-label>
+            <q-item-label>Profile</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-close-popup @click="onItemClick">
+        <q-item clickable v-close-popup to="/user/settings">
           <q-item-section>
-            <q-item-label>Videos</q-item-label>
+            <q-item-label>Settings</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-separator color="grey-8" />
-        <q-item clickable v-close-popup @click="onItemClick">
+        <q-item clickable v-close-popup to="/user/profile">
           <q-item-section>
             <q-item-label>Articles</q-item-label>
           </q-item-section>
@@ -37,16 +37,22 @@
 
 <script lang="ts">
 import { useUserStore } from '../../store/user';
+import { ref } from 'vue';
 
 export default {
   name: 'UserMenu',
   props: {},
   setup() {
     const user = useUserStore();
+    const menuState = ref(false);
 
     return {
       user,
       userFullName: user.getFullName,
+      menuState,
+      toggleMenu: () => {
+        menuState.value = !menuState.value;
+      },
     };
   },
 };
