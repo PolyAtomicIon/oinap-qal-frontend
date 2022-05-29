@@ -142,7 +142,8 @@ $inner-container-height: 96px;
     position: relative;
     width: 100%;
     // height: calc(100vh - 138px);
-    height: calc(var(--vh, 1vh) * 100 - 74px);
+    height: calc(100vh - 74px);
+    // height: calc(var(--vh, 1vh) * 100 - 74px);
     background: $secondary;
     @media screen and (max-width: $breakpoint-sm) {
       height: calc(var(--vh, 1vh) * 100 - 50px);

@@ -31,6 +31,8 @@
           @keyup.enter="navigateTo(searchFragment)"
           @click="focus"
           @blur="unFocus"
+          autofocus
+          ref="searchInput"
         >
           <template v-slot:append>
             <q-icon
@@ -50,14 +52,16 @@
         </q-input>
         <div class="mobile-only">
           <q-btn
-            v-if="!searchMobile"
             flat
             round
             icon="search"
             color="grey"
             size="md"
-            class="header__search-btn"
-            @click="searchMobile = true"
+            :class="[
+              'header__search-btn',
+              searchMobile && 'header__search-btn--hide',
+            ]"
+            @click="[searchMobile = true, focus()]"
           />
         </div>
         <q-slide-transition :duration="100">
@@ -103,13 +107,15 @@
         </q-slide-transition>
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
-      <div class="header__auth" v-if="!user.loggedIn">
-        <button
-          class="text-white header__auth__btn bg-primary"
+      <div class="header__auth q-mr-md" v-if="!user.loggedIn">
+        <q-btn
+          color="primary"
+          :size="$q.platform.is.mobile ? 'sm' : 'md'"
+          class="text-white header__auth__btn"
           @click="onSignIn"
         >
           Sign in
-        </button>
+        </q-btn>
         <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
         <slot name="add-button"> </slot>
       </div>
@@ -121,7 +127,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
+import { useQuasar, QInput } from 'quasar';
 import { useModalsStore } from '../../store/modals';
 import { useUserStore } from '../../store/user';
 import UserMenu from './UserMenu.vue';
@@ -135,7 +141,8 @@ export default defineComponent({
     const modals = useModalsStore();
     const isFocused = ref(false);
     const inputWidth = ref(false);
-    const searchMobile = ref(false);
+    const searchMobile = ref(false);;
+    const searchInput = ref<InstanceType<typeof QInput> | null>(null);
     const user = useUserStore();
     const $router = useRouter();
     const $q = useQuasar();
@@ -169,6 +176,9 @@ export default defineComponent({
     const focus = () => {
       setTimeout(() => (isFocused.value = true), 100);
       setTimeout(() => (inputWidth.value = true), 100);
+      setTimeout(() => (searchInput.value?.focus()), 100);
+      console.log(searchInput.value)
+
       console.log('???');
     };
     const unFocus = () => {
@@ -207,6 +217,7 @@ export default defineComponent({
       searchMobile,
       hashList,
       user,
+      searchInput,
     };
   },
 });
@@ -235,6 +246,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     padding: 8px 24px;
+    padding-right: 0;
   }
 
   &__logo {
@@ -260,6 +272,7 @@ export default defineComponent({
     }
   }
   &__search {
+    position: relative;
     &-field .q-field__control {
       border-radius: 50px;
     }
@@ -279,6 +292,9 @@ export default defineComponent({
       }
     }
     &-btn {
+      &--hide {
+        visibility: hidden;
+      }
     }
     &-transition {
       border-radius: 0 0 24px 24px;
@@ -314,7 +330,8 @@ export default defineComponent({
     @media screen and (max-width: $breakpoint-sm) {
       &-field {
         position: fixed;
-        top: 0;
+        z-index: 200;
+        top: 4px;
         left: 0;
         min-width: 100%;
         padding: 5px 10px;
@@ -353,6 +370,7 @@ export default defineComponent({
     &__btn {
       padding: 0 15px !important;
       height: 36px;
+      text-transform: capitalize;
       border-radius: 24px;
       border-style: none;
       @media screen and (max-width: $breakpoint-sm) {

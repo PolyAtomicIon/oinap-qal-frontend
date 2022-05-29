@@ -98,15 +98,13 @@
         <q-checkbox v-model="form.is_accepted" dark color="gray" />
         <span>
           I accept all
-          <q-btn
-            flat
-            dense
-            no-caps
-            color="primary"
-            label="rules"
-            class="q-pb-sm"
-            to="/rules"
-          />
+          <router-link
+            class="text-bold text-primary"
+            to="/studio/guide"
+            @click="modals.setShowSignUpModal(false)"
+          >
+            rules
+          </router-link>
         </span>
       </div>
 
@@ -176,6 +174,7 @@ export default defineComponent({
       onSubmit,
       categories,
       form,
+      modals
     };
   },
 });

@@ -29,7 +29,7 @@
             icon="star_border"
             icon-selected="star"
           ></q-rating>
-          <span class="game-card__reviews"> Reviews 21 </span>
+          <!-- <span class="game-card__reviews"> Reviews 21 </span> -->
         </q-card-section>
         <q-card-section
           class="q-pa-none"
