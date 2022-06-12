@@ -1,4 +1,4 @@
-import { ICommentData } from 'src/entities'
+import {ICommentData, ICommentDTO} from 'src/entities'
 
 import { IGameFeedbackService } from 'src/services'
 import { AxiosResponse } from 'axios'
@@ -10,11 +10,14 @@ export class GameFeedbackService implements IGameFeedbackService {
   constructor () {
     this.data = []
   }
-  async getAllCommentByTitle (title: string): Promise<AxiosResponse<ICommentData[]>> {
-    return await ApiService.get(`/game_feedbacks/?title=${title}`);
+  async getAllCommentByTitle (title: string): Promise<AxiosResponse<ICommentDTO>> {
+    return await ApiService.get(`/game_comments/?title=${title}`);
   }
   async setOneComment (comment: object): Promise<AxiosResponse<ICommentData>> {
-    return await ApiService.post('/game_feedbacks/',comment);
+    return await ApiService.post('/game_comments/',comment);
+  }
+  async setOneFeedback (feedback: object): Promise<AxiosResponse<ICommentData>> {
+    return await ApiService.post('/game_feedbacks/',feedback);
   }
 
 }

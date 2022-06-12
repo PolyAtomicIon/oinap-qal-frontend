@@ -3,7 +3,7 @@
     <div class="flex">
       <div class="comment__img q-mr-md"/>
       <div class="flex column">
-        <span class="q-pb-xs comment__name">{{user.name}}</span>
+        <span class="q-pb-xs comment__name">{{user.user}}</span>
         <q-rating
           :model-value="user.rating"
           size="1.2em"
@@ -24,7 +24,7 @@
         input-style="color:white"
         autogrow
         readonly
-        :model-value="user.comment"
+        :model-value="user.content"
       >
       </q-input>
     </div>

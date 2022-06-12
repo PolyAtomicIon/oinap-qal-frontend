@@ -87,15 +87,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, computed, onMounted} from 'vue'
+import {defineComponent, ref, computed} from 'vue'
 import { useQuasar } from 'quasar'
 import Info from '../atoms/sdk-drawer/SdkDrawerInfo.vue'
 import Feedback from '../atoms/sdk-drawer/SdkDrawerFeedback.vue'
 import Leaders from '../atoms/sdk-drawer/SdkDrawerLeaderboard.vue'
 import Share from '../atoms/sdk-drawer/SdkDrawerShare.vue'
-import {ICommentData, IGameData} from "src/entities";
-import {IGameFeedbackService, provider} from '../../services/index';
-import {useRoute} from "vue-router";
 
 
 const defGameInfo= {

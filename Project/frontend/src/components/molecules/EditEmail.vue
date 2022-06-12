@@ -100,7 +100,6 @@ export default {
   &__btn {
     width: 28%;
     min-width: 200px;
-    border-radius: 5px;
     text-transform: capitalize;
   }
   &__input {
