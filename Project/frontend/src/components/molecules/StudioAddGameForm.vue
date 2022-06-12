@@ -4,7 +4,7 @@
       <!-- file -->
       <div class="add-game__form__field">
         <label for="file">File</label>
-        <p class="text-primary q-py-sm"> {{ form.fileName }} </p>
+        <p class="text-primary q-py-sm">{{ form.fileName }}</p>
       </div>
 
       <!-- cover -->
@@ -70,17 +70,17 @@
 
         <div class="q-gutter-xs q-mt-md">
           <q-chip
-            v-for="(value, name) in form.tags"
+            v-for="(value, name) in tags"
             :key="name"
-            :color="value ? 'primary' : 'grey'"
-            :outline="!value"
+            :color="value.isChosen ? 'primary' : 'grey'"
+            :outline="!value.isChosen"
             text-color="white"
             size="md"
             class="q-pa-lg"
             clickable
             @click="
               () => {
-                form.tags[name] = !form.tags[name];
+                tags[name].isChosen = !tags[name].isChosen;
               }
             "
           >
@@ -105,6 +105,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue';
+import { useCategoriesStore } from '../../store/categories';
 import { IGameTag, IGameForm } from '../../entities/Game.interfaces';
 
 export default defineComponent({
@@ -113,16 +114,18 @@ export default defineComponent({
   props: {
     fileName: {
       type: String,
-      default: ''
+      default: '',
     },
   },
-  setup(props, {emit}) {
-    const tags: IGameTag = reactive({
-      game: true,
-      space: false,
-      multiplayer: false,
-      shooter: false,
-      guns: false,
+  setup(props, { emit }) {
+    const categoriesStore = useCategoriesStore();
+
+    const tags: IGameTag = reactive({});
+    categoriesStore.categories.forEach((category) => {
+      tags[category.title] = {
+        isChosen: false,
+        id: category.id,
+      };
     });
 
     const form: IGameForm = reactive({
@@ -131,7 +134,7 @@ export default defineComponent({
       cover: null,
       name: '',
       description: '',
-      tags: tags,
+      tags: [],
     });
 
     let coverPreviewLink = ref('');
@@ -141,7 +144,14 @@ export default defineComponent({
     };
 
     const onSubmit = () => {
-      emit('submit', form)
+      for (const [key, tag] of Object.entries(tags)) {
+        if (tag.isChosen) {
+          console.log(key)
+          form.tags.push(tag.id);
+        }
+      }
+
+      emit('submit', form);
     };
 
     return {

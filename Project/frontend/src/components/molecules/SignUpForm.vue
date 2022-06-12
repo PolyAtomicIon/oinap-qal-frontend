@@ -74,17 +74,17 @@
 
         <div class="q-gutter-xs q-mt-md">
           <q-chip
-            v-for="(value, name) in form.categories"
+            v-for="(value, name) in categories"
             :key="name"
-            :color="value ? 'primary' : 'grey'"
-            :outline="!value"
+            :color="value.isChosen ? 'primary' : 'grey'"
+            :outline="!value.isChosen"
             text-color="white"
             size="md"
             class="q-pa-md"
             clickable
             @click="
               () => {
-                form.categories[name] = !form.categories[name];
+                categories[name].isChosen = !categories[name].isChosen;
               }
             "
           >
@@ -138,17 +138,23 @@ import { ISignUp } from '../../entities/Auth.interfaces';
 import { IGameTag } from '../../entities/Game.interfaces';
 import { useUserStore } from '../../store/user';
 import { useModalsStore } from '../../store/modals';
+import { useCategoriesStore } from '../../store/categories';
+import { useRouter, useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'SignInForm',
   props: {},
   setup() {
-    const categories: IGameTag = reactive({
-      game: true,
-      space: false,
-      multiplayer: false,
-      shooter: false,
-      guns: false,
+    const user = useUserStore();
+    const modals = useModalsStore();
+    const categoriesStore = useCategoriesStore();
+
+    const categories: IGameTag = reactive({});
+    categoriesStore.categories.forEach((category) => {
+      categories[category.title] = {
+        isChosen: false,
+        id: category.id,
+      };
     });
 
     const form: ISignUp = reactive({
@@ -156,17 +162,28 @@ export default defineComponent({
       email: '',
       password: '',
       password2: '',
-      role: 'USER',
-      categories: categories,
+      role: 'GAMER',
+      categories: [],
       is_accepted: false,
     });
 
-    const user = useUserStore();
-    const modals = useModalsStore();
+    const $router = useRouter();
+    const $route = useRoute();
 
     const onSubmit = () => {
+      form.categories = [];
+      for (const [key, category] of Object.entries(categories)) {
+        if (category.isChosen) {
+          console.log(key);
+          form.categories.push(category.id);
+        }
+      }
       void user.signUp(form).then(() => {
         modals.setShowSignUpModal(false);
+
+        if ($route.path.includes('mobile')) {
+          void $router.replace('profile');
+        }
       });
     };
 
@@ -174,7 +191,7 @@ export default defineComponent({
       onSubmit,
       categories,
       form,
-      modals
+      modals,
     };
   },
 });
