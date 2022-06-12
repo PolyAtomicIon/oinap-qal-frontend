@@ -58,6 +58,8 @@
 <script lang="ts">
 import Comment from '../sdk-drawer/SdkDrawerComment.vue';
 import { defineComponent, ref } from 'vue';
+import {IGameFeedbackService, provider} from '../../../services/index';
+
 const asd: Array<object> = [];
 
 export default defineComponent({
@@ -74,10 +76,25 @@ export default defineComponent({
   setup() {
     const rating = ref(0);
     const comment = ref('');
-    const onSubmit = () => {
+    const onSubmit =async () => {
       console.log(comment.value);
       console.log(rating.value);
+      await setComment()
     };
+    const gameFeedbackService: IGameFeedbackService = provider().GameFeedback;
+
+    const setComment = async () => {
+      await gameFeedbackService.setOneComment({
+        game:1,
+        user:2,
+        value:3,
+        content:''
+      }).then(function (response){
+        console.log(response)
+      });
+        console.log('good')
+    };
+
     return {
       onSubmit,
       comment,
