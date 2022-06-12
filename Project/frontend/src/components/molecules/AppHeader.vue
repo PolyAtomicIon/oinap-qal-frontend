@@ -21,10 +21,9 @@
           standout
           dark
           :class="[
-          'fit',
-          'header__search-field',
-          !searchMobile && 'mobile-hide',
-          inputWidth && 'header__search-field_active',
+            'header__search-field',
+            !searchMobile && 'mobile-hide',
+            inputWidth && 'header__search-field_active',
           ]"
           bg-color="grey-9"
           color="white"
@@ -32,6 +31,8 @@
           @keyup.enter="navigateTo(searchFragment)"
           @click="focus"
           @blur="unFocus"
+          autofocus
+          ref="searchInput"
         >
           <template v-slot:append>
             <q-icon
@@ -49,46 +50,56 @@
             />
           </template>
         </q-input>
-        <div
-          class="mobile-only"
-        >
+        <div class="mobile-only">
           <q-btn
-            v-if="!searchMobile"
             flat
             round
             icon="search"
             color="grey"
             size="md"
-            class="header__search-btn"
-            @click="searchMobile=true"
+            :class="[
+              'header__search-btn',
+              searchMobile && 'header__search-btn--hide',
+            ]"
+            @click="[searchMobile = true, focus()]"
           />
         </div>
         <q-slide-transition :duration="100">
-          <div class=" bg-dark-grey header__search-transition" v-show="isFocused">
+          <div
+            class="bg-dark-grey header__search-transition"
+            v-show="isFocused"
+          >
             <div class="header__search-transition-container">
               <p class="q-ma-none">Search by rating</p>
               <div class="flex wrap">
-                <div v-for="n in 6" :key="n" class="header__search-rating-container" @click="navigateTo('rating',n-1)">
-                  <div class="header__search-rating" >
+                <div
+                  v-for="n in 6"
+                  :key="n"
+                  class="header__search-rating-container"
+                  @click="navigateTo('rating', n - 1)"
+                >
+                  <div class="header__search-rating">
                     <q-rating
-                      :model-value=n-1
+                      :model-value="n - 1"
                       :size="$q.platform.is.mobile ? '1em' : '1.2em'"
                       readonly
                       color="yellow-5"
                       icon="star_border"
                       icon-selected="star"
                     ></q-rating>
-                  </div >
+                  </div>
                 </div>
               </div>
               <p class="q-ma-none">Search by rating</p>
               <div class="flex wrap">
-                <div v-for="hash in hashList"
-                     :key="hash"
-                     class="header__search-rating-container">
+                <div
+                  v-for="hash in hashList"
+                  :key="hash"
+                  class="header__search-rating-container"
+                >
                   <div class="header__search-hash" @click="hashFunction(hash)">
-                    <span>{{hash}}</span>
-                  </div >
+                    <span>{{ hash }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,11 +107,18 @@
         </q-slide-transition>
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
-      <div class="header__auth" v-if="!user.loggedIn">
+      <div class="header__auth q-mr-md" v-if="!user.loggedIn">
+        <q-btn
+          color="primary"
+          :size="$q.platform.is.mobile ? 'sm' : 'md'"
+          class="text-white header__auth__btn"
+          <div class="header__auth" v-if="!user.loggedIn">
         <button
           class="text-white header__auth__btn bg-primary"
           @click="onSignIn"
-        >Sign in</button>
+        >
+          Sign in
+        </q-btn>
         <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
         <slot name="add-button"> </slot>
       </div>
@@ -112,7 +130,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
+import { useQuasar, QInput } from 'quasar';
 import { useModalsStore } from '../../store/modals';
 import { useUserStore } from '../../store/user';
 import UserMenu from './UserMenu.vue';
@@ -124,9 +142,10 @@ export default defineComponent({
   setup() {
     const searchFragment = ref('');
     const modals = useModalsStore();
-    const isFocused=ref(false)
-    const inputWidth=ref(false)
-    const searchMobile=ref(false)
+    const isFocused = ref(false);
+    const inputWidth = ref(false);
+    const searchMobile = ref(false);;
+    const searchInput = ref<InstanceType<typeof QInput> | null>(null);
     const user = useUserStore();
     const $router = useRouter();
     const $q = useQuasar();
@@ -144,40 +163,49 @@ export default defineComponent({
         modals.setShowSignInModal(true);
       }
     };
-    const hashList=['#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel','#Marvel'];
-    const navigateTo = (path: string, index=-1) => {
-      if(index!=-1){
-        void $router.push({name:'rating',params:{rating:index}})
-      }
-      else{
-        void $router.push({name:'searchString', params:{searchString: path}})
-      }
-      isFocused.value=false
-    }
-    const hashFunction = (hash: string) =>{
-      searchFragment.value+=hash
-    }
+    const hashList = [
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+      '#Marvel',
+    ];
+    const hashFunction = (hash: string) => {
+      searchFragment.value += hash;
+    };
     const focus = () => {
-      setTimeout(() => isFocused.value=true,100
-      )
-      setTimeout(() => inputWidth.value=true,100
-      )
-      console.log('???')
-    }
+      setTimeout(() => (isFocused.value = true), 100);
+      setTimeout(() => (inputWidth.value = true), 100);
+      setTimeout(() => (searchInput.value?.focus()), 100);
+      console.log(searchInput.value)
+
+      console.log('???');
+    };
     const unFocus = () => {
-      setTimeout(() => isFocused.value=false,100
-      )
-      setTimeout(() => inputWidth.value=false,350
-      )
-    }
-    const close = (event:PointerEvent) => {
-      event.preventDefault()
-      isFocused.value=false
-      setTimeout(() => inputWidth.value=false,350
-      )
-      setTimeout(() => searchMobile.value=false,300
-      )
-    }
+      setTimeout(() => (isFocused.value = false), 100);
+      setTimeout(() => (inputWidth.value = false), 350);
+      setTimeout(() => (searchMobile.value = false), 300);
+    };
+    const close = (event: PointerEvent) => {
+      event.preventDefault();
+      isFocused.value = false;
+      setTimeout(() => (inputWidth.value = false), 350);
+      setTimeout(() => (searchMobile.value = false), 300);
+    };
+    const navigateTo = (path: string, index = -1) => {
+      if (index != -1) {
+        void $router.push({ name: 'rating', params: { rating: index } });
+      } else {
+        void $router.push({
+          name: 'searchString',
+          params: { searchString: path },
+        });
+      }
+      unFocus();
+    };
     return {
       onSignUp,
       onSignIn,
@@ -191,9 +219,10 @@ export default defineComponent({
       inputWidth,
       searchMobile,
       hashList,
-      user
-    }
-  }
+      user,
+      searchInput,
+    };
+  },
 });
 </script>
 
@@ -220,6 +249,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     padding: 8px 24px;
+    padding-right: 0;
   }
 
   &__logo {
@@ -245,16 +275,17 @@ export default defineComponent({
     }
   }
   &__search {
+    position: relative;
     &-field .q-field__control {
       border-radius: 50px;
     }
     &-field {
-      max-width: 300px;
-      &_active{
-        min-width: 505px;
-      }
-      &_active .q-field__control {
-        border-radius: 24px 24px 0 0;
+      min-width: 505px;
+      width: 100%;
+      &_active {
+        .q-field__control {
+          border-radius: 24px 24px 0 0;
+        }
       }
       &__input {
         &:active,
@@ -264,18 +295,21 @@ export default defineComponent({
       }
     }
     &-btn {
+      &--hide {
+        visibility: hidden;
+      }
     }
-    &-transition{
+    &-transition {
       border-radius: 0 0 24px 24px;
       position: fixed;
       max-width: 505px;
       width: 100%;
       margin-top: 2px;
-      &-container{
+      &-container {
         margin: 15px;
       }
     }
-    &-rating{
+    &-rating {
       padding: 6px 6px;
       border: 1px solid $grey;
       border-radius: 50px;
@@ -283,54 +317,54 @@ export default defineComponent({
       flex-wrap: wrap;
       margin: 5px;
     }
-    &-rating:hover{
+    &-rating:hover {
       background-color: $grey;
     }
-    &-hash{
+    &-hash {
       padding: 5px 10px;
       border: 1px solid $grey;
       border-radius: 50px;
       margin: 5px;
       cursor: pointer;
     }
-    &-hash:hover{
+    &-hash:hover {
       background-color: $grey;
     }
-    @media screen and (max-width: 380px) {
-      &-field{
+    @media screen and (max-width: $breakpoint-sm) {
+      &-field {
         position: fixed;
-        top: 0;
+        z-index: 200;
+        top: 4px;
         left: 0;
         min-width: 100%;
-        padding:5px 10px;
-        &_active{
+        padding: 5px 10px;
+        &_active {
           min-width: 100%;
-        }
-        &_active .q-field__control {
-          border-radius: 14px;
+          .q-field__control {
+            border-radius: 14px;
+          }
         }
       }
-      &-transition{
+      &-transition {
         max-width: 94%;
         left: 3%;
         border-radius: 10px;
         margin-top: 22px;
-        padding:0;
-        &-container{
+        padding: 0;
+        &-container {
           margin: 10px;
         }
       }
-      &-rating{
+      &-rating {
         padding: 4px 4px;
         margin: 2px;
         cursor: pointer;
       }
-      &-hash{
+      &-hash {
         padding: 3px 8px;
         margin: 2px;
       }
     }
-
   }
   &__auth {
     display: flex;
@@ -339,6 +373,7 @@ export default defineComponent({
     &__btn {
       padding: 0 15px !important;
       height: 36px;
+      text-transform: capitalize;
       border-radius: 24px;
       border-style: none;
       @media screen and (max-width: $breakpoint-sm) {
@@ -346,7 +381,6 @@ export default defineComponent({
       }
     }
   }
-
 
 }
 </style>
