@@ -77,6 +77,7 @@
 import { defineComponent, reactive, ref } from 'vue';
 import { ISignIn } from '../../entities/Auth.interfaces';
 import { useUserStore } from '../../store/user';
+import { useRouter, useRoute } from 'vue-router';
 import { useModalsStore } from '../../store/modals';
 
 export default defineComponent({
@@ -89,6 +90,9 @@ export default defineComponent({
       password: '',
     });
 
+    const $router = useRouter();
+    const $route = useRoute();
+
     const user = useUserStore();
     const modals = useModalsStore();
     const onSubmit = () => {
@@ -96,6 +100,9 @@ export default defineComponent({
         .signIn(form)
         .then(() => {
           modals.setShowSignInModal(false);
+          if ($route.path.includes('mobile')) {
+            void $router.replace('profile');
+          }
         })
         .catch(() => {
           onError.value = true;

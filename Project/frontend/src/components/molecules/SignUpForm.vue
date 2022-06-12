@@ -139,6 +139,7 @@ import { IGameTag } from '../../entities/Game.interfaces';
 import { useUserStore } from '../../store/user';
 import { useModalsStore } from '../../store/modals';
 import { useCategoriesStore } from '../../store/categories';
+import { useRouter, useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'SignInForm',
@@ -166,16 +167,23 @@ export default defineComponent({
       is_accepted: false,
     });
 
+    const $router = useRouter();
+    const $route = useRoute();
+
     const onSubmit = () => {
       form.categories = [];
       for (const [key, category] of Object.entries(categories)) {
         if (category.isChosen) {
-          console.log(key)
+          console.log(key);
           form.categories.push(category.id);
         }
       }
       void user.signUp(form).then(() => {
         modals.setShowSignUpModal(false);
+
+        if ($route.path.includes('mobile')) {
+          void $router.replace('profile');
+        }
       });
     };
 

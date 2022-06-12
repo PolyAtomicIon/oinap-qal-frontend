@@ -9,7 +9,7 @@
       :label="userFullName"
       dropdown-icon="keyboard_arrow_down"
       v-model="menuState"
-      content-class="bg-dark"
+      content-class="bg-dark user-menu__dropdown"
     >
       <q-list dark>
         <q-item clickable v-close-popup to="/user/profile">
@@ -61,5 +61,7 @@ export default {
 <style lang="scss">
 .user-menu {
   text-align: right;
+  &__dropdown {
+  }
 }
 </style>
