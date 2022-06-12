@@ -46,8 +46,8 @@
     <div>
       <span class="q-ma-none sdk-feedback__all-comments">All comments</span>
       <comment
-        v-for="user in comments"
-        :key="user.name"
+        v-for="user in gameComments"
+        :key="user.user"
         :user="user"
         class="q-my-md"
       />
@@ -57,7 +57,11 @@
 
 <script lang="ts">
 import Comment from '../sdk-drawer/SdkDrawerComment.vue';
-import { defineComponent, ref } from 'vue';
+import {computed, defineComponent, onMounted, ref} from 'vue';
+import {IGameFeedbackService, provider} from '../../../services/index';
+import {useRoute} from 'vue-router';
+import {ICommentData} from 'src/entities';
+
 const asd: Array<object> = [];
 
 export default defineComponent({
@@ -75,10 +79,61 @@ export default defineComponent({
     const rating = ref(0);
     const comment = ref('');
     const onSubmit = () => {
-      console.log(comment.value);
-      console.log(rating.value);
+      if(comment.value){
+         setComment()
+      }
+      if(rating.value){
+         setFeedback()
+      }
     };
+    const gameCommentService: IGameFeedbackService = provider().GameFeedback;
+
+    const $route = useRoute();
+    const gameTitle = computed(() => $route.params.game_id).value
+
+    const commentService: IGameFeedbackService = provider().GameFeedback;
+    let gameComments = ref<ICommentData[]>([]);
+    let isFetched = ref(false);
+
+
+    const setComment = () => {
+      void gameCommentService.setOneComment({
+        game:gameTitle,
+        author:2,
+        content:comment.value,
+        parent:null
+      }).then(function (response){
+        console.log(response)
+      });
+      void fetchComments()
+    };
+    const setFeedback = () => {
+     void gameCommentService.setOneFeedback({
+        game:gameTitle,
+        user:3,
+        value:rating.value
+      }).then(function (response){
+        console.log(response)
+      });
+    };
+
+
+
+    const fetchComments = async () => {
+      isFetched.value = false;
+      gameComments.value = [];
+      let commentResponse
+      commentResponse = await commentService.getAllCommentByTitle(
+        gameTitle as string
+      );
+      gameComments.value = commentResponse.data.data ;
+
+      isFetched.value = true;
+    };
+    onMounted(fetchComments);
+
     return {
+      gameComments,
       onSubmit,
       comment,
       rating,

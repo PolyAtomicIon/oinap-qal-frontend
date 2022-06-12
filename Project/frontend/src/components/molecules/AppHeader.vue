@@ -131,7 +131,6 @@ import { useQuasar, QInput } from 'quasar';
 import { useModalsStore } from '../../store/modals';
 import { useUserStore } from '../../store/user';
 import UserMenu from './UserMenu.vue';
-
 export default defineComponent({
   name: 'AppHeader',
   components: { UserMenu },
@@ -178,7 +177,6 @@ export default defineComponent({
       setTimeout(() => (inputWidth.value = true), 100);
       setTimeout(() => (searchInput.value?.focus()), 100);
       console.log(searchInput.value)
-
       console.log('???');
     };
     const unFocus = () => {
@@ -233,39 +231,32 @@ export default defineComponent({
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   padding: 16px 24px;
-
   @media screen and (max-width: $breakpoint-lg) {
     max-width: 1280px;
   }
-
   @media screen and (max-width: $breakpoint-md) {
     // max-width: 100%;
   }
-
   @media screen and (max-width: $breakpoint-sm) {
     display: flex;
     justify-content: space-between;
     padding: 8px 24px;
     padding-right: 0;
   }
-
   &__logo {
     display: flex;
     align-items: center;
     width: 190px;
     cursor: pointer;
-
     @media screen and (max-width: $breakpoint-sm) {
       width: 32px;
     }
-
     &__figure {
       width: 32px;
     }
     &__title {
       width: 96px;
       margin-left: 16px;
-
       @media screen and (max-width: $breakpoint-sm) {
         display: none;
       }
