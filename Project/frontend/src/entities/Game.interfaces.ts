@@ -1,5 +1,8 @@
 export interface IGameTag {
-  [key: string]: boolean;
+  [key: string]: {
+    isChosen: boolean
+    id: number
+  };
 }
 
 export interface IGameForm {
@@ -8,7 +11,7 @@ export interface IGameForm {
   cover: File | null;
   name: string;
   description: string;
-  tags: IGameTag;
+  tags: number[];
 }
 
 export interface IGameRouteQueries {

@@ -1,5 +1,3 @@
-import { IGameTag } from './Game.interfaces';
-
 export interface ISignIn {
   username: string;
   password: string;
@@ -10,7 +8,7 @@ export interface ISignUp {
   email: string;
   password: string;
   password2: string;
-  role: string;
-  categories: IGameTag;
+  role: 'DEVELOPER' | 'GAMER';
+  categories: number[];
   is_accepted: boolean;
 }

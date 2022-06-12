@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue';
-import { IGameTag, IGameForm } from '../../entities/Game.interfaces';
+import { IGameForm } from '../../entities/Game.interfaces';
 import StudioUploadForm from '../molecules/StudioUploadForm.vue';
 import StudioAddGameForm from '../molecules/StudioAddGameForm.vue';
 
@@ -62,7 +62,7 @@ export default defineComponent({
       cover: null,
       name: '',
       description: '',
-      tags: {} as IGameTag,
+      tags: [],
     });
 
     const fileUploaded = (file: File[]) => {
