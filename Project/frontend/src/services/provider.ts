@@ -5,6 +5,7 @@ import { UsersService } from './user/index';
 import { IProvider } from './provider.types';
 import { GamesSearchService } from './search/index'
 import { GameFeedbackService } from './feedback/index'
+import { LeaderBoardService } from './leaderBoard/index'
 
 export const provider = (): IProvider => ({
   Games: new GamesService(),
@@ -12,5 +13,6 @@ export const provider = (): IProvider => ({
   Categories: new CategoriesService(),
   User: new UsersService(),
   Search: new GamesSearchService(),
-  GameFeedback: new GameFeedbackService()
+  GameFeedback: new GameFeedbackService(),
+  LeaderBoard: new LeaderBoardService(),
 })

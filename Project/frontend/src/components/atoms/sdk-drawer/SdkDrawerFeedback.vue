@@ -128,8 +128,6 @@ export default defineComponent({
       );
       gameComments.value = commentResponse.data.data ;
 
-      console.log(gameComments.value)
-
       isFetched.value = true;
     };
     onMounted(fetchComments);
