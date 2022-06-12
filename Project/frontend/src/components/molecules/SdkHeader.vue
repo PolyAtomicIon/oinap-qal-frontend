@@ -22,7 +22,7 @@
           4.5
         </span>
       </div>
-      <div class="sdk-header__auth mobile-hide">
+      <div class="sdk-header__auth mobile-hide" v-if="!user.loggedIn">
         <q-btn
           flat
           round
@@ -39,6 +39,7 @@
         />
         <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
       </div>
+      <user-menu class="mobile-hide" v-else></user-menu>
     </q-toolbar>
   </q-header>
 </template>
@@ -48,10 +49,15 @@ import { defineComponent, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
 import { useModalsStore } from '../../store/modals';
+import { useUserStore } from '../../store/user';
+
+import UserMenu from './UserMenu.vue';
 
 export default defineComponent({
   name: 'SdkHeader',
-  components: {},
+  components: {
+    UserMenu,
+  },
   props: {
     toggleLeftDrawer: {
       type: Function,
@@ -61,6 +67,7 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
     const modals = useModalsStore();
+    const user = useUserStore();
     const $q = useQuasar();
     const $router = useRouter();
     const onSignUp = () => {
@@ -82,6 +89,7 @@ export default defineComponent({
       onSignUp,
       onSignIn,
       leftDrawerOpen,
+      user,
     };
   },
 });

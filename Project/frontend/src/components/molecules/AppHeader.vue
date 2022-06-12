@@ -131,6 +131,7 @@ import { useQuasar, QInput } from 'quasar';
 import { useModalsStore } from '../../store/modals';
 import { useUserStore } from '../../store/user';
 import UserMenu from './UserMenu.vue';
+
 export default defineComponent({
   name: 'AppHeader',
   components: { UserMenu },
