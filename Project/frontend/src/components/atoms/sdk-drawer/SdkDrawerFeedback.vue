@@ -105,6 +105,7 @@ export default defineComponent({
       }).then(function (response){
         console.log(response)
       });
+      void fetchComments()
     };
     const setFeedback = () => {
      void gameCommentService.setOneFeedback({
