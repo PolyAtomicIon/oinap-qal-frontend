@@ -12,3 +12,9 @@ export interface ISignUp {
   categories: number[];
   is_accepted: boolean;
 }
+
+export interface IToken {
+  data: {
+    access_token: string;
+  }
+}
