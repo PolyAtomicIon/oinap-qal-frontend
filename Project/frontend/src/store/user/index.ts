@@ -80,11 +80,12 @@ export const useUserStore = defineStore('user', {
         role: null,
       };
       localStorage.setItem('token', '');
+      // @ts-ignore
       ApiService.defaults.headers.common['Authorization'] = '';
     },
     setUserData(token: string){
       const data = jose.decodeJwt(token) as ITokenData;
-
+      // console.log(data)
       this.loggedIn = true;
       this.user = {
         id: data.id,
@@ -96,6 +97,7 @@ export const useUserStore = defineStore('user', {
       }
 
       localStorage.setItem('token', token);
+      // @ts-ignore
       ApiService.defaults.headers.common['Authorization'] = 'Token ' + token;
     },
     loadAndSetToken() {
