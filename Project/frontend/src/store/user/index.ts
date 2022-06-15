@@ -1,29 +1,40 @@
 import { defineStore } from 'pinia';
-import { ISignIn, ISignUp, IToken } from '../../entities/Auth.interfaces';
+import { ISignIn, ISignUp, IToken, ITokenData, IAuthError, IAuthErrorData } from '../../entities/Auth.interfaces';
 import { provider } from '../../services/';
+import { api as ApiService } from 'src/boot/axios'
 import * as jose from 'jose';
 
 export type RootState = {
   loggedIn: boolean;
-  email: string;
-  userId: null | number;
+  user: {
+    id: number | null,
+    token: string | null
+    email: string,
+    username: string,
+    avatar: string | null
+  },
 };
 
 export const useUserStore = defineStore('user', {
   state: () =>
     ({
       loggedIn: false,
-      email: 'user@gmail.com',
-      userId: null,
+      user: {
+        id: null,
+        token: null,
+        email: '',
+        username: '',
+        avatar: null,
+      },
     } as RootState),
   getters: {
-    getEmail: (state) => state.email,
-    getFullName: (): string => 'John Jiop',
+    getEmail: (state) => state.user.email,
+    getFullName: (state): string => state.user.username,
   },
   actions: {
     setEmail(otherEmail: string) {
       console.log(otherEmail);
-      this.email = otherEmail;
+      this.user.email = otherEmail;
     },
     signIn(payload: ISignIn): Promise<boolean> {
       return new Promise<boolean>((resolve, reject) => {
@@ -31,11 +42,7 @@ export const useUserStore = defineStore('user', {
           .User.signIn(payload)
           .then(({ data }: { data: IToken }) => {
             // console.log(data);
-
-            const claims = jose.decodeJwt(data.data.access_token);
-
-            this.userId = claims.id as number;
-            this.loggedIn = true;
+            this.setUserData(data.data.access_token);
             resolve(true);
           })
           .catch((error) => {
@@ -48,15 +55,51 @@ export const useUserStore = defineStore('user', {
       return new Promise<boolean>((resolve, reject) => {
         provider()
           .User.signUp(payload)
-          .then(() => {
-            this.loggedIn = true;
+          .then(({ data }: { data: IToken }) => {
+            this.setUserData(data.data.access_token);
             resolve(true);
           })
-          .catch((error) => {
-            console.log('Error signing up', error);
-            reject();
+          .catch((error: IAuthError) => {
+            if (error.response) {
+              const data: IAuthErrorData = error.response.data;
+              console.log('Error signing up', data);
+              reject(data);
+            }
           });
       });
     },
+    logout() {
+      this.loggedIn = false;
+      this.user = {
+        id: null,
+        token: null,
+        email: '',
+        username: '',
+        avatar: null,
+      };
+      localStorage.setItem('token', '');
+      ApiService.defaults.headers.common['Authorization'] = '';
+    },
+    setUserData(token: string){
+      const data = jose.decodeJwt(token) as ITokenData;
+
+      this.loggedIn = true;
+      this.user = {
+        id: data.id,
+        email: data.email,
+        username: data.username,
+        avatar: data.avatar,
+        token
+      }
+
+      localStorage.setItem('token', token);
+      ApiService.defaults.headers.common['Authorization'] = 'Token ' + token;
+    },
+    loadAndSetToken() {
+      const token = localStorage.getItem('token')
+      if(token) {
+        this.setUserData(token);
+      }
+    }
   },
 });

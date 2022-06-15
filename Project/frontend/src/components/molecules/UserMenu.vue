@@ -1,15 +1,22 @@
 <template>
   <div class="user-menu">
-    <q-avatar class="q-mr-sm cursor-pointer" @click="toggleMenu">
-      <img src="https://cdn.quasar.dev/img/avatar.png" />
+    <q-avatar class="q-mr-sm cursor-pointer mobile-hide"  @click="toggleMenu">
+      <q-img
+        :src="user.user.avatar"
+        fit="cover"
+        spinner-color="primary"
+        spinner-size="18px"
+      />
     </q-avatar>
     <q-btn-dropdown
       flat
+      dense
       dark
-      :label="userFullName"
-      dropdown-icon="keyboard_arrow_down"
       v-model="menuState"
-      content-class="bg-dark user-menu__dropdown"
+      :label="userFullName()"
+      dropdown-icon="keyboard_arrow_down"
+      content-class="bg-dark"
+      class="user-menu__dropdown"
     >
       <q-list dark>
         <q-item clickable v-close-popup to="/user/profile">
@@ -25,9 +32,9 @@
         </q-item>
 
         <q-separator color="grey-8" />
-        <q-item clickable v-close-popup to="/user/profile">
+        <q-item clickable v-close-popup @click="user.logout">
           <q-item-section>
-            <q-item-label>Articles</q-item-label>
+            <q-item-label>Logout</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -48,7 +55,12 @@ export default {
 
     return {
       user,
-      userFullName: user.getFullName,
+      userFullName: () => {
+        if( user.getFullName.length > 10 ){
+          return user.getFullName.substr(0, 7) + '...';
+        }
+        return user.getFullName;
+      },
       menuState,
       toggleMenu: () => {
         menuState.value = !menuState.value;
@@ -62,6 +74,8 @@ export default {
 .user-menu {
   text-align: right;
   &__dropdown {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 }
 </style>

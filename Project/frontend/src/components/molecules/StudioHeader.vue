@@ -18,6 +18,7 @@
         color="primary"
         icon="add"
         round
+        :style="{height: '30px'}"
         @click="addGame"
       />
     </template>
@@ -26,7 +27,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AppHeader from './AppHeader.vue'
+import AppHeader from './AppHeader.vue';
 import { useUserStore } from '../../store/user';
 
 export default defineComponent({
@@ -37,15 +38,15 @@ export default defineComponent({
   props: {
     addGame: {
       type: Function,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup() {
     const user = useUserStore();
 
     return {
-      user
-    }
-  }
+      user,
+    };
+  },
 });
 </script>
