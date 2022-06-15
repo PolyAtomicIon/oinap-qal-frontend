@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ISignIn, ISignUp, IToken, ITokenData, IAuthError, IAuthErrorData } from '../../entities/Auth.interfaces';
 import { provider } from '../../services/';
+import { api as ApiService } from 'src/boot/axios'
 import * as jose from 'jose';
 
 export type RootState = {
@@ -34,18 +35,6 @@ export const useUserStore = defineStore('user', {
     setEmail(otherEmail: string) {
       console.log(otherEmail);
       this.user.email = otherEmail;
-    },
-    setUserData(token: string){
-      const data = jose.decodeJwt(token) as ITokenData;
-
-      this.loggedIn = true;
-      this.user = {
-        id: data.id,
-        email: data.email,
-        username: data.username,
-        avatar: data.avatar,
-        token
-      }
     },
     signIn(payload: ISignIn): Promise<boolean> {
       return new Promise<boolean>((resolve, reject) => {
@@ -88,6 +77,29 @@ export const useUserStore = defineStore('user', {
         username: '',
         avatar: null,
       };
+      localStorage.setItem('token', '');
+      ApiService.defaults.headers.common['Authorization'] = '';
+    },
+    setUserData(token: string){
+      const data = jose.decodeJwt(token) as ITokenData;
+
+      this.loggedIn = true;
+      this.user = {
+        id: data.id,
+        email: data.email,
+        username: data.username,
+        avatar: data.avatar,
+        token
+      }
+
+      localStorage.setItem('token', token);
+      ApiService.defaults.headers.common['Authorization'] = 'Token ' + token;
+    },
+    loadAndSetToken() {
+      const token = localStorage.getItem('token')
+      if(token) {
+        this.setUserData(token);
+      }
     }
   },
 });

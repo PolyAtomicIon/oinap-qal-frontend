@@ -393,9 +393,12 @@ export default defineComponent({
     display: inline-flex;
     align-items: center;
     flex-direction: row-reverse;
-    gap: 8px;
+    gap: 16px;
     flex: 1;
 
+    @media screen and (max-width: $breakpoint-sm) {
+      gap: 8px;
+    }
   }
 }
 </style>
