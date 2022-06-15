@@ -1,32 +1,24 @@
 <template>
   <q-card flat class="comment bg-transparent">
-    <div class="flex">
-      <div class="comment__img q-mr-md"/>
-      <div class="flex column">
-        <span class="q-pb-xs comment__name">{{user.user}}</span>
-        <q-rating
-          :model-value="user.rating"
-          size="1.2em"
-          readonly
-          color="yellow-5"
-          icon="star_border"
-          icon-selected="star"
-        ></q-rating>
+    <div class="flex row">
+      <div>
+        <div class="comment__img q-mr-md"/>
       </div>
-    </div>
-    <div>
-      <q-input
-        dense
-        standout
-        color="white"
-        bg-color="grey-9"
-        class="text-white q-mt-sm comment__input"
-        input-style="color:white"
-        autogrow
-        readonly
-        :model-value="user.content"
-      >
-      </q-input>
+      <div class="flex column comment__body">
+        <span class="q-pb-xs comment__name">{{user.username}}</span>
+        <q-input
+          dense
+          standout
+          color="white"
+          bg-color="grey-9"
+          class="text-white comment__input"
+          input-style="color:white"
+          autogrow
+          readonly
+          :model-value="user.content"
+        >
+        </q-input>
+      </div>
     </div>
   </q-card>
 </template>
@@ -53,6 +45,10 @@ export default {
 <style lang="scss">
 .comment{
   font-size: 16px;
+  width: 100%;
+  &__body{
+    width: 80%;
+  }
   &__img{
     width: 48px;
     height: 48px;
@@ -64,7 +60,6 @@ export default {
   }
   &__input{
     font-size: 14px;
-    margin-left: 64px;
   }
   &__input textarea{
     overflow: hidden;

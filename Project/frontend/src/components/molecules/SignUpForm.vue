@@ -198,7 +198,7 @@ export default defineComponent({
         })
         .catch((errorData: IAuthErrorData) => {
           const errors: string[][] = Object.values(errorData);
-          authErrors.push(...(errors.flat() as string[]));
+          authErrors.push(...(errors.flat()));
         });
     };
 

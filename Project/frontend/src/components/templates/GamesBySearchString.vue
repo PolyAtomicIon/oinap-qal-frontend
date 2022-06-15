@@ -1,5 +1,5 @@
 <template>
-  <div class="games-by-search">
+  <div class="games-by-search q-pa-md full-height">
     <h1 class="games-by-search__title">{{ this.$route.params.searchString }}</h1>
     <h1 v-if="this.$route.params.rating" class="games-by-search__title">{{ this.$route.params.rating }}</h1>
     <div v-if="isFetched" class="row q-col-gutter-md">

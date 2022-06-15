@@ -61,6 +61,8 @@ import {computed, defineComponent, onMounted, ref} from 'vue';
 import {IGameFeedbackService, provider} from '../../../services/index';
 import {useRoute} from 'vue-router';
 import {ICommentData} from 'src/entities';
+import {useUserStore} from 'src/store/user/index';
+
 
 const asd: Array<object> = [];
 
@@ -95,17 +97,14 @@ export default defineComponent({
     let gameComments = ref<ICommentData[]>([]);
     let isFetched = ref(false);
 
-
-    const setComment = () => {
-      void gameCommentService.setOneComment({
+    const setComment =async  () => {
+      await gameCommentService.setOneComment({
         game:gameTitle,
-        author:2,
+        author:9,
         content:comment.value,
         parent:null
-      }).then(function (response){
-        console.log(response)
-      });
-      void fetchComments()
+      })
+      await fetchComments()
     };
     const setFeedback = () => {
      void gameCommentService.setOneFeedback({
@@ -123,8 +122,8 @@ export default defineComponent({
       isFetched.value = false;
       gameComments.value = [];
       let commentResponse
-      commentResponse = await commentService.getAllCommentByTitle(
-        gameTitle as string
+      commentResponse = await commentService.getAllCommentByGame(
+        +gameTitle
       );
       gameComments.value = commentResponse.data.data ;
 
