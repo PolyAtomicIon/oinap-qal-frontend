@@ -1,3 +1,5 @@
+import {JWTPayload} from 'jose';
+
 export interface ISignIn {
   username: string;
   password: string;
@@ -18,3 +20,21 @@ export interface IToken {
     access_token: string;
   }
 }
+export interface ITokenData extends JWTPayload {
+  id: number,
+  email: string,
+  token: string,
+  avatar: string,
+  username: string,
+}
+
+
+export interface IAuthErrorData {
+  [key: string]: string[];
+};
+
+export interface IAuthError {
+  response : {
+    data: IAuthErrorData;
+  };
+};

@@ -101,7 +101,7 @@ export default defineComponent({
         .then(() => {
           modals.setShowSignInModal(false);
           if ($route.path.includes('mobile')) {
-            void $router.replace('profile');
+            void $router.replace('/user/profile');
           }
         })
         .catch(() => {

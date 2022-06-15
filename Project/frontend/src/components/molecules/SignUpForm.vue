@@ -108,6 +108,12 @@
         </span>
       </div>
 
+      <div class="auth__errors">
+        <p v-for="error in authErrors" :key="error">
+          {{ error }}
+        </p>
+      </div>
+
       <!-- action buttons -->
       <div class="flex column items-start">
         <q-btn
@@ -116,6 +122,7 @@
           color="primary"
           type="submit"
           class="q-mt-xs full-width"
+          :disable="!form.is_accepted"
         >
         </q-btn>
         <q-btn
@@ -134,7 +141,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import { ISignUp } from '../../entities/Auth.interfaces';
+import { ISignUp, IAuthErrorData } from '../../entities/Auth.interfaces';
 import { IGameTag } from '../../entities/Game.interfaces';
 import { useUserStore } from '../../store/user';
 import { useModalsStore } from '../../store/modals';
@@ -170,6 +177,8 @@ export default defineComponent({
     const $router = useRouter();
     const $route = useRoute();
 
+    let authErrors: string[] = reactive([]);
+
     const onSubmit = () => {
       form.categories = [];
       for (const [key, category] of Object.entries(categories)) {
@@ -178,13 +187,19 @@ export default defineComponent({
           form.categories.push(category.id);
         }
       }
-      void user.signUp(form).then(() => {
-        modals.setShowSignUpModal(false);
+      void user
+        .signUp(form)
+        .then(() => {
+          modals.setShowSignUpModal(false);
 
-        if ($route.path.includes('mobile')) {
-          void $router.replace('profile');
-        }
-      });
+          if ($route.path.includes('mobile')) {
+            void $router.replace('/user/profile');
+          }
+        })
+        .catch((errorData: IAuthErrorData) => {
+          const errors: string[][] = Object.values(errorData);
+          authErrors.push(...(errors.flat() as string[]));
+        });
     };
 
     return {
@@ -192,23 +207,29 @@ export default defineComponent({
       categories,
       form,
       modals,
+      authErrors,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.auth__form {
-  width: 500px;
-  margin: 0 auto;
-  border-radius: 14px;
-  padding: 0 16px;
-  padding-bottom: 24px;
-  @media screen and (max-width: $breakpoint-xs) {
-    width: 100%;
+.auth {
+  &__form {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 0 16px;
+    padding-bottom: 24px;
+    @media screen and (max-width: $breakpoint-xs) {
+      width: 100%;
+    }
+    &__field {
+      color: $grey !important;
+    }
   }
-  &__field {
-    color: $grey !important;
+  &__errors {
+    color: $negative;
   }
 }
 </style>

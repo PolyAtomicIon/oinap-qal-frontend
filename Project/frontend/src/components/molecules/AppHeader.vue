@@ -61,7 +61,7 @@
               'header__search-btn',
               searchMobile && 'header__search-btn--hide',
             ]"
-            @click="[searchMobile = true, focus()]"
+            @click="[(searchMobile = true), focus()]"
           />
         </div>
         <q-slide-transition :duration="100">
@@ -107,7 +107,7 @@
         </q-slide-transition>
       </div>
       <!-- <q-space class="mobile-hide"></q-space> -->
-      <div class="header__auth q-mr-md" v-if="!user.loggedIn">
+      <div class="header__auth" v-if="!user.loggedIn">
         <q-btn
           color="primary"
           :size="$q.platform.is.mobile ? 'sm' : 'md'"
@@ -117,9 +117,11 @@
           Sign in
         </q-btn>
         <button class="c-btn c-btn--flat" @click="onSignUp">Sign up</button>
+      </div>
+      <div class="header__auth-logged-in" v-else>
+        <user-menu></user-menu>
         <slot name="add-button"> </slot>
       </div>
-      <user-menu v-else></user-menu>
     </q-toolbar>
   </q-header>
 </template>
@@ -141,7 +143,7 @@ export default defineComponent({
     const modals = useModalsStore();
     const isFocused = ref(false);
     const inputWidth = ref(false);
-    const searchMobile = ref(false);;
+    const searchMobile = ref(false);
     const searchInput = ref<InstanceType<typeof QInput> | null>(null);
     const user = useUserStore();
     const $router = useRouter();
@@ -176,8 +178,8 @@ export default defineComponent({
     const focus = () => {
       setTimeout(() => (isFocused.value = true), 100);
       setTimeout(() => (inputWidth.value = true), 100);
-      setTimeout(() => (searchInput.value?.focus()), 100);
-      console.log(searchInput.value)
+      setTimeout(() => searchInput.value?.focus(), 100);
+      console.log(searchInput.value);
       console.log('???');
     };
     const unFocus = () => {
@@ -240,15 +242,17 @@ export default defineComponent({
   }
   @media screen and (max-width: $breakpoint-sm) {
     display: flex;
-    justify-content: space-between;
-    padding: 8px 24px;
-    padding-right: 0;
+    justify-content: center;
+    padding: 8px 12px;
   }
   &__logo {
-    display: flex;
+    display: inline-flex;
+    flex: 1;
     align-items: center;
     width: 190px;
+    margin-right: auto;
     cursor: pointer;
+
     @media screen and (max-width: $breakpoint-sm) {
       width: 32px;
     }
@@ -265,12 +269,19 @@ export default defineComponent({
   }
   &__search {
     position: relative;
+    flex: 1;
     &-field .q-field__control {
       border-radius: 50px;
     }
     &-field {
       min-width: 505px;
       width: 100%;
+
+      @media screen and (max-width: $breakpoint-md) {
+        min-width: 300px;
+        max-width: 300px;
+      }
+
       &_active {
         .q-field__control {
           border-radius: 24px 24px 0 0;
@@ -297,6 +308,10 @@ export default defineComponent({
       &-container {
         margin: 15px;
       }
+
+      @media screen and (max-width: $breakpoint-md) {
+        max-width: 300px;
+      }
     }
     &-rating {
       padding: 6px 6px;
@@ -319,7 +334,7 @@ export default defineComponent({
     &-hash:hover {
       background-color: $grey;
     }
-    @media screen and (max-width: $breakpoint-sm) {
+    @media screen and (max-width: $breakpoint-xs) {
       &-field {
         position: fixed;
         z-index: 200;
@@ -356,9 +371,13 @@ export default defineComponent({
     }
   }
   &__auth {
-    display: flex;
+    margin-left: auto;
+    display: inline-flex;
     align-items: center;
     flex-direction: row-reverse;
+    flex: 1;
+    min-width: 150px;
+
     &__btn {
       padding: 0 15px !important;
       height: 36px;
@@ -369,6 +388,14 @@ export default defineComponent({
         font-size: 14px !important;
       }
     }
+  }
+  &__auth-logged-in {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 8px;
+    flex: 1;
+
   }
 }
 </style>
