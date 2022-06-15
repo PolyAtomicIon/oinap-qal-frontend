@@ -26,6 +26,7 @@ export interface ITokenData extends JWTPayload {
   token: string,
   avatar: string,
   username: string,
+  role: 'GAMER' | 'ADMIN' | 'DEVELOPER',
 }
 
 

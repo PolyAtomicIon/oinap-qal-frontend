@@ -191,9 +191,10 @@ export default defineComponent({
         .signUp(form)
         .then(() => {
           modals.setShowSignUpModal(false);
+          modals.setShowSignInModal(true);
 
           if ($route.path.includes('mobile')) {
-            void $router.replace('/user/profile');
+            void $router.replace('/mobile-modals/signin');
           }
         })
         .catch((errorData: IAuthErrorData) => {
