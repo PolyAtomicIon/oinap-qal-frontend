@@ -1,17 +1,22 @@
 <template>
   <q-header v-if="!$q.fullscreen.isActive" class="bg-dark">
     <q-toolbar class="header">
-      <div class="header__logo" @click="$router.push('/')">
+      <div class="header__logo">
         <img
           class="header__logo__figure"
           :src="require('../../assets/logo/logo.svg')"
           alt="logo"
+          @click="$router.push('/')"
         />
         <img
           class="header__logo__title"
           :src="require('../../assets/logo/logo-title.svg')"
           alt="logo-title"
+          @click="$router.push('/')"
         />
+        <div class="hide-desktop q-ml-md">
+          <slot name="add-button"> </slot>
+        </div>
       </div>
       <div class="">
         <q-input
@@ -120,7 +125,9 @@
       </div>
       <div class="header__auth-logged-in" v-else>
         <user-menu></user-menu>
-        <slot name="add-button"> </slot>
+        <div class="show-desktop">
+          <slot name="add-button"> </slot>
+        </div>
       </div>
     </q-toolbar>
   </q-header>

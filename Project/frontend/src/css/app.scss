@@ -181,3 +181,17 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba($primary, 0.7);
 }
+
+.show-desktop {
+  display: inline-block;
+  @media screen and (max-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+
+.hide-desktop {
+  display: none;
+  @media screen and (max-width: $breakpoint-sm) {
+    display: inline-block;
+  }
+}
