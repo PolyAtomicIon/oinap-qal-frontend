@@ -1,6 +1,6 @@
 <template>
   <q-card-section>
-    <q-form @submit="onSubmit" class="q-gutter-md">
+    <q-form @submit="onSubmit" class="q-gutter-md add-game__form">
       <!-- file -->
       <div class="add-game__form__field">
         <label for="file">File</label>
@@ -169,6 +169,9 @@ export default defineComponent({
 .add-game__form {
   width: 500px;
   border-radius: 14px;
+  @media screen and (max-width: $breakpoint-xs) {
+    max-width: 280px;
+  }
   &__field {
     color: $grey !important;
   }
