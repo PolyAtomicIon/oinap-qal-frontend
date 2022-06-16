@@ -55,11 +55,7 @@
 
           <q-tab-panel name="info">
             <info
-              :title="gameAbout.title"
-              :author="gameAbout.author"
-              :rating="gameAbout.rating"
-              :info="gameAbout.about"
-              :img="gameAbout.img"
+              :game="game"
             />
           </q-tab-panel>
 
@@ -87,12 +83,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, computed} from 'vue'
+import {defineComponent, ref, computed, onMounted} from 'vue'
 import { useQuasar } from 'quasar'
 import Info from '../atoms/sdk-drawer/SdkDrawerInfo.vue'
 import Feedback from '../atoms/sdk-drawer/SdkDrawerFeedback.vue'
 import Leaders from '../atoms/sdk-drawer/SdkDrawerLeaderboard.vue'
 import Share from '../atoms/sdk-drawer/SdkDrawerShare.vue'
+import {useRoute} from 'vue-router';
+import {IGamesService, provider} from 'src/services';
+import {IGame} from 'src/entities';
 
 
 const defGameInfo= {
@@ -182,9 +181,35 @@ export default defineComponent({
       return $q.platform.is.mobile ? 350 : 550;
     });
 
+    const $route = useRoute();
+    const gameTitle = computed(() => $route.params.game_id).value
+
+    const gameService: IGamesService = provider().Games;
+    let game = ref({});
+    let isFetched = ref(false);
+
+
+    const fetchGamesBySearch = async () => {
+      isFetched.value = false;
+      game.value = {};
+      let gamesResponse
+      gamesResponse = await gameService.getOneById(
+        +gameTitle
+      );
+      game.value = gamesResponse?.data.data as IGame;
+
+      console.log(game.value)
+
+
+      isFetched.value = true;
+    };
+    onMounted(fetchGamesBySearch);
+
+
 
     return {
       comment,
+      game,
       rating,
       tab,
       responsiveWidth

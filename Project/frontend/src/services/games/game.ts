@@ -22,7 +22,7 @@ export class GamesService implements IGamesService {
   }
 
   async getOneById (id: number): Promise<AxiosResponse<IGame> | undefined> {
-    return await ApiService.get(`/game/${id}`);
+    return await ApiService.get(`/games/${id}`);
   }
 
 }

@@ -14,7 +14,7 @@ export class GamesSearchService implements IGamesSearchService {
 
 
   async getAllBySearch (string: string): Promise<AxiosResponse<IGameDTO>> {
-    return await ApiService.get(`/search/?title=${string}`);
+    return await ApiService.get(`/search/?q=${string}`);
   }
 
   async getAllByHashtag (string: string): Promise<AxiosResponse<IGameData[]>> {
@@ -22,7 +22,7 @@ export class GamesSearchService implements IGamesSearchService {
   }
 
   async getAllByRating (rating: number): Promise<AxiosResponse<IGameDTO>> {
-    return await ApiService.get(`/search/?total_rate=${rating}`);
+    return await ApiService.get(`/search/?rating_value=${rating}`);
   }
 
 

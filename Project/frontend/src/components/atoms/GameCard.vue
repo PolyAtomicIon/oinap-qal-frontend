@@ -23,8 +23,9 @@
           class="q-pa-none"
         >
           <q-rating
-            :model-value="ratingModel"
+            :model-value="rating"
             size="1.3em"
+            readonly
             color="yellow-5"
             icon="star_border"
             icon-selected="star"
@@ -55,7 +56,6 @@
 </template>
 
 <script>
-import { ref } from 'vue';
 export default {
   name: 'GameCard',
   props: {
@@ -78,7 +78,6 @@ export default {
   },
   setup() {
     return {
-      ratingModel: ref(1),
     };
   },
 };

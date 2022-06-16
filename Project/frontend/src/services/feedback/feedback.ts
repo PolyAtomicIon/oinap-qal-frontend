@@ -10,8 +10,8 @@ export class GameFeedbackService implements IGameFeedbackService {
   constructor () {
     this.data = []
   }
-  async getAllCommentByTitle (title: string): Promise<AxiosResponse<ICommentDTO>> {
-    return await ApiService.get(`/game_comments/?title=${title}`);
+  async getAllCommentByGame (id: number): Promise<AxiosResponse<ICommentDTO>> {
+    return await ApiService.get(`/game_comments/?game=${id}`);
   }
   async setOneComment (comment: object): Promise<AxiosResponse<ICommentData>> {
     return await ApiService.post('/game_comments/',comment);

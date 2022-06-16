@@ -23,7 +23,7 @@ export interface IToken {
   }
 }
 export interface ITokenData extends JWTPayload {
-  id: number,
+  user_id: number,
   email: string,
   token: string,
   avatar: string,

@@ -1,4 +1,4 @@
-import { IComment, ICommentData } from 'src/entities'
+import { ICommentData } from 'src/entities'
 
 export interface IGameData {
   readonly id?: number
@@ -9,12 +9,11 @@ export interface IGameData {
   readonly isActive: boolean
   readonly picture: string
   readonly tags: string[]
-
   readonly comments: ICommentData[]
 }
 
 export interface IGame extends IGameData {
-  readonly comments: IComment[]
+  data: IGameData
 }
 
 export interface IGameDTO {
