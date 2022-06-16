@@ -9,6 +9,7 @@
         :img="game.cover"
         :title="game.title"
         :description="game.description"
+        :rating="game.total_rate"
       ></game-card>
     </div>
     <div v-else class="row q-col-gutter-md">

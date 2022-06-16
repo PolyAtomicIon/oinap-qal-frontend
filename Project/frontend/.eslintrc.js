@@ -81,6 +81,7 @@ module.exports = {
     quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },

@@ -22,7 +22,7 @@ export class GamesSearchService implements IGamesSearchService {
   }
 
   async getAllByRating (rating: number): Promise<AxiosResponse<IGameDTO>> {
-    return await ApiService.get(`/search/?total_rate=${rating}`);
+    return await ApiService.get(`/search/?rating_value=${rating}`);
   }
 
 

@@ -8,6 +8,7 @@
         v-for="game in games"
         :key="game.id"
         :img="game.cover"
+        :rating="game.total_rate"
         :title="game.title"
         :description="game.description"
       ></game-card>

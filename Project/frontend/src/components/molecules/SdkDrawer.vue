@@ -89,9 +89,9 @@ import Info from '../atoms/sdk-drawer/SdkDrawerInfo.vue'
 import Feedback from '../atoms/sdk-drawer/SdkDrawerFeedback.vue'
 import Leaders from '../atoms/sdk-drawer/SdkDrawerLeaderboard.vue'
 import Share from '../atoms/sdk-drawer/SdkDrawerShare.vue'
-import {useRoute} from "vue-router";
-import {IGamesService, provider} from "src/services";
-import {IGame} from "src/entities";
+import {useRoute} from 'vue-router';
+import {IGamesService, provider} from 'src/services';
+import {IGame} from 'src/entities';
 
 
 const defGameInfo= {

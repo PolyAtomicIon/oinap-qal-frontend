@@ -1,11 +1,11 @@
 <template>
   <div class="flex q-mt-xl q-gutter-y-sm">
     <div class="q-pr-md flex items-center">
-      <img :src="game.cover" width="150" />
+      <img :src="game.cover" class="info__img" />
     </div>
     <div class="flex column justify-around q-gutter-y-xs">
       <span class="info__title q-ma-none">{{ game.title }}</span>
-      <span class="info__about text-grey">Author: {{ 'author' }}</span>
+      <span class="info__about text-grey">Author: {{ game.author_username }}</span>
       <div class="flex items-center">
         <q-rating
           :model-value="game.total_rate"
@@ -25,28 +25,6 @@
 </template>
 
 <script>
-const defGameInfo={
-  title: {
-    type: String,
-    default: '',
-  },
-  rating: {
-    type: Number,
-    default: 0,
-  },
-  author: {
-    type: String,
-    default: '',
-  },
-  img: {
-    type: String,
-    default: '',
-  },
-  info: {
-    type: String,
-    default: '',
-  },
-}
 export default {
   name: 'sdkDrawerInfo',
   props: {
@@ -60,6 +38,10 @@ export default {
 
 <style lang="scss">
 .info {
+  &__img{
+    width: 150px;
+    border-radius: 10px;
+  }
   &__about {
     font-size: 16px;
     font-style: normal;

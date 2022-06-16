@@ -82,10 +82,10 @@ export const useUserStore = defineStore('user', {
     },
     setUserData(token: string){
       const data = jose.decodeJwt(token) as ITokenData;
-
+      console.log(data)
       this.loggedIn = true;
       this.user = {
-        id: data.id,
+        id: data.user_id,
         email: data.email,
         username: data.username,
         avatar: data.avatar,

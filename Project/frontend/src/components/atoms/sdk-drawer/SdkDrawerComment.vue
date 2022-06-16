@@ -2,7 +2,8 @@
   <q-card flat class="comment bg-transparent">
     <div class="flex row">
       <div>
-        <div class="comment__img q-mr-md"/>
+        <div v-if="!user.avatar" class="comment__img q-mr-md"/>
+        <img v-else :src="user.avatar" class="comment__img q-mr-md">
       </div>
       <div class="flex column comment__body">
         <span class="q-pb-xs comment__name">{{user.username}}</span>
@@ -54,6 +55,7 @@ export default {
     height: 48px;
     background-color: grey;
     border-radius: 100%;
+    object-fit: cover;
   }
   &__name{
     font-size: 16px;
