@@ -62,6 +62,7 @@
         <q-btn
           flat
           no-caps
+          @click="showSignUpModal"
           label="Do not have account ?"
           color="white"
           type="submit"
@@ -108,9 +109,14 @@ export default defineComponent({
           onError.value = true;
         });
     };
+    const showSignUpModal = () => {
+      modals.setShowSignInModal(false);
+      modals.setShowSignUpModal(true);
+    };
 
     return {
       onSubmit,
+      showSignUpModal,
       form,
       onError,
     };

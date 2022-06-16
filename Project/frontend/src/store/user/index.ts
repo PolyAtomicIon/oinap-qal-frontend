@@ -11,7 +11,8 @@ export type RootState = {
     token: string | null
     email: string,
     username: string,
-    avatar: string | null
+    avatar: string | null,
+    role: 'GAMER' | 'ADMIN' | 'DEVELOPER' | null,
   },
 };
 
@@ -25,6 +26,7 @@ export const useUserStore = defineStore('user', {
         email: '',
         username: '',
         avatar: null,
+        role: null,
       },
     } as RootState),
   getters: {
@@ -55,8 +57,7 @@ export const useUserStore = defineStore('user', {
       return new Promise<boolean>((resolve, reject) => {
         provider()
           .User.signUp(payload)
-          .then(({ data }: { data: IToken }) => {
-            this.setUserData(data.data.access_token);
+          .then(() => {
             resolve(true);
           })
           .catch((error: IAuthError) => {
@@ -76,8 +77,10 @@ export const useUserStore = defineStore('user', {
         email: '',
         username: '',
         avatar: null,
+        role: null,
       };
       localStorage.setItem('token', '');
+      // @ts-ignore
       ApiService.defaults.headers.common['Authorization'] = '';
     },
     setUserData(token: string){
@@ -89,10 +92,12 @@ export const useUserStore = defineStore('user', {
         email: data.email,
         username: data.username,
         avatar: data.avatar,
-        token
+        token,
+        role: data.role
       }
 
       localStorage.setItem('token', token);
+      // @ts-ignore
       ApiService.defaults.headers.common['Authorization'] = 'Token ' + token;
     },
     loadAndSetToken() {

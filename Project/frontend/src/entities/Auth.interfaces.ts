@@ -11,6 +11,8 @@ export interface ISignUp {
   password: string;
   password2: string;
   role: 'DEVELOPER' | 'GAMER';
+  contact?: string;
+  portfolio?: string;
   categories: number[];
   is_accepted: boolean;
 }
@@ -26,6 +28,7 @@ export interface ITokenData extends JWTPayload {
   token: string,
   avatar: string,
   username: string,
+  role: 'GAMER' | 'ADMIN' | 'DEVELOPER',
 }
 
 

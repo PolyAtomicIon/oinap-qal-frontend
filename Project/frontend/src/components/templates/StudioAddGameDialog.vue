@@ -1,6 +1,6 @@
 <template>
   <q-dialog :model-value="isDialogActive">
-    <q-card dark class="bg-dark-light upload-file-card">
+    <q-card dark class="bg-dark-light">
       <q-card-section class="row items-center q-pb-none">
         <div class="flex items-center">
           <span class="text-h6">Add game</span>

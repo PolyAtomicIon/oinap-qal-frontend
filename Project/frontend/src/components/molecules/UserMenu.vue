@@ -1,6 +1,6 @@
 <template>
   <div class="user-menu">
-    <q-avatar class="q-mr-sm cursor-pointer mobile-hide"  @click="toggleMenu">
+    <q-avatar class="q-mr-sm cursor-pointer mobile-hide" @click="toggleMenu">
       <q-img
         :src="user.user.avatar"
         fit="cover"
@@ -19,19 +19,20 @@
       class="user-menu__dropdown"
     >
       <q-list dark>
-        <q-item clickable v-close-popup to="/user/profile">
+        <q-item
+          v-for="item in menuItems"
+          :key="item.link"
+          clickable
+          v-close-popup
+          :to="item.link"
+        >
           <q-item-section>
-            <q-item-label>Profile</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup to="/user/settings">
-          <q-item-section>
-            <q-item-label>Settings</q-item-label>
+            <q-item-label>{{ item.title }}</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-separator color="grey-8" />
+
         <q-item clickable v-close-popup @click="user.logout">
           <q-item-section>
             <q-item-label>Logout</q-item-label>
@@ -44,7 +45,7 @@
 
 <script lang="ts">
 import { useUserStore } from '../../store/user';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export default {
   name: 'UserMenu',
@@ -52,11 +53,30 @@ export default {
   setup() {
     const user = useUserStore();
     const menuState = ref(false);
+    const menuItems = computed(() => {
+      const items = [
+        {
+          title: 'Profile',
+          link: '/user/profile',
+        },
+        {
+          title: 'Settings',
+          link: '/user/settings',
+        },
+      ];
+      if (user.user.role === 'DEVELOPER') {
+        items.push({
+          title: 'Studio',
+          link: '/studio',
+        });
+      }
+      return items;
+    });
 
     return {
       user,
       userFullName: () => {
-        if( user.getFullName.length > 10 ){
+        if (user.getFullName.length > 10) {
           return user.getFullName.substr(0, 7) + '...';
         }
         return user.getFullName;
@@ -65,6 +85,7 @@ export default {
       toggleMenu: () => {
         menuState.value = !menuState.value;
       },
+      menuItems,
     };
   },
 };

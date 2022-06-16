@@ -1,17 +1,22 @@
 <template>
   <q-header v-if="!$q.fullscreen.isActive" class="bg-dark">
     <q-toolbar class="header">
-      <div class="header__logo" @click="$router.push('/')">
+      <div class="header__logo">
         <img
           class="header__logo__figure"
           :src="require('../../assets/logo/logo.svg')"
           alt="logo"
+          @click="$router.push('/')"
         />
         <img
           class="header__logo__title"
           :src="require('../../assets/logo/logo-title.svg')"
           alt="logo-title"
+          @click="$router.push('/')"
         />
+        <div class="hide-desktop q-ml-md">
+          <slot name="add-button"> </slot>
+        </div>
       </div>
       <div class="">
         <q-input
@@ -22,7 +27,7 @@
           dark
           :class="[
             'header__search-field',
-            !searchMobile && 'mobile-hide',
+            !searchMobile && 'hide__mobile',
             inputWidth && 'header__search-field_active',
           ]"
           bg-color="grey-9"
@@ -50,7 +55,7 @@
             />
           </template>
         </q-input>
-        <div class="mobile-only">
+        <div class="hide__desktop">
           <q-btn
             flat
             round
@@ -120,7 +125,9 @@
       </div>
       <div class="header__auth-logged-in" v-else>
         <user-menu></user-menu>
-        <slot name="add-button"> </slot>
+        <div class="show-desktop">
+          <slot name="add-button"> </slot>
+        </div>
       </div>
     </q-toolbar>
   </q-header>
@@ -243,6 +250,7 @@ export default defineComponent({
   @media screen and (max-width: $breakpoint-sm) {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 8px 12px;
   }
   &__logo {
@@ -274,12 +282,11 @@ export default defineComponent({
       border-radius: 50px;
     }
     &-field {
-      min-width: 505px;
-      width: 100%;
+      min-width: 300px;
+      max-width: 300px;
 
-      @media screen and (max-width: $breakpoint-md) {
-        min-width: 300px;
-        max-width: 300px;
+      @media screen and (max-width: $breakpoint-xs) {
+        width: 100%;
       }
 
       &_active {
@@ -302,15 +309,14 @@ export default defineComponent({
     &-transition {
       border-radius: 0 0 24px 24px;
       position: fixed;
-      max-width: 505px;
-      width: 100%;
+      max-width: 300px;
       margin-top: 2px;
       &-container {
         margin: 15px;
       }
 
-      @media screen and (max-width: $breakpoint-md) {
-        max-width: 300px;
+      @media screen and (max-width: $breakpoint-xs) {
+        width: 100%;
       }
     }
     &-rating {
@@ -398,6 +404,20 @@ export default defineComponent({
 
     @media screen and (max-width: $breakpoint-sm) {
       gap: 8px;
+    }
+  }
+}
+
+.hide {
+  &__mobile {
+    @media screen and (max-width: $breakpoint-xs) {
+      display: none;
+    }
+  }
+  &__desktop {
+    display: none;
+    @media screen and (max-width: $breakpoint-xs) {
+      display: block;
     }
   }
 }
