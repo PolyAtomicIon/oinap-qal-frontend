@@ -4,7 +4,7 @@
       <q-btn
         v-if="user.loggedIn"
         size="md"
-        class="text-white desktop-only"
+        class="text-white c-desktop-only"
         color="primary"
         icon="add"
         label="Add game"
@@ -14,7 +14,7 @@
       <q-btn
         v-if="user.loggedIn"
         size="sm"
-        class="text-white mobile-only"
+        class="text-white c-mobile-only"
         color="primary"
         icon="add"
         round
@@ -50,3 +50,19 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+  .c {
+    &-desktop-only {
+      @media screen and (max-width: $breakpoint-sm) {
+        display: none;
+      }
+    }
+    &-mobile-only {
+      display: none;
+      @media screen and (max-width: $breakpoint-sm) {
+        display: inline-flex;
+      }
+    }
+  }
+</style>

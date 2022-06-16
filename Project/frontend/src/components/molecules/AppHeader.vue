@@ -27,7 +27,7 @@
           dark
           :class="[
             'header__search-field',
-            !searchMobile && 'mobile-hide',
+            !searchMobile && 'hide__mobile',
             inputWidth && 'header__search-field_active',
           ]"
           bg-color="grey-9"
@@ -55,7 +55,7 @@
             />
           </template>
         </q-input>
-        <div class="mobile-only">
+        <div class="hide__desktop">
           <q-btn
             flat
             round
@@ -250,6 +250,7 @@ export default defineComponent({
   @media screen and (max-width: $breakpoint-sm) {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 8px 12px;
   }
   &__logo {
@@ -281,12 +282,11 @@ export default defineComponent({
       border-radius: 50px;
     }
     &-field {
-      min-width: 505px;
-      width: 100%;
+      min-width: 300px;
+      max-width: 300px;
 
-      @media screen and (max-width: $breakpoint-md) {
-        min-width: 300px;
-        max-width: 300px;
+      @media screen and (max-width: $breakpoint-xs) {
+        width: 100%;
       }
 
       &_active {
@@ -309,15 +309,14 @@ export default defineComponent({
     &-transition {
       border-radius: 0 0 24px 24px;
       position: fixed;
-      max-width: 505px;
-      width: 100%;
+      max-width: 300px;
       margin-top: 2px;
       &-container {
         margin: 15px;
       }
 
-      @media screen and (max-width: $breakpoint-md) {
-        max-width: 300px;
+      @media screen and (max-width: $breakpoint-xs) {
+        width: 100%;
       }
     }
     &-rating {
@@ -405,6 +404,20 @@ export default defineComponent({
 
     @media screen and (max-width: $breakpoint-sm) {
       gap: 8px;
+    }
+  }
+}
+
+.hide {
+  &__mobile {
+    @media screen and (max-width: $breakpoint-xs) {
+      display: none;
+    }
+  }
+  &__desktop {
+    display: none;
+    @media screen and (max-width: $breakpoint-xs) {
+      display: block;
     }
   }
 }
