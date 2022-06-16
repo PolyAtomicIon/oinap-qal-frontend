@@ -119,7 +119,7 @@ export default defineComponent({
     const setFeedback = () => {
      void gameCommentService.setOneFeedback({
         game:gameTitle,
-        user:3,
+        user:user.user.id,
         value:rating.value
       }).then(function (response){
         console.log(response)
