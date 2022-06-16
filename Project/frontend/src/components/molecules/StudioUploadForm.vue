@@ -1,5 +1,5 @@
 <template>
-  <q-card-section class="column flex items-center justify-center">
+  <q-card-section class="column flex items-center justify-center  upload-file-card">
     <q-uploader
       url="http://localhost:4444/upload"
       label="Custom header"
