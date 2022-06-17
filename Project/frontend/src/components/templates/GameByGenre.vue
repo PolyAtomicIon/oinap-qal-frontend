@@ -10,6 +10,7 @@
         :title="game.title"
         :description="game.description"
         :rating="game.total_rate"
+        :id="game.id"
       ></game-card>
     </div>
     <div v-else class="row q-col-gutter-md">

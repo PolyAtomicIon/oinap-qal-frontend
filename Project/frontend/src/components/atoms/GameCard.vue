@@ -41,7 +41,7 @@
             no-caps
             align="center"
             size="md"
-            @click="$router.push('/games/1')"
+            @click="$router.push(`/games/${id}`)"
           >
             <img
               :src="require(`/public/icons/generics/chevron-right-white.svg`)"
@@ -72,6 +72,10 @@ export default {
       default: 'no description',
     },
     rating: {
+      type: Number,
+      default: 1,
+    },
+    id: {
       type: Number,
       default: 1,
     },

@@ -28,7 +28,7 @@
           <q-form @submit="onSubmit" class="q-px-lg q-pt-lg">
             <div class="q-px-none q-py-md edit-email__current">
               <label class="text-grey flex block">Current email</label>
-              <span class="text-white">{{ userEmail }}</span>
+              <span class="text-white">{{ editEmail }}</span>
             </div>
 
             <div class="q-px-none q-pb-none edit-email__current">
@@ -68,11 +68,12 @@
 import { ref } from 'vue';
 export default {
   name: 'EditEmail',
-  setup() {
-    const editEmail = ref('');
+  setup(props) {
+    const editEmail = ref(props.userAbout);
     const onSubmit = () => {
       console.log(editEmail.value);
     };
+
     return {
       editEmail,
       onSubmit,
@@ -80,7 +81,7 @@ export default {
     };
   },
   props: {
-    userEmail: {
+    userAbout: {
       Type: String,
       default: 'alexa.jackson@gmail.com',
     },
