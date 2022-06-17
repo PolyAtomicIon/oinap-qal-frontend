@@ -1,6 +1,10 @@
 <template>
   <div class="q-pa-md full-height">
-    <my-banner></my-banner>
+    <my-banner v-if="isFetched"
+      :game1="games[0]"
+      :game2="games[1]"
+      :game3="games[2]"
+    />
     <div v-if="isFetched && $route.path === '/'" class="row q-col-gutter-md q-mt-md">
       <game-card
         class="col-xs-12 col-sm-6 col-md-6 col-lg-4"
