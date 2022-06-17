@@ -12,6 +12,7 @@ export class UsersService implements IUsersService {
     });
   }
 
+
   async signUp(payload: ISignUp): Promise<AxiosResponse> {
     return await ApiService.post('/users/register_view/', payload, {
       headers: {
@@ -19,4 +20,13 @@ export class UsersService implements IUsersService {
       },
     });
   }
+
+  async editUserProfile(id:number,payload:FormData): Promise<AxiosResponse> {
+    return await ApiService.patch(`/users/${id}`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data;',
+      },
+    } );
+  }
+
 }

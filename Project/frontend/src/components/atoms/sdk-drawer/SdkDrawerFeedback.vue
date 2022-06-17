@@ -119,15 +119,14 @@ export default defineComponent({
       await fetchComments();
     };
     const setFeedback = () => {
-      void gameCommentService
-        .setOneFeedback({
-          game: gameTitle,
-          user: 3,
-          value: rating.value,
-        })
-        .then(function (response) {
-          console.log(response);
-        });
+     void gameCommentService.setOneFeedback({
+        game:gameTitle,
+        user:user.user.id,
+        value:rating.value
+      }).then(function (response){
+        console.log(response)
+      });
+
     };
     const fetchComments = async () => {
       isFetched.value = false;

@@ -95,18 +95,7 @@
                   </div>
                 </div>
               </div>
-              <p class="q-ma-none">Search by rating</p>
-              <div class="flex wrap">
-                <div
-                  v-for="hash in hashList"
-                  :key="hash"
-                  class="header__search-rating-container"
-                >
-                  <div class="header__search-hash" @click="hashFunction(hash)">
-                    <span>{{ hash }}</span>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </q-slide-transition>

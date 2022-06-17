@@ -3,7 +3,9 @@
     <q-form @submit="onSubmit" class="flex no-wrap edit-profile__container" >
       <div onclick="console.log('click')" class="edit-profile__img relative-position ">
         <q-img
-          :src="user.user.avatar"
+
+          :src="photoC"
+
           width="160px"
           height="160px"
           class=" "
@@ -16,6 +18,11 @@
           height="25"
           width="25"
         >
+        <q-file
+          v-model="photo"
+          class="absolute absolute-center"
+        ></q-file>
+
       </div>
 
       <div class="edit-profile__description q-pl-xl">
@@ -41,46 +48,81 @@
             color="primary"
             text-color="white"
             type="submit"
-            label="Save" />
+            label="Save"
+            @click="setChange()"
+          />
         </div>
       </div>
     </q-form>
   </q-card>
 </template>
 
-<script>
-import {ref} from 'vue';
-import { useUserStore } from 'src/store/user';
+<script lang="ts">
+import { defineComponent, ref, computed} from 'vue';
+import {IUsersService, provider} from '../../services';
+import {useUserStore} from '../../store/user';
 
 const defUserProfile={
   img:'False.png',
-  name:'Alexa Jackson',
+  username:'Alexa Jackson',
   rating: 5023
 }
-export default {
+export default defineComponent({
   name: 'UserSettings',
   props:{
     userAbout:{
-      type:Object,
-      default: defUserProfile
+      type:String,
+      default: defUserProfile.img
+    },
+    username:{
+      type:String,
+      default: defUserProfile.img
     }
   },
-  setup() {
-    const user = useUserStore();
-    const editName= ref(user.user.username);
-    const editPhoto= ref('photo');
+
+  setup(props) {
+    const editName = ref(props.username);
+    const editPhoto = ref(props.userAbout);
+    const photo = ref<null | File>(null);
+
     const onSubmit = () => {
       console.log(editName.value)
       console.log(editPhoto.value)
     };
+
+    const user = useUserStore();
+    const userService: IUsersService = provider().User;
+
+    const datish = new FormData()
+
+    const setChange = async  () => {
+      if( photo.value )
+        datish.append('avatar', photo.value)
+      datish.append('username', editName.value)
+      datish.append('firstname', 'a')
+      datish.append('lastname', 'b')
+
+      if( user.user.id )
+        await userService.editUserProfile(+user.user.id, datish)
+    };
+
     return {
       onSubmit,
       editPhoto,
       editName,
+      setChange,
+      photo,
+      photoC: computed(() => {
+        console.log(photo.value)
+        if( !photo.value )
+          return ''
+        return URL.createObjectURL(photo.value)
+      })
       user
+
     };
   },
-}
+})
 </script>
 
 <style lang="scss">
