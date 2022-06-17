@@ -10,9 +10,9 @@
   >
     <q-carousel-slide name="map" class="banner row flex justify-between">
       <div class="banner__about">
-        <span class="banner__title block text-white"> Game2 </span>
+        <span class="banner__title block text-white"> {{ game1.title }} </span>
         <span class="banner__description block">
-          Invite your friends and play together Phaser!
+          Invite your friends and play together Bounce!
         </span>
         <div>
           <q-btn
@@ -21,42 +21,20 @@
             text-color="primary"
             color="white"
             label="Play now"
-            to="/games/1"
+            :to="`/games/${game1.id}`"
           >
           </q-btn>
         </div>
       </div>
-      <div class="banner__img">
-        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
-      </div>
-    </q-carousel-slide>
-    <q-carousel-slide name="f" class="banner row flex justify-between">
-      <div class="banner__about">
-        <span class="banner__title block text-white"> Phasefdr </span>
-        <span class="banner__description block">
-          Invite your friends and play together Phaser!
-        </span>
-        <div>
-          <q-btn
-            no-caps
-            unelevated
-            text-color="primary"
-            color="white"
-            label="Play now"
-            to="/games/1"
-          >
-          </q-btn>
-        </div>
-      </div>
-      <div class="banner__img">
-        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      <div class="banner__img flex items-center">
+        <img :src="require('../../assets/images/haxball-big-min.png')" alt=""  />
       </div>
     </q-carousel-slide>
     <q-carousel-slide name="e" class="banner row flex justify-between">
       <div class="banner__about">
-        <span class="banner__title block text-white"> Phaser </span>
+        <span class="banner__title block text-white"> {{ game2.title }} </span>
         <span class="banner__description block">
-          Invite your friends and play together Phaser!
+          Invite your friends and play together {{ game2.title }}!
         </span>
         <div>
           <q-btn
@@ -65,13 +43,35 @@
             text-color="primary"
             color="white"
             label="Play now"
-            to="/games/1"
+            :to="`/games/${game2.id}`"
           >
           </q-btn>
         </div>
       </div>
-      <div class="banner__img">
-        <img :src="require('../../assets/images/BannerImage.png')" alt="" />
+      <div class="banner__img flex items-center">
+        <img :src="require('../../assets/images/asd.png')" alt=""  />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide name="f" class="banner row flex justify-between">
+      <div class="banner__about">
+        <span class="banner__title block text-white"> {{ game3.title }} </span>
+        <span class="banner__description block">
+          Invite your friends and play together Bounce!
+        </span>
+        <div>
+          <q-btn
+            no-caps
+            unelevated
+            text-color="primary"
+            color="white"
+            label="Play now"
+            :to="`/games/${game3.id}`"
+          >
+          </q-btn>
+        </div>
+      </div>
+      <div class="banner__img flex items-center">
+        <img :src="require('../../assets/images/BannerImage.png')" alt=""  />
       </div>
     </q-carousel-slide>
   </q-carousel>
@@ -82,6 +82,17 @@ import { ref } from 'vue';
 
 export default {
   name: 'Banner',
+  props:{
+    game1:{
+      type:Object
+    },
+    game2:{
+      type:Object
+    },
+    game3:{
+      type:Object
+    },
+  },
   setup() {
     return {
       slide: ref('map'),
