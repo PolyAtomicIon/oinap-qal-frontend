@@ -46,9 +46,14 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router'
-import { GameMessageInterface, IGameRouteQueries } from '../../entities';
+import { useRoute } from 'vue-router';
+import {
+  GameMessageInterface,
+  IGameRouteQueries,
+  IGameData,
+} from '../../entities';
 import { provider } from '../../services';
+import { useUserStore } from '../../store/user';
 import fixProblemWithViewHeight from '../../services/utils';
 // import QCard from 'quasar'
 
@@ -62,6 +67,8 @@ export default defineComponent({
     const gameUrl = ref('https://biz-oinaimyz.herokuapp.com/games/');
     const isGameLoaded = ref(false);
     const adActive = ref(true);
+    const user = useUserStore();
+    const gameData = ref<IGameData | null>(null);
 
     const showAd = () => {
       adActive.value = true;
@@ -88,18 +95,35 @@ export default defineComponent({
       const { uid, iid, chatid, msgid }: IGameRouteQueries = $route.query;
 
       if (uid && msgid && chatid) {
-        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/chat/${chatid}/msg/${msgid}/score/${score.value}`)
+        await provider().Game.setScoreTelegramApi(
+          `/setscore/uid/${uid}/chat/${chatid}/msg/${msgid}/score/${score.value}`
+        );
+      } else if (uid && iid) {
+        await provider().Game.setScoreTelegramApi(
+          `/setscore/uid/${uid}/iid/${iid}/score/${score.value}`
+        );
       }
-      else if (uid && iid) {
-        await provider().Game.setScoreTelegramApi(`/setscore/uid/${uid}/iid/${iid}/score/${score.value}`)
+
+      if (user.user.id && gameData.value) {
+        const gameId = +$route.params.game_id;
+        void provider().Game.setScore({
+          user: user.user.id,
+          game: gameId,
+          score: score.value,
+        });
       }
-    }
+    };
 
     onMounted(() => {
-      const gameFileId = $route.params.game_id;
-      gameUrl.value += gameFileId.toString() + '/index.html';
+      const gameId = $route.params.game_id;
+      void provider()
+        .Game.getById(+gameId)
+        .then(({ data }) => {
+          gameData.value = data.data;
+          gameUrl.value += `${gameData.value.file_id}/index.html`;
 
-      fixProblemWithViewHeight();
+          fixProblemWithViewHeight();
+        });
     });
 
     // catch messages from iframe
@@ -127,6 +151,7 @@ export default defineComponent({
       onIframeLoaded,
       gameUrl,
       isGameLoaded,
+      gameData,
     };
   },
 });

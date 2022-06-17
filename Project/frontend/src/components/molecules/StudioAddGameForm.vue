@@ -65,7 +65,7 @@
       </div>
 
       <!-- tags -->
-      <div class="add-game__form__field">
+      <!-- <div class="add-game__form__field">
         <label for="description">Tags</label>
 
         <div class="q-gutter-xs q-mt-md">
@@ -87,7 +87,7 @@
             {{ name }}
           </q-chip>
         </div>
-      </div>
+      </div> -->
 
       <!-- save button -->
       <div>
@@ -106,7 +106,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue';
 import { useCategoriesStore } from '../../store/categories';
-import { IGameTag, IGameForm } from '../../entities/Game.interfaces';
+import { IGameTag, IGameFormX } from '../../entities/Game.interfaces';
 
 export default defineComponent({
   name: 'StudioAddGameForm',
@@ -128,9 +128,9 @@ export default defineComponent({
       };
     });
 
-    const form: IGameForm = reactive({
+    const form: IGameFormX = reactive({
       fileName: props.fileName,
-      file: null,
+      file_id: null,
       cover: null,
       name: '',
       description: '',
@@ -147,7 +147,7 @@ export default defineComponent({
       for (const [key, tag] of Object.entries(tags)) {
         if (tag.isChosen) {
           console.log(key)
-          form.tags.push(tag.id);
+          form.tags.push(key);
         }
       }
 

@@ -4,7 +4,7 @@
     <q-list class="q-my-md" bordered>
       <div v-for="(user,index) in leadersList" :key="index" class="q-pa-none q-ma-none flex column" >
         <q-item clickable v-ripple class="q-pa-none flex items-center">
-          <span class="text-grey q-px-md">#{{index}}</span>
+          <span class="text-grey q-px-md">#{{index + 1}}</span>
             <span>{{user.username}}</span>
           <q-space/>
           <div class="q-pr-md">
@@ -52,6 +52,7 @@ export default {
         +gameTitle
       );
       leadersList.value = leaderBoardResponse.data.data ;
+      leadersList.value = leadersList.value.filter(record => record.score)
 
       isFetched.value = true;
     };

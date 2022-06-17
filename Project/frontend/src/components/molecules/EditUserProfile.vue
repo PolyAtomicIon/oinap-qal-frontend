@@ -3,7 +3,9 @@
     <q-form @submit="onSubmit" class="flex no-wrap edit-profile__container" >
       <div onclick="console.log('click')" class="edit-profile__img relative-position ">
         <q-img
+
           :src="photoC"
+
           width="160px"
           height="160px"
           class=" "
@@ -77,10 +79,12 @@ export default defineComponent({
       default: defUserProfile.img
     }
   },
+
   setup(props) {
     const editName = ref(props.username);
     const editPhoto = ref(props.userAbout);
     const photo = ref<null | File>(null);
+
     const onSubmit = () => {
       console.log(editName.value)
       console.log(editPhoto.value)
@@ -114,6 +118,8 @@ export default defineComponent({
           return ''
         return URL.createObjectURL(photo.value)
       })
+      user
+
     };
   },
 })

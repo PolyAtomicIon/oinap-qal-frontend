@@ -24,7 +24,6 @@
       card-class="bg-dark-light"
       table-class="text-white"
       table-header-class="text-grey"
-      hide-bottom
       hide-top
       row-key="index"
       class="table__body"
@@ -43,20 +42,31 @@
         <q-tr :props="props">
           <q-td v-for="col in props.cols" :key="col.name" :props="props">
             <q-img
-              v-if="col.name == 'cover'"
+              v-if="col.name == 'cover' && col.value"
               :src="col.value"
               :ratio="16 / 9"
               fit="cover"
               class="rounded-borders"
               width="96px"
-            />
+            >
+            </q-img>
+            <q-img
+              v-else-if="col.name == 'cover'"
+              src="https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700924686.jpg"
+              :ratio="16 / 9"
+              fit="cover"
+              class="rounded-borders"
+              width="96px"
+            >
+            </q-img>
+
             <q-rating
               v-else-if="col.name == 'rating'"
               :model-value="col.value"
               color="yellow-5"
               icon="star_border"
               icon-selected="star"
-              style="min-width: 80px;"
+              style="min-width: 80px"
             ></q-rating>
             <span v-else>
               {{ col.value }}
@@ -69,7 +79,7 @@
               flat
               round
               color="white"
-              @click="deleteGame(props.row.index, props.row.name)"
+              @click="deleteGameActivator(props.row.index, props.row.name)"
               icon="delete"
             >
               <q-tooltip
@@ -107,7 +117,7 @@
               flat
               round
               dense
-              @click="props.expand = !props.expand"
+              @click="$router.push(`/games/${props.row.index}`)"
               icon="chevron_right"
             >
               <q-tooltip
@@ -137,7 +147,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { provider } from '../../services';
+import { IStudioGameData } from '../../entities';
 import StudioDeleteDialog from '../../components/molecules/StudioDeleteDialog.vue';
+import { IStudioService } from '../../services/studio';
+import { useUserStore } from '../../store/user';
 
 const columns = [
   {
@@ -147,7 +161,6 @@ const columns = [
   },
   { name: 'cover', align: 'center', label: 'Cover', field: 'cover' },
   { name: 'name', label: 'Name', align: 'left', field: 'name' },
-  { name: 'date', label: 'Date', align: 'left', field: 'date', sortable: true },
   { name: 'played', label: 'Played', field: 'played', sortable: true },
   { name: 'feedbacks', label: 'Feedbacks', field: 'feedbacks', sortable: true },
   {
@@ -156,59 +169,6 @@ const columns = [
     label: 'Rating',
     field: 'rating',
     sortable: true,
-  },
-];
-
-const rows = [
-  {
-    index: 1,
-    cover:
-      'https://img.championat.com/s/735x490/news/big/r/f/epic-games-prekraschaet-torgovlyu-v-svoih-igrah-v-rossii_1646558841801456127.jpg',
-    name: 'Frozen Yogurt',
-    date: '12.02.2022',
-    played: 96,
-    feedbacks: 87,
-    rating: Math.floor(Math.random() * 5) + 1,
-  },
-  {
-    index: 2,
-    cover:
-      'https://img.championat.com/s/735x490/news/big/r/f/epic-games-prekraschaet-torgovlyu-v-svoih-igrah-v-rossii_1646558841801456127.jpg',
-    name: 'Frozen Yogurt',
-    date: '12.02.2022',
-    played: 96,
-    feedbacks: 87,
-    rating: Math.floor(Math.random() * 5) + 1,
-  },
-  {
-    index: 3,
-    cover:
-      'https://img.championat.com/s/735x490/news/big/r/f/epic-games-prekraschaet-torgovlyu-v-svoih-igrah-v-rossii_1646558841801456127.jpg',
-    name: 'Frozen Yogurt',
-    date: '12.02.2022',
-    played: 96,
-    feedbacks: 87,
-    rating: Math.floor(Math.random() * 5) + 1,
-  },
-  {
-    index: 4,
-    cover:
-      'https://img.championat.com/s/735x490/news/big/r/f/epic-games-prekraschaet-torgovlyu-v-svoih-igrah-v-rossii_1646558841801456127.jpg',
-    name: 'Frozen Yogurt',
-    date: '12.02.2022',
-    played: 96,
-    feedbacks: 87,
-    rating: Math.floor(Math.random() * 5) + 1,
-  },
-  {
-    index: 5,
-    cover:
-      'https://img.championat.com/s/735x490/news/big/r/f/epic-games-prekraschaet-torgovlyu-v-svoih-igrah-v-rossii_1646558841801456127.jpg',
-    name: 'Frozen Yogurt',
-    date: '12.02.2022',
-    played: 96,
-    feedbacks: 87,
-    rating: Math.floor(Math.random() * 5) + 1,
   },
 ];
 
@@ -221,15 +181,51 @@ export default defineComponent({
     const filterProperties = ref(['Newest', 'Oldest', 'Popularity']);
     const filterBy = ref('Newest');
 
+    const user = useUserStore();
+    const studioService: IStudioService = provider().Studio;
+
     const isDeleteDialogActive = ref(false);
     const activeGameTitle = ref('');
     const toggleDeleteDialogActive = () => {
       isDeleteDialogActive.value = !isDeleteDialogActive.value;
     };
-    const deleteGame = (id: number, title: string) => {
+
+    let rows = ref([]);
+    const loadGames = () => {
+      void studioService.getAllGames().then(({ data }) => {
+        data = data.data.filter(
+          (game: IStudioGameData) => game.user === user.user.id
+        );
+        console.log(data);
+        rows.value = data.map((game: IStudioGameData) => {
+          return {
+            index: game.id,
+            cover: game.cover,
+            name: game.title,
+            played: game.played_count,
+            feedbacks: game.views,
+            rating: game.total_rate,
+          };
+        });
+      });
+    };
+    loadGames();
+
+    let currentGameId: number | null = null;
+    const deleteGameActivator = (id: number, title: string) => {
       console.log(id, title);
+      currentGameId = id;
       activeGameTitle.value = title;
       toggleDeleteDialogActive();
+    };
+    const deleteGame = () => {
+      if (currentGameId) {
+        toggleDeleteDialogActive();
+        void studioService.deleteGame(currentGameId).then(() => {
+          loadGames();
+        });
+        currentGameId = null;
+      }
     };
 
     return {
@@ -240,6 +236,7 @@ export default defineComponent({
       isDeleteDialogActive,
       toggleDeleteDialogActive,
       deleteGame,
+      deleteGameActivator,
       activeGameTitle,
     };
   },

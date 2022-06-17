@@ -2,9 +2,13 @@
   <div class="q-mt-xl q-pb-lg">
     <div v-if="user.loggedIn">
       <div class="flex items-center">
-        <img v-if="user.user.avatar" :src="user.user.avatar" class="sdk-feedback__img" />
+        <img
+          v-if="user.user.avatar"
+          :src="user.user.avatar"
+          class="sdk-feedback__img"
+        />
 
-        <h6 class="q-my-none q-ml-md">{{user.user.username}}</h6>
+        <h6 class="q-my-none q-ml-md">{{ user.user.username }}</h6>
       </div>
       <div>
         <q-form @submit="onSubmit" class="sdk-feedback">
@@ -48,7 +52,6 @@
     </div>
     <div v-if="!user.loggedIn" class="flex justify-center sdk-feedback__auth">
       <h5 class="text-white">Login to leave comments</h5>
-
     </div>
 
     <div>
@@ -65,12 +68,11 @@
 
 <script lang="ts">
 import Comment from '../sdk-drawer/SdkDrawerComment.vue';
-import {computed, defineComponent, onMounted, ref} from 'vue';
-import {IGameFeedbackService, provider} from '../../../services/index';
-import {useRoute} from 'vue-router';
-import {ICommentData} from 'src/entities';
-import {useUserStore} from 'src/store/user/index';
-
+import { computed, defineComponent, onMounted, ref } from 'vue';
+import { IGameFeedbackService, provider } from '../../../services/index';
+import { useRoute } from 'vue-router';
+import { ICommentData } from 'src/entities';
+import { useUserStore } from 'src/store/user/index';
 
 const asd: Array<object> = [];
 
@@ -89,32 +91,32 @@ export default defineComponent({
     const rating = ref(0);
     const comment = ref('');
     const onSubmit = () => {
-      if(comment.value){
-        void setComment()
+      if (comment.value) {
+        void setComment();
       }
-      if(rating.value){
-        void setFeedback()
+      if (rating.value) {
+        void setFeedback();
       }
     };
     const user = useUserStore();
 
     const gameCommentService: IGameFeedbackService = provider().GameFeedback;
     const $route = useRoute();
-    const gameTitle = computed(() => $route.params.game_id).value
+    const gameTitle = computed(() => $route.params.game_id).value;
 
     const commentService: IGameFeedbackService = provider().GameFeedback;
     let gameComments = ref<ICommentData[]>([]);
     let isFetched = ref(false);
 
-    const setComment =async  () => {
-      console.log(user.user)
+    const setComment = async () => {
+      console.log(user.user);
       await gameCommentService.setOneComment({
-        game:gameTitle,
+        game: gameTitle,
         author: user.user.id,
-        content:comment.value,
-        parent:null
-      })
-      await fetchComments()
+        content: comment.value,
+        parent: null,
+      });
+      await fetchComments();
     };
     const setFeedback = () => {
      void gameCommentService.setOneFeedback({
@@ -124,15 +126,14 @@ export default defineComponent({
       }).then(function (response){
         console.log(response)
       });
+
     };
     const fetchComments = async () => {
       isFetched.value = false;
       gameComments.value = [];
-      let commentResponse
-      commentResponse = await commentService.getAllCommentByGame(
-        +gameTitle
-      );
-      gameComments.value = commentResponse.data.data ;
+      let commentResponse;
+      commentResponse = await commentService.getAllCommentByGame(+gameTitle);
+      gameComments.value = commentResponse.data.data;
 
       isFetched.value = true;
     };
@@ -157,7 +158,7 @@ export default defineComponent({
     padding-left: 0px;
     padding-right: 0px;
   }
-  &__img{
+  &__img {
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -165,7 +166,7 @@ export default defineComponent({
   }
   &__comment {
   }
-  &__auth{
+  &__auth {
     height: 200px;
   }
   &__all-comments {
