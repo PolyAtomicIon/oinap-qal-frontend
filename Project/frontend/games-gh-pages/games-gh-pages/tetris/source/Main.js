@@ -86,6 +86,12 @@ function showGameOver() {
     sounds.play("end");
     scores.setInput();
     destroyGame();
+    let finalScore = score.score;
+    console.log(finalScore)
+    window.top.postMessage({
+      name: 'gameFinished',
+      finalScore
+    }, '*')
 }
 
 /**

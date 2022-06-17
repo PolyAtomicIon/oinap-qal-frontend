@@ -3,7 +3,7 @@
     <q-toolbar class="sdk-header">
       <div class="sdk-header__logo">
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title class="text-bold mobile-hide">
+        <q-toolbar-title class="text-bold mobile-hide" @click="$router.push('/')">
           Easy Play
         </q-toolbar-title>
       </div>

@@ -5,13 +5,22 @@ export interface IGameTag {
   };
 }
 
-export interface IGameForm {
+export interface IGameFormX {
   fileName: string;
-  file: File | null;
+  file_id: number | null;
   cover: File | null;
   name: string;
   description: string;
-  tags: number[];
+  tags: string[];
+}
+
+export interface IGameForm {
+  fileName: string;
+  file_id: number | null;
+  cover: File | null;
+  name: string;
+  description: string;
+  tags: string;
 }
 
 export interface IGameRouteQueries {

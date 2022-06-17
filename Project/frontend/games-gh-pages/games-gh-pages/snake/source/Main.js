@@ -72,6 +72,13 @@ function gameOver() {
     display.set("gameOver").show();
     scores.setInput();
     instance.destroyGame();
+
+    let finalScore = score.score;
+    console.log(finalScore)
+    window.top.postMessage({
+      name: 'gameFinished',
+      finalScore
+    }, '*')
 }
 
 /**

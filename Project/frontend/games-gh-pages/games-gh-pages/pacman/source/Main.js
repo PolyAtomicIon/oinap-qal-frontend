@@ -38,6 +38,11 @@ let shortcuts  = null;;
  * @returns {Void}
  */
 function gameOver() {
+
+    window.top.postMessage({
+      name: 'gameFinished',
+      finalScore: score.score
+    }, '*')
     display.set("ready");
     animations.gameOver(() => {
         food   = null;

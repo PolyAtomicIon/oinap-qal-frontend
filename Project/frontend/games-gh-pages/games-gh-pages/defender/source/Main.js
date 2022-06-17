@@ -77,6 +77,12 @@ function destroyGame() {
  */
 function showGameOver() {
     display.set("gameOver");
+    let finalScore = score.total;
+    console.log(finalScore)
+    window.top.postMessage({
+      name: 'gameFinished',
+      finalScore
+    }, '*')
     destroyGame();
     maps.saveScore(score.lives, score.total);
     score.showFinal();
