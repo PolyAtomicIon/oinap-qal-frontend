@@ -13,7 +13,9 @@ export class LeaderBoardService implements ILeaderBoardService {
   }
 
   async getLeadersByGameID (gameID: number): Promise<AxiosResponse<ILeaderDTO>> {
-    return await ApiService.get(`/game_scores/?game=${gameID}`);
+    // return await ApiService.get(`/game_scores/?game=${gameID}`);
+    return await ApiService.get(`games/${gameID}/leaders/`);
+
   }
 
 }

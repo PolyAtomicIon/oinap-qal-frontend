@@ -6,7 +6,8 @@
         fit="cover"
         spinner-color="primary"
         spinner-size="18px"
-      />
+      >
+      </q-img>
     </q-avatar>
     <q-btn-dropdown
       flat
@@ -55,12 +56,12 @@ export default {
     const menuState = ref(false);
     const menuItems = computed(() => {
       const items = [
+        // {
+        //   title: 'Profile',
+        //   link: '/user/profile',
+        // },
         {
           title: 'Profile',
-          link: '/user/profile',
-        },
-        {
-          title: 'Settings',
           link: '/user/settings',
         },
       ];

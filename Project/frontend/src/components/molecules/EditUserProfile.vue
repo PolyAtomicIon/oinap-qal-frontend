@@ -3,7 +3,7 @@
     <q-form @submit="onSubmit" class="flex no-wrap edit-profile__container" >
       <div onclick="console.log('click')" class="edit-profile__img relative-position ">
         <q-img
-          :src="require('src/assets/user/'+userAbout.img)"
+          :src="user.user.avatar"
           width="160px"
           height="160px"
           class=" "
@@ -50,6 +50,7 @@
 
 <script>
 import {ref} from 'vue';
+import { useUserStore } from 'src/store/user';
 
 const defUserProfile={
   img:'False.png',
@@ -65,7 +66,8 @@ export default {
     }
   },
   setup() {
-    const editName= ref('Alexa Jackson');
+    const user = useUserStore();
+    const editName= ref(user.user.username);
     const editPhoto= ref('photo');
     const onSubmit = () => {
       console.log(editName.value)
@@ -74,7 +76,8 @@ export default {
     return {
       onSubmit,
       editPhoto,
-      editName
+      editName,
+      user
     };
   },
 }

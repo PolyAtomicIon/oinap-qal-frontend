@@ -117,7 +117,7 @@
               flat
               round
               dense
-              @click="props.expand = !props.expand"
+              @click="$router.push(`/games/${props.row.index}`)"
               icon="chevron_right"
             >
               <q-tooltip

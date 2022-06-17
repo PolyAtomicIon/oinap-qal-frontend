@@ -3,7 +3,10 @@
     <q-toolbar class="sdk-header">
       <div class="sdk-header__logo">
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title class="text-bold mobile-hide" @click="$router.push('/')">
+        <q-toolbar-title
+          class="text-bold mobile-hide"
+          @click="$router.push('/')"
+        >
           Easy Play
         </q-toolbar-title>
       </div>
@@ -16,10 +19,10 @@
           text-color="grey"
           icon="chevron_left"
         />
-        Forest Match
+        {{ gameData && gameData.title || 'Game' }}
         <span>
           <q-icon name="star" color="orange-5"></q-icon>
-          4.5
+          {{ gameData && gameData.total_rate || 2 }}
         </span>
       </div>
       <div class="sdk-header__auth mobile-hide" v-if="!user.loggedIn">
@@ -45,11 +48,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useModalsStore } from '../../store/modals';
 import { useUserStore } from '../../store/user';
+import { IGameData } from '../../entities';
+import { provider } from '../../services';
 
 import UserMenu from './UserMenu.vue';
 
@@ -70,6 +75,8 @@ export default defineComponent({
     const user = useUserStore();
     const $q = useQuasar();
     const $router = useRouter();
+    const $route = useRoute();
+    const gameData = ref<IGameData | null>(null);
     const onSignUp = () => {
       if ($q.platform.is.mobile) {
         void $router.push('/mobile-modals/signup');
@@ -85,11 +92,21 @@ export default defineComponent({
       }
     };
 
+    onMounted(() => {
+      const gameId = $route.params.game_id;
+      void provider()
+        .Game.getById(+gameId)
+        .then(({ data }) => {
+          gameData.value = data.data;
+        });
+    });
+
     return {
       onSignUp,
       onSignIn,
       leftDrawerOpen,
       user,
+      gameData,
     };
   },
 });
