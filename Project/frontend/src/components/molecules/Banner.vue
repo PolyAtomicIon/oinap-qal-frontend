@@ -32,7 +32,7 @@
     </q-carousel-slide>
     <q-carousel-slide name="e" class="banner row flex justify-between">
       <div class="banner__about">
-        <span class="banner__title block text-white"> {{ game2.title }} </span>
+        <span class="banner__title block text-white"> Blocks </span>
         <span class="banner__description block">
           Invite your friends and play together {{ game2.title }}!
         </span>

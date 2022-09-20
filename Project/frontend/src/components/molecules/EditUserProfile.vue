@@ -117,7 +117,7 @@ export default defineComponent({
         if( !photo.value )
           return ''
         return URL.createObjectURL(photo.value)
-      })
+      }),
       user
 
     };

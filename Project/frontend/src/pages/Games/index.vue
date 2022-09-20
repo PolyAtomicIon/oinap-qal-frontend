@@ -31,8 +31,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref} from 'vue';
 import MyBanner from '../../components/molecules/Banner.vue';
-import {IGamesService, provider} from "src/services";
-import {IGameData} from "src/entities";
+import {IGamesService, provider} from '../../services';
+import {IGameData} from '../../entities';
 import GameCard from '../../components/atoms/GameCard.vue';
 
 export default defineComponent({

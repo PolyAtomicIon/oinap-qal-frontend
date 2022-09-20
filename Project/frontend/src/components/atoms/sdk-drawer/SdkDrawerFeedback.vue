@@ -57,7 +57,7 @@
     <div>
       <span class="q-ma-none sdk-feedback__all-comments">All comments</span>
       <comment
-        v-for="user in gameComments.reverse()"
+        v-for="user in gameComments"
         :key="user.user"
         :user="user"
         class="q-my-md"
@@ -106,7 +106,6 @@ export default defineComponent({
 
     const commentService: IGameFeedbackService = provider().GameFeedback;
     let gameComments = ref<ICommentData[]>([]);
-    let isFetched = ref(false);
 
     const setComment = async () => {
       console.log(user.user);
@@ -129,13 +128,11 @@ export default defineComponent({
 
     };
     const fetchComments = async () => {
-      isFetched.value = false;
       gameComments.value = [];
       let commentResponse;
       commentResponse = await commentService.getAllCommentByGame(+gameTitle);
       gameComments.value = commentResponse.data.data;
-
-      isFetched.value = true;
+      gameComments.value = gameComments.value.reverse();
     };
     onMounted(fetchComments);
 
