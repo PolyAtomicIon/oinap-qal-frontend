@@ -240,8 +240,6 @@ Website Admin
 
 ## Sitemap, Page descriptions
 
-![alt sitemap of admin](./Proposal/SiteMap/Admin.png)
-![alt sitemap of developer](./Proposal/SiteMap/Developer.png)
 ![alt sitemap of user](./Proposal/SiteMap/Gamer.png)
 
 <table>
