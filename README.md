@@ -1,7 +1,7 @@
 # CSS 410 Research tools and methods
 ## Web platform for HTML5 games
 ## Demo
-https://www.oinap-qal.abmco.kz/#/
+https://www.oinap-qal.abmco.kz/#/games/1
 
 ## Team members
 + **Bekzat Yernat** (180107265) - Frontend Developer (GitHub account: PolyAtomicIon)
